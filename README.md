@@ -1,3 +1,7 @@
 # galtogo
 
-Tuga made first edit
+Tuga
+=======
+Nomin
+=======
+Muugii
