@@ -1,8 +1,8 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import mongooseConfig from "./config/mongoose.config";
-import userApi from "./routes/user.api";
+import mongooseConfig from "./config/mongoose-config";
+import userApi from "./routes/user-api";
 
 dotenv.config();
 
@@ -13,8 +13,6 @@ app.use(express.json());
 app.use(cors());
 
 app.use(userApi);
-
-app.use("/", userApi);
 
 app.listen(port, () => {
   mongooseConfig;
