@@ -1,0 +1,23 @@
+post http://localhost:4200/addusers  http/1.1
+Content-Type: application/json
+
+{
+  "name": "Test",
+  "phone": 8611111111,
+  "email": "nominnnnn@gmail.com",
+  "password": "22ww"
+}
+
+###
+
+get http://localhost:4200/users http/1.1
+
+###
+
+get http://localhost:4200/users/:id http/1.1
+Content-Type: application/json
+
+ {
+  "_id": "64338a9184a5bc880ad99a80"
+ }
+

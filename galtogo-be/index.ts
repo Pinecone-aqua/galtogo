@@ -8,15 +8,13 @@ dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT || 4200;
-app.use(cors());
-app.use(userApi);
+
 app.use(express.json());
+app.use(cors());
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
-});
+app.use(userApi);
 
-app.use("/user", userApi);
+app.use("/", userApi);
 
 app.listen(port, () => {
   mongooseConfig;

@@ -5,7 +5,7 @@ export default function Tables(): JSX.Element {
     <Layout>
       <div className="p-4 ">
         <div className="w-full m-auto p-4 bg-white border rounded-lg overflow-y-auto">
-          Tables Page
+          Reservations Page
         </div>
       </div>
     </Layout>
