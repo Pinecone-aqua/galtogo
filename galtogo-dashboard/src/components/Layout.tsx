@@ -1,14 +1,13 @@
 import Head from "next/head";
-import Footer from "./Footer";
 import Header from "./Header";
 import { ReactNode } from "react";
-import Side from "./Side";
+import Sidebar from "./Sidebar";
 
 type PropTypes = {
   children: ReactNode;
 };
 
-export default function Layout({ children }: PropTypes) {
+export default function Layout({ children }: PropTypes): JSX.Element {
   return (
     <>
       <Head>
@@ -17,14 +16,14 @@ export default function Layout({ children }: PropTypes) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="container mx-auto px-4">
-        <Header />
-        <div className="flex">
-          <Side />
-          {children}
-        </div>
-        <Footer />
-      </main>
+      <div>
+        <Sidebar>
+          <main className="bg-gray-100 min-h-screen">
+            <Header />
+            {children}
+          </main>
+        </Sidebar>
+      </div>
     </>
   );
 }
