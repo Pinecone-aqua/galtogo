@@ -13,8 +13,8 @@ const port = process.env.PORT || 4200;
 app.use(express.json());
 app.use(cors());
 
-app.use(userApi);
-app.use(reservationApi);
+app.use("/user", userApi);
+app.use("/reservation/", reservationApi);
 
 app.listen(port, () => {
   mongooseConfig;

@@ -1,21 +1,21 @@
 ### User test starts here
-post http://localhost:4200/adduser  http/1.1
+post http://localhost:4200/user/add  http/1.1
 Content-Type: application/json
 
 {
-  "name": "Nomin",
-  "phone": 86116862,
-  "email": "nominest3@gmail.com",
+  "name": "Test",
+  "phone": 86116802,
+  "email": "nominest33@gmail.com",
   "password": "22ww"
 }
 
 ###
 
-get http://localhost:4200/users http/1.1
+get http://localhost:4200/user/all http/1.1
 
 ###
 
-get http://localhost:4200/users/:id http/1.1
+get http://localhost:4200/user/:id http/1.1
 Content-Type: application/json
 
  {
@@ -24,10 +24,10 @@ Content-Type: application/json
 
 ### Reservation test starts here
 
-get http://localhost:4200/reservations http/1.1
+get http://localhost:4200/reservation/all http/1.1
 
 ### 
-post http://localhost:4200/addreservation  http/1.1
+post http://localhost:4200/reservation/add  http/1.1
 Content-Type: application/json
 
 {
