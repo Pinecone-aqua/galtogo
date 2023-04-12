@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/user", userApi);
-app.use("/reservation/", reservationApi);
+app.use("/reservation", reservationApi);
 
 app.listen(port, () => {
   mongooseConfig;
