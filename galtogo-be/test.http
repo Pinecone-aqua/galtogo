@@ -1,0 +1,23 @@
+post http://localhost:4200/adduser  http/1.1
+Content-Type: application/json
+
+{
+  "name": "Nomin",
+  "phone": 86116862,
+  "email": "nominest3@gmail.com",
+  "password": "22ww"
+}
+
+###
+
+get http://localhost:4200/users http/1.1
+
+###
+
+get http://localhost:4200/users/:id http/1.1
+Content-Type: application/json
+
+ {
+  "_id": "64338a9184a5bc880ad99a80"
+ }
+
