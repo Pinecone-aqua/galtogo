@@ -16,9 +16,7 @@ reservationApi.get("/all", async (req: Request, res: Response) => {
 //Read one reservation
 reservationApi.get("/:id", async (req: Request, res: Response) => {
   try {
-    const reservation = await Reservation.findOne({ _id: req.body.id }).limit(
-      1
-    );
+    const reservation = await Reservation.findOne({ _id: req.body._id });
     res.status(200).json(reservation);
   } catch (error) {
     res.status(404).send("Error getting a reservation");
@@ -41,9 +39,9 @@ reservationApi.post("/add", async (req: Request, res: Response) => {
 //Delete reservation
 reservationApi.delete("/:id", async (req: Request, res: Response) => {
   try {
-    const reservation = await Reservation.findOne({
+    const reservation = await Reservation.findByIdAndDelete({
       _id: req.body._id,
-    }).limit(1);
+    });
     if (reservation) {
       res.status(200).json(reservation);
     } else {

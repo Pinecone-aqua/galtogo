@@ -1,16 +1,15 @@
-import mongoose, { Schema } from "mongoose";
+import { Schema, model } from "mongoose";
 
-const ReservationSchema = new mongoose.Schema(
+const ReservationSchema = new Schema(
   {
-    booking_date: { type: String, required: true },
-    booking_hour: { type: String, required: true },
-    booking_seats: { type: Number, required: true },
+    date: { type: String, required: true },
+    hour: { type: String, required: true },
+    persons: { type: Number, required: true },
     user_id: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
     },
-    booking_status: Boolean,
+    isActive: { type: Boolean, default: true },
     table_id: {
       type: Schema.Types.ObjectId,
       ref: "Table",
@@ -19,5 +18,5 @@ const ReservationSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Reservation = mongoose.model("Reservation", ReservationSchema);
+const Reservation = model("Reservation", ReservationSchema);
 export default Reservation;

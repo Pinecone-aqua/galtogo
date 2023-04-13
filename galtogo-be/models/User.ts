@@ -1,9 +1,13 @@
-import mongoose, { Schema } from "mongoose";
-import { required } from "mongoose-typescript";
+import { Schema, model } from "mongoose";
 
-const UserSchema = new mongoose.Schema(
+const UserSchema = new Schema(
   {
-    name: {
+    firstName: {
+      type: String,
+      required: true,
+      max: 20,
+    },
+    lastName: {
       type: String,
       required: true,
       max: 20,
@@ -16,16 +20,16 @@ const UserSchema = new mongoose.Schema(
       type: Number,
       required: true,
       unique: true,
+      max: 99999999,
     },
     password: {
       type: String,
-      required: true,
     },
   },
   {
-    collection: "users",
+    timestamps: true,
   }
 );
 
-const User = mongoose.model("User", UserSchema, "users");
+const User = model("User", UserSchema);
 export default User;

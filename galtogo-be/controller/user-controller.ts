@@ -16,7 +16,7 @@ userApi.get("/all", async (req: Request, res: Response) => {
 //Read one user
 userApi.get("/:id", async (req: Request, res: Response) => {
   try {
-    const user = await User.findOne({ _id: req.body._id }).limit(1);
+    const user = await User.findOne({ _id: req.body._id });
     res.status(200).json(user);
   } catch (error) {
     res.status(404).send("Error getting a user");
@@ -39,9 +39,8 @@ userApi.post("/add", async (req: Request, res: Response) => {
 
 //Delete user
 userApi.delete("/:id", async (req: Request, res: Response) => {
-  console.log("delete", req.body._id);
   try {
-    const users = await User.findOne({ _id: req.body._id }).limit(1);
+    const users = await User.findByIdAndDelete({ _id: req.body._id });
     if (users) {
       res.status(200).json(users);
     } else {

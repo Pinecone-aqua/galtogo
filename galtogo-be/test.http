@@ -3,9 +3,10 @@ post http://localhost:4200/user/add  http/1.1
 Content-Type: application/json
 
 {
-  "name": "Test",
-  "phone": 86116802,
-  "email": "nominest33@gmail.com",
+  "firstName": "T",
+  "lastName": "No",
+  "phone": 86116800,
+  "email": "nominest323@gmail.com",
   "password": "22ww"
 }
 
@@ -19,26 +20,50 @@ get http://localhost:4200/user/:id http/1.1
 Content-Type: application/json
 
  {
-  "_id": "64338a9184a5bc880ad99a80"
+  "_id": "6434d8a94d64a2329195d1fc"
+ }
+
+###
+ ###
+
+delete http://localhost:4200/user/:id http/1.1
+Content-Type: application/json
+
+ {
+  "_id": "64375ea1d086c7f903b90009"
  }
 
 ### Reservation test starts here
 
 get http://localhost:4200/reservation/all http/1.1
 
+
+### 
+
+delete http://localhost:4200/reservation/:id http/1.1
+Content-Type: application/json
+
+{
+  "_id": "64375f02d086c7f903b90016"
+}
+
 ### 
 post http://localhost:4200/reservation/add  http/1.1
 Content-Type: application/json
 
 {
-  "booking_date": "2023-04-04",
-  "booking_seats": 8,
-  "booking_hour":"14:00",
-  "user_id": "6434d8a94d64a2329195d1fc"
+  "date": "2023-04-05",
+  "persons": 8,
+  "hour":"14:00"
 }
 
-### Reservation test starts here
+### 
 
-get http://localhost:4200/reservation/id http/1.1
+get http://localhost:4200/reservation/:id http/1.1
+Content-Type: application/json
+
+{
+  "_id": "64375f96df8358d83c43211c"
+}
 
 ### 
