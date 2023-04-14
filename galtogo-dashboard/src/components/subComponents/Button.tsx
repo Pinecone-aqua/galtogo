@@ -1,7 +1,7 @@
-import { concat } from "@/utils/concat-class-names";
-import { cva, VariantProps } from "class-variance-authority";
 import { Loader2 } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 import { ButtonHTMLAttributes, FC } from "react";
+import { cva, VariantProps } from "class-variance-authority";
 
 const buttonVariants = cva(
   "active:scale-95 inline-flex items-center justify-center rounded-lg text-sm font-medium transition-color focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
@@ -25,7 +25,7 @@ const buttonVariants = cva(
   }
 );
 
-export interface ButtonProps
+interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   isLoading?: boolean;
@@ -40,7 +40,7 @@ const Button: FC<ButtonProps> = ({
   ...props
 }) => (
   <button
-    className={concat(buttonVariants({ variant, size, className }))}
+    className={twMerge(buttonVariants({ variant, size, className }))}
     disabled={isLoading}
     {...props}
   >

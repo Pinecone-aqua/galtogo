@@ -20,7 +20,16 @@ export default function Settings(): JSX.Element {
             className=""
             onClick={handleClick}
           >
-            Test
+            Test 1
+          </Button>
+          <Button
+            type="button"
+            variant="dark"
+            size="lg"
+            className="ms-4"
+            onClick={handleClick}
+          >
+            Test 2
           </Button>
         </div>
       </div>
