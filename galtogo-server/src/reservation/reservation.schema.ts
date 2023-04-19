@@ -1,9 +1,9 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Table } from 'src/table/table.schema';
 import { User } from 'src/user/user.schema';
 
-@Schema()
+@Schema({ timestamps: true })
 export class Reservation {
   @Prop({ required: true })
   time: string; // '16:00'
@@ -28,10 +28,16 @@ export class Reservation {
   })
   table: Table;
 
-  @Prop({ default: () => Date.now() })
-  createdAt: Date;
-
-  @Prop({ default: () => Date.now() })
-  updatedAt: Date;
+  @Prop({ default: true })
+  isActive: boolean;
 }
 export const ReservationSchema = SchemaFactory.createForClass(Reservation);
+
+export interface IReservation {
+  time: string;
+  date: string;
+  persons: number;
+  user: User;
+  table: Table;
+  isActive: boolean;
+}
