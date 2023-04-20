@@ -8,11 +8,15 @@ import { CreateReservationDto } from './dto/create-reservation.dto';
 @Injectable()
 export class ReservationService {
   constructor(
-    @InjectModel(Reservation.name) private reservationModel: Model<Reservation>,
+    @InjectModel(Reservation.name)
+    private reservationModel: Model<Reservation>,
   ) {}
 
   async getReservations(): Promise<IReservation[]> {
-    const result = await this.reservationModel.find().exec();
+    const result = await this.reservationModel
+      .find()
+      .populate(['user', 'table'])
+      .exec();
     return result;
   }
 
