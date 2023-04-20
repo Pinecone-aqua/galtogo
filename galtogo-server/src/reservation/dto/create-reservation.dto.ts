@@ -4,7 +4,7 @@ export class CreateReservationDto {
   readonly time: string;
   readonly date: string;
   readonly persons: number;
-  readonly isActive: boolean;
+  readonly isCompleted: boolean;
   readonly user: ObjectId;
   readonly table: ObjectId;
 }

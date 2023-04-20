@@ -8,9 +8,9 @@ Team "Galtogoo" 2023
 
 # Developers:
 
-M.Munkhtulga /developer, team head/ { aqua22.munkhtulga.munkhdorj@gmail.com }
-Nomin /developer/
-Munkhbat /developer, designer/
+M.Munkhtulga /developer, team head/ { tugarik@gmail.com }
+Nomin /developer/ { nominest3@gmail.com }
+Munkhbat /developer, designer/ { muugiiyep0722@gmail.com }
 
 # Brief
 

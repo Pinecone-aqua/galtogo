@@ -28,8 +28,8 @@ export class Reservation {
   })
   table: Table;
 
-  @Prop({ default: true })
-  isActive: boolean;
+  @Prop({ default: false })
+  isCompleted: boolean;
 }
 export const ReservationSchema = SchemaFactory.createForClass(Reservation);
 
@@ -39,5 +39,5 @@ export interface IReservation {
   persons: number;
   user: User;
   table: Table;
-  isActive: boolean;
+  isCompleted: boolean;
 }

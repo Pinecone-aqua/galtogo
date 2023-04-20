@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/filename-case */
 import { FiSettings } from "react-icons/fi";
-import { GrRestaurant } from "react-icons/gr";
+import { FaRegListAlt } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { RxSketchLogo, RxDashboard, RxPerson } from "react-icons/rx";
 
@@ -14,7 +14,7 @@ export const menuItems = [
   {
     name: "Reservations",
     path: "/dashboard/Reservations",
-    image: <GrRestaurant size={20} />,
+    image: <FaRegListAlt size={20} />,
   },
   { name: "Users", path: "/dashboard/Users", image: <RxPerson size={20} /> },
   {

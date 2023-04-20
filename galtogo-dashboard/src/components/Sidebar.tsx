@@ -7,7 +7,7 @@ interface PageProp {
   children: ReactNode;
 }
 
-const active = "bg-purple-800 text-white";
+const active = "bg-sky-800 text-white";
 const inActive = "bg-gray-100 hover:bg-gray-200";
 
 export default function Sidebar({ children }: PageProp): JSX.Element {

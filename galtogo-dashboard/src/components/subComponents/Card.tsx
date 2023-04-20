@@ -1,9 +1,9 @@
 import { Loader2 } from "lucide-react";
 import { twMerge } from "tailwind-merge";
-import { ButtonHTMLAttributes, FC } from "react";
+import { FC, TextareaHTMLAttributes } from "react";
 import { cva, VariantProps } from "class-variance-authority";
 
-const buttonVariants = cva(
+const cardVariants = cva(
   "active:scale-95 inline-flex items-center justify-center rounded-lg text-sm font-medium transition-color focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
   {
     variants: {
@@ -25,13 +25,13 @@ const buttonVariants = cva(
   }
 );
 
-interface ButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+interface CardProps
+  extends TextareaHTMLAttributes<HTMLTextAreaElement>,
+    VariantProps<typeof cardVariants> {
   isLoading?: boolean;
 }
 
-const Button: FC<ButtonProps> = ({
+const Card: FC<CardProps> = ({
   className,
   children,
   variant,
@@ -39,14 +39,14 @@ const Button: FC<ButtonProps> = ({
   size,
   ...props
 }) => (
-  <button
-    className={twMerge(buttonVariants({ variant, size, className }))}
+  <textarea
+    className={twMerge(cardVariants({ variant, size, className }))}
     disabled={isLoading}
     {...props}
   >
     {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
     {children}
-  </button>
+  </textarea>
 );
 
-export default Button;
+export default Card;
