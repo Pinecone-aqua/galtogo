@@ -1,10 +1,7 @@
 import Layout from "@/components/Layout";
 import Button from "@/components/subComponents/Button";
-import Card from "@/components/subComponents/Card";
+import { ReservationStatus } from "@/utils/constants";
 import axios from "axios";
-
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { FaShoppingBag } from "react-icons/fa";
 
 export default function Reservations(props: {
   reservationData: IReservation[];
@@ -22,61 +19,52 @@ export default function Reservations(props: {
             type="button"
             variant="default"
             size="lg"
-            className=""
+            className="sm:mx-6 m-3"
             onClick={handleClick}
           >
             Add Reservation
           </Button>
-
-          <div className="p-2 my-3 grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 items-center justify-between cursor-pointer ">
-            <span>Reservation</span>
-            <span className="hidden sm:flex ">Table</span>
-            <span className="hidden md:grid">Booked Time</span>
-            <span className="flex items-center justify-between">
-              <p>Status</p>
-              <BsThreeDotsVertical className="" />
-            </span>
-          </div>
-          <ul>
+          <div className="m-3 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 items-center justify-between">
             {reservationData.map((reservation, index) => (
-              <li
+              <div
+                className="bg-gray-50 hover:bg-gray-100 rounded-lg sm:mx-3 my-3 p-2"
                 key={index}
-                className="bg-gray-50 hover:bg-gray-100 rounded-lg my-3 p-2 grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 flex-wrap items-center justify-between"
               >
-                <div className="flex items-center">
-                  <div className="bg-sky-100 rounded-lg p-3">
-                    <FaShoppingBag className="text-sky-800" />
-                  </div>
-                  <div className="pl-4">
+                <div className="p-4 flex items-center justify-between border-b-4">
+                  <p className="bg-sky-600 p-3 rounded-lg text-center">
+                    {"# " + reservation.table.name}
+                  </p>
+                  <div className="">
                     <p className="text-gray-800 font-bold">
                       {reservation.date}
                     </p>
-                    <p className="text-gray-400 text-sm">
-                      {`${reservation.user.firstName} ${reservation.user.lastName}`}
-                    </p>
+                    <p className="text-gray-400">{reservation.time}</p>
                   </div>
                 </div>
-                <div className="hidden sm:flex">
-                  <p className="bg-sky-600 p-3 rounded-lg">
-                    {"# " + reservation.table.name}
+                <div className="cardBody p-4 text-gray-400 text-md">
+                  <p className="text-gray-800">
+                    {`${reservation.user.firstName} ${reservation.user.lastName}`}
                   </p>
+                  <p className="">{reservation.user.phone}</p>
+                  <p className="text-sm">{reservation.user.email}</p>
                 </div>
-                <p className="hidden md:grid">{reservation.time}</p>
-                <p className="text-gray-600 flex items-center justify-between">
-                  <span
-                    className={
-                      reservation.isCompleted
-                        ? "bg-green-200 p-2 rounded-lg"
-                        : "bg-yellow-200 p-2 rounded-lg"
-                    }
-                  >
-                    {reservation.isCompleted ? "Completed" : "Pending"}
-                  </span>
-                  <BsThreeDotsVertical />
-                </p>
-              </li>
+                <Button
+                  onClick={handleStatus(reservation._id)}
+                  className="m-4"
+                  size="default"
+                  variant={
+                    reservation.status === ReservationStatus.PENDING
+                      ? "yellow"
+                      : reservation.status === ReservationStatus.CONFIRMED
+                      ? "green"
+                      : "red"
+                  }
+                >
+                  {reservation.status}
+                </Button>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </Layout>
@@ -94,4 +82,8 @@ export const getServerSideProps: () => Promise<{
       reservationData,
     },
   };
+};
+
+const handleStatus = ({ _id }) => {
+  axios.get(`http://localhost:5050/${:_id/submit}`).then().catch((err)=>console.log('Current id is not found');)
 };

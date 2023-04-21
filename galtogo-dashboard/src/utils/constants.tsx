@@ -28,3 +28,9 @@ export const menuItems = [
     image: <FiSettings size={20} />,
   },
 ];
+
+export enum ReservationStatus {
+  PENDING = "pending",
+  CONFIRMED = "confirmed",
+  CANCELLED = "cancelled",
+}

@@ -8,7 +8,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { ReservationService } from './reservation.service';
-import { IReservation } from './reservation.schema';
+import { IReservation, ReservationStatus } from './reservation.schema';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
 
@@ -38,5 +38,21 @@ export class ReservationController {
   @Delete(':id')
   deleteReservation(@Param('id') id: string) {
     return this.reservationService.deleteReservation(id);
+  }
+
+  @Patch(':id/confirm')
+  confirmReservation(@Param('id') id: string) {
+    return this.reservationService.updateReservationStatus(
+      id,
+      ReservationStatus.CONFIRMED,
+    );
+  }
+
+  @Patch(':id/cancel')
+  cancelReservation(@Param('id') id: string) {
+    return this.reservationService.updateReservationStatus(
+      id,
+      ReservationStatus.CANCELLED,
+    );
   }
 }

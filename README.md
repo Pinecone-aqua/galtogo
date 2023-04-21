@@ -35,7 +35,6 @@ GALTOGO WebApp is a system for online booking reservations in a restaurant. GALT
 
 # ERD
 
-|-----------------------------------|
 | Reservation
 |-----------------------------------|
 | id (ObjectId)
@@ -44,11 +43,9 @@ GALTOGO WebApp is a system for online booking reservations in a restaurant. GALT
 | table_id (ObjectID ref: “Table”)
 | user_id (ObjectID ref: “User”)
 | isCompleted (Boolean)
-|-----------------------------------|
 
 ---
 
-|-----------------------------------|
 | Table
 |-----------------------------------|
 | id (ObjectId)
@@ -56,11 +53,9 @@ GALTOGO WebApp is a system for online booking reservations in a restaurant. GALT
 | capacity (Number)
 | isActive (boolean)
 | isCompleted (Boolean)
-|-----------------------------------|
 
 ---
 
-|-----------------------------------|
 | Users
 |-----------------------------------|
 | id (ObjectId)
@@ -68,20 +63,16 @@ GALTOGO WebApp is a system for online booking reservations in a restaurant. GALT
 | lastName (String)
 | email (String)
 | phone (String)
-|-----------------------------------|
 
 ---
 
-|-----------------------------------|
 | Category
 |-----------------------------------|
 | id (ObjectId)
 | name (String)
-|-----------------------------------|
 
 ---
 
-|-----------------------------------|
 | Product
 |-----------------------------------|
 | id (ObjectId)
@@ -89,7 +80,6 @@ GALTOGO WebApp is a system for online booking reservations in a restaurant. GALT
 | price (Number)
 | description (String)
 | category (ObjectId, ref=”Category”)
-|-----------------------------------|
 
 ---
 

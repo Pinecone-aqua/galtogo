@@ -1,7 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { IReservation, Reservation } from './reservation.schema';
+import {
+  IReservation,
+  Reservation,
+  ReservationStatus,
+} from './reservation.schema';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 
@@ -33,5 +37,10 @@ export class ReservationService {
   async deleteReservation(id: string) {
     await this.reservationModel.findByIdAndDelete(id).exec();
     return { message: `Reservation deleted with id: ${id}` };
+  }
+
+  async updateReservationStatus(id: string, status: ReservationStatus) {
+    await this.reservationModel.findByIdAndUpdate(id, { status }).exec();
+    return { message: `Reservation with id: ${id} status updated` };
   }
 }

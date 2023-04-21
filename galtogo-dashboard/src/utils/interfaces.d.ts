@@ -5,7 +5,7 @@ interface IReservation {
   persons: number;
   user: IUser;
   table: ITable;
-  isCompleted: boolean;
+  status: string;
 }
 
 interface IUser {
