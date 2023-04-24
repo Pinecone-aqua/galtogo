@@ -1,6 +1,6 @@
 interface IReservation {
   _id: mongoose.Schema.Types.ObjectId;
-  time: string;
+  time: [string];
   date: string;
   persons: number;
   user: IUser;

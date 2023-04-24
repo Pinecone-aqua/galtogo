@@ -2,21 +2,25 @@ import Layout from "@/components/Layout";
 import Button from "@/components/subComponents/Button";
 import { ReservationStatus } from "@/utils/constants";
 import axios from "axios";
+import { useState } from "react";
 
 export default function Reservations(props: {
   reservationData: IReservation[];
 }): JSX.Element {
   const { reservationData } = props;
-
-  const handleClick = () => {
+  const [statusBtns, setButtons] = useState<string[]>(
+    Object.values(ReservationStatus)
+  );
+  const handleAdd = () => {
     console.log("Reservation add button");
   };
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleStatus = (e: any) => {
-    e.preventDefault();
-    console.log("Status change button:", e.target.id);
+  const handleChangeStatus = (e: any) => {
     axios
-      .patch(`http://localhost:5050/reservation/${e.target.id}/confirm`)
+      .patch(
+        `http://localhost:5050/reservation/${e.target.id}/confirm?status=${e.target.name}`
+      )
       .then((res) => {
         console.log(res.data.message);
       })
@@ -26,13 +30,13 @@ export default function Reservations(props: {
   return (
     <Layout>
       <div className="p-4 ">
-        <div className="w-full m-auto p-4 bg-white border rounded-lg overflow-y-auto">
+        <div className="w-full m-auto p-4 pb-28 bg-white border rounded-lg overflow-y-auto">
           <Button
             type="button"
             variant="default"
             size="lg"
             className="sm:mx-6 m-3"
-            onClick={handleClick}
+            onClick={handleAdd}
           >
             Add Reservation
           </Button>
@@ -43,7 +47,7 @@ export default function Reservations(props: {
                 key={index}
               >
                 <div className="p-4 flex items-center justify-between border-b-4">
-                  <p className="bg-sky-600 p-3 rounded-lg text-center">
+                  <p className="bg-sky-600 p-3 rounded-lg text-center text-white font-bold">
                     {"# " + reservation.table.name}
                   </p>
                   <div className="">
@@ -60,21 +64,47 @@ export default function Reservations(props: {
                   <p className="">{reservation.user.phone}</p>
                   <p className="text-sm">{reservation.user.email}</p>
                 </div>
-                <Button
-                  onClick={handleStatus}
-                  id={reservation._id}
-                  className="m-4"
-                  size="default"
-                  variant={
-                    reservation.status === ReservationStatus.PENDING
-                      ? "yellow"
-                      : reservation.status === ReservationStatus.CONFIRMED
-                      ? "green"
-                      : "red"
+                <div className="relative group/status">
+                  <Button
+                    id={reservation._id}
+                    className="m-4"
+                    size="default"
+                    variant={
+                      reservation.status === ReservationStatus.PENDING
+                        ? "yellow"
+                        : reservation.status === ReservationStatus.CONFIRMED
+                        ? "green"
+                        : "red"
+                    }
+                  >
+                    {reservation.status}
+                  </Button>
+                  {
+                    <div
+                      className={`hidden group-focus-within/status:flex absolute bg-gray-50 rounded-xl top-0 order-20 w-fit flex-col`}
+                    >
+                      {statusBtns.map((statusName, index) => (
+                        <Button
+                          key={index}
+                          onClick={handleChangeStatus}
+                          name={statusName}
+                          id={reservation._id}
+                          className="m-4"
+                          size="default"
+                          variant={
+                            statusName === ReservationStatus.PENDING
+                              ? "yellow"
+                              : statusName === ReservationStatus.CONFIRMED
+                              ? "green"
+                              : "red"
+                          }
+                        >
+                          {statusName}
+                        </Button>
+                      ))}
+                    </div>
                   }
-                >
-                  {reservation.status}
-                </Button>
+                </div>
               </div>
             ))}
           </div>
@@ -84,7 +114,7 @@ export default function Reservations(props: {
   );
 }
 
-export const getServerSideProps: () => Promise<{
+export const getStaticProps: () => Promise<{
   props: { reservationData: IReservation[] | null };
 }> = async () => {
   const reservationData = await axios

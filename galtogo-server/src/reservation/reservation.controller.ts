@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Query,
   Patch,
   Post,
 } from '@nestjs/common';
@@ -18,6 +19,11 @@ export class ReservationController {
   @Get()
   getReservation(): Promise<IReservation[]> {
     return this.reservationService.getReservations();
+  }
+
+  @Get(':date')
+  getReservationsByDate(@Param('date') date: string): Promise<IReservation[]> {
+    return this.reservationService.getReservationsByDate(date);
   }
 
   @Post('add')
@@ -41,14 +47,20 @@ export class ReservationController {
   }
 
   @Patch(':id/confirm')
-  confirmReservation(@Param('id') id: string) {
+  confirmReservation(@Param('id') id: string, @Query('status') status: string) {
+    console.log('params: ', status);
+    return this.reservationService.updateReservationStatus(id, status);
+  }
+
+  @Patch(':id/pending')
+  pendingReservation(@Param('id') id: string) {
     return this.reservationService.updateReservationStatus(
       id,
-      ReservationStatus.CONFIRMED,
+      ReservationStatus.PENDING,
     );
   }
 
-  @Patch(':id/cancel')
+  @Patch(':id/cancelled')
   cancelReservation(@Param('id') id: string) {
     return this.reservationService.updateReservationStatus(
       id,
