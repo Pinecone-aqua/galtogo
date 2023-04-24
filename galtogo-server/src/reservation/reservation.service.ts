@@ -41,6 +41,6 @@ export class ReservationService {
 
   async updateReservationStatus(id: string, status: ReservationStatus) {
     await this.reservationModel.findByIdAndUpdate(id, { status }).exec();
-    return { message: `Reservation with id: ${id} status updated` };
+    return { message: `Reservation with id: ${id} status updated`, status };
   }
 }

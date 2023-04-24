@@ -11,6 +11,18 @@ export default function Reservations(props: {
   const handleClick = () => {
     console.log("Reservation add button");
   };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleStatus = (e: any) => {
+    e.preventDefault();
+    console.log("Status change button:", e.target.id);
+    axios
+      .patch(`http://localhost:5050/reservation/${e.target.id}/confirm`)
+      .then((res) => {
+        console.log(res.data.message);
+      })
+      .catch((err) => console.log("Current id is not found", err));
+  };
+
   return (
     <Layout>
       <div className="p-4 ">
@@ -49,7 +61,8 @@ export default function Reservations(props: {
                   <p className="text-sm">{reservation.user.email}</p>
                 </div>
                 <Button
-                  onClick={handleStatus(reservation._id)}
+                  onClick={handleStatus}
+                  id={reservation._id}
                   className="m-4"
                   size="default"
                   variant={
@@ -82,8 +95,4 @@ export const getServerSideProps: () => Promise<{
       reservationData,
     },
   };
-};
-
-const handleStatus = ({ _id }) => {
-  axios.get(`http://localhost:5050/${:_id/submit}`).then().catch((err)=>console.log('Current id is not found');)
 };
