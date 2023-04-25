@@ -17,7 +17,7 @@ interface IUser {
 }
 
 interface ITable {
-  name: string;
+  name: number;
   capacity: number;
   isActive: boolean;
 }

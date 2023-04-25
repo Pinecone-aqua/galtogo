@@ -34,3 +34,9 @@ export enum ReservationStatus {
   CONFIRMED = "confirmed",
   CANCELLED = "cancelled",
 }
+
+export const filterBtns = [
+  { name: "table" },
+  { name: "date" },
+  { name: "user" },
+];

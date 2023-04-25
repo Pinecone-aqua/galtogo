@@ -17,8 +17,11 @@ import { UpdateReservationDto } from './dto/update-reservation.dto';
 export class ReservationController {
   constructor(private readonly reservationService: ReservationService) {}
   @Get()
-  getReservation(): Promise<IReservation[]> {
-    return this.reservationService.getReservations();
+  getReservation(
+    @Query() query: { filter: string; isAsc: string },
+  ): Promise<IReservation[]> {
+    console.log(query);
+    return this.reservationService.getReservations({ query });
   }
 
   @Get(':date')

@@ -21,11 +21,10 @@ export default function Tables(props: {
     console.log("date: ", e.target.value);
     try {
       setDatas(e.target.value);
-      const result = await axios
+      await axios
         .get(`http://localhost:5050/reservation/${e.target.value}`)
         .then((res) => res.data)
         .catch((err) => console.log(err));
-      // console.log("result", result);
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +64,7 @@ export const getStaticProps: () => Promise<{
 }> = async () => {
   const date = moment(new Date()).format("YYYY-MM-DD");
   const reservationData = await axios
-    .get(`http://localhost:5050/reservation/2023-04-20`)
+    .get(`http://localhost:5050/reservation?filter=table&isAsc=asc`)
     .then((res) => res.data);
   return {
     props: {
