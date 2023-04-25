@@ -4,11 +4,12 @@ import {
   Delete,
   Get,
   Param,
+  Query,
   Patch,
   Post,
 } from '@nestjs/common';
 import { ReservationService } from './reservation.service';
-import { IReservation } from './reservation.schema';
+import { IReservation, ReservationStatus } from './reservation.schema';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
 
@@ -16,8 +17,16 @@ import { UpdateReservationDto } from './dto/update-reservation.dto';
 export class ReservationController {
   constructor(private readonly reservationService: ReservationService) {}
   @Get()
-  getReservation(): Promise<IReservation[]> {
-    return this.reservationService.getReservations();
+  getReservation(
+    @Query() query: { filter: string; isAsc: string },
+  ): Promise<IReservation[]> {
+    console.log(query);
+    return this.reservationService.getReservations({ query });
+  }
+
+  @Get(':date')
+  getReservationsByDate(@Param('date') date: string): Promise<IReservation[]> {
+    return this.reservationService.getReservationsByDate(date);
   }
 
   @Post('add')
@@ -38,5 +47,27 @@ export class ReservationController {
   @Delete(':id')
   deleteReservation(@Param('id') id: string) {
     return this.reservationService.deleteReservation(id);
+  }
+
+  @Patch(':id/confirm')
+  confirmReservation(@Param('id') id: string, @Query('status') status: string) {
+    console.log('params: ', status);
+    return this.reservationService.updateReservationStatus(id, status);
+  }
+
+  @Patch(':id/pending')
+  pendingReservation(@Param('id') id: string) {
+    return this.reservationService.updateReservationStatus(
+      id,
+      ReservationStatus.PENDING,
+    );
+  }
+
+  @Patch(':id/cancelled')
+  cancelReservation(@Param('id') id: string) {
+    return this.reservationService.updateReservationStatus(
+      id,
+      ReservationStatus.CANCELLED,
+    );
   }
 }

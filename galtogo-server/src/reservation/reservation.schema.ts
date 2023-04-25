@@ -3,6 +3,12 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Table } from 'src/table/table.schema';
 import { User } from 'src/user/user.schema';
 
+export enum ReservationStatus {
+  PENDING = 'pending',
+  CONFIRMED = 'confirmed',
+  CANCELLED = 'cancelled',
+}
+
 @Schema({ timestamps: true })
 export class Reservation {
   @Prop({ required: true })
@@ -28,8 +34,11 @@ export class Reservation {
   })
   table: Table;
 
-  @Prop({ default: true })
-  isActive: boolean;
+  @Prop({
+    enum: Object.values(ReservationStatus),
+    default: ReservationStatus.PENDING,
+  })
+  status: string;
 }
 export const ReservationSchema = SchemaFactory.createForClass(Reservation);
 
@@ -39,5 +48,5 @@ export interface IReservation {
   persons: number;
   user: User;
   table: Table;
-  isActive: boolean;
+  status: string;
 }

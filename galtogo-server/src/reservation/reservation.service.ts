@@ -12,11 +12,27 @@ export class ReservationService {
     private reservationModel: Model<Reservation>,
   ) {}
 
-  async getReservations(): Promise<IReservation[]> {
+  async getReservations({ query }): Promise<IReservation[]> {
     const result = await this.reservationModel
-      .find()
+      .find({})
       .populate(['user', 'table'])
-      .exec();
+      .sort([
+        [query.filter, query.isAsc],
+        ['time', 'asc'],
+      ]);
+
+    return result;
+  }
+
+  async getReservationsByDate(date: string): Promise<IReservation[]> {
+    console.log(date);
+    const result = await this.reservationModel
+      .find({ date })
+      .populate(['user', 'table'])
+      .sort([
+        ['table', 'desc'],
+        ['time', 'asc'],
+      ]);
     return result;
   }
 
@@ -33,5 +49,13 @@ export class ReservationService {
   async deleteReservation(id: string) {
     await this.reservationModel.findByIdAndDelete(id).exec();
     return { message: `Reservation deleted with id: ${id}` };
+  }
+
+  async updateReservationStatus(id: string, status: string) {
+    await this.reservationModel.findByIdAndUpdate(id, { status }).exec();
+    const result = await this.reservationModel
+      .find()
+      .populate(['user', 'table']);
+    return { message: `Reservation with id: ${id} status updated`, result };
   }
 }
