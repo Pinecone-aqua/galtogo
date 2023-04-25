@@ -13,3 +13,10 @@ export class User {
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
+
+export interface IUser {
+  lastName: string;
+  firstName: string;
+  email: string;
+  phone: number;
+}
