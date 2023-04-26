@@ -25,14 +25,9 @@ export class ReservationService {
   }
 
   async getReservationsByDate(date: string): Promise<IReservation[]> {
-    console.log(date);
     const result = await this.reservationModel
       .find({ date })
-      .populate(['user', 'table'])
-      .sort([
-        ['table', 'desc'],
-        ['time', 'asc'],
-      ]);
+      .populate(['user', 'table']);
     return result;
   }
 

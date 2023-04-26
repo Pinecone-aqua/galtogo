@@ -9,7 +9,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { ReservationService } from './reservation.service';
-import { IReservation, ReservationStatus } from './reservation.schema';
+import { IReservation } from './reservation.schema';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
 
@@ -24,7 +24,7 @@ export class ReservationController {
     return this.reservationService.getReservations({ query });
   }
 
-  @Get(':date')
+  @Get('date/:date')
   getReservationsByDate(@Param('date') date: string): Promise<IReservation[]> {
     return this.reservationService.getReservationsByDate(date);
   }
@@ -53,21 +53,5 @@ export class ReservationController {
   confirmReservation(@Param('id') id: string, @Query('status') status: string) {
     console.log('params: ', status);
     return this.reservationService.updateReservationStatus(id, status);
-  }
-
-  @Patch(':id/pending')
-  pendingReservation(@Param('id') id: string) {
-    return this.reservationService.updateReservationStatus(
-      id,
-      ReservationStatus.PENDING,
-    );
-  }
-
-  @Patch(':id/cancelled')
-  cancelReservation(@Param('id') id: string) {
-    return this.reservationService.updateReservationStatus(
-      id,
-      ReservationStatus.CANCELLED,
-    );
   }
 }

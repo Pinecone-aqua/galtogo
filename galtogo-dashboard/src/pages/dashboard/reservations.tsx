@@ -3,7 +3,7 @@ import Layout from "@/components/Layout";
 import Button from "@/components/subComponents/Button";
 import { useState } from "react";
 import { filterBtns } from "@/utils/constants";
-import ReservationCard from "@/components/subComponents/Card";
+import ReservationCard from "@/components/subComponents/ReservationCard";
 
 export default function Reservations(props: {
   reservationData: IReservation[];
@@ -73,7 +73,7 @@ export default function Reservations(props: {
   );
 }
 
-export const getStaticProps: () => Promise<{
+export const getServerSideProps: () => Promise<{
   props: { reservationData: IReservation[] | null };
 }> = async () => {
   const reservationData = await axios

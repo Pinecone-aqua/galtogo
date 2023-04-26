@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import Layout from "@/components/Layout";
 import Button from "@/components/subComponents/Button";
 import TableBar from "@/components/subComponents/TableBar";
@@ -7,26 +8,29 @@ import { useState } from "react";
 
 export default function Tables(props: {
   reservationData: IReservation[];
+  tablesData: ITable[];
 }): JSX.Element {
   const { reservationData } = props;
+  const { tablesData } = props;
   const [datas, setDatas] = useState<IReservation[]>(reservationData);
+  const [date, setDate] = useState(moment(new Date()).format("YYYY-MM-DD"));
 
   const handleAdd = () => {
     console.log("Reservation add button");
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleDate = async (e: any) => {
-    e.preventDefault();
-    console.log("date: ", e.target.value);
+  const handleChange: (e: any) => Promise<void> = async (e) => {
     try {
-      setDatas(e.target.value);
-      await axios
-        .get(`http://localhost:5050/reservation/${e.target.value}`)
+      setDate(e.target.value);
+      console.log(e.target.value);
+      const newData: Promise<IReservation[]> = await axios
+        .get(`http://localhost:5050/reservation/date/${e.target.value}`)
         .then((res) => res.data)
-        .catch((err) => console.log(err));
+        .catch((err) => console.log("axios: ", err));
+      setDatas(await newData);
     } catch (error) {
-      console.log(error);
+      console.log("axios error: ", error);
     }
   };
 
@@ -44,12 +48,17 @@ export default function Tables(props: {
             >
               Add Table
             </Button>
-            <input type="date" onChange={handleDate} />
+            <input
+              className="rounded-lg p-3 mb-4 focus:outline-none border"
+              type="date"
+              value={date}
+              onChange={handleChange}
+            />
           </div>
-          <div className="w-full m-auto p-4 bg-white border rounded-lg overflow-y-auto">
-            {datas.map((reservation, index) => (
+          <div className="m-3">
+            {tablesData.map((table, index) => (
               <div key={index}>
-                <TableBar reservation={reservation} />
+                <TableBar reservations={datas} table={table} />
               </div>
             ))}
           </div>
@@ -59,16 +68,23 @@ export default function Tables(props: {
   );
 }
 
-export const getStaticProps: () => Promise<{
-  props: { reservationData: IReservation[] | null };
+export const getServerSideProps: () => Promise<{
+  props: {
+    reservationData: IReservation[] | null;
+    tablesData: ITable[] | null;
+  };
 }> = async () => {
   const date = moment(new Date()).format("YYYY-MM-DD");
   const reservationData = await axios
-    .get(`http://localhost:5050/reservation?filter=table&isAsc=asc`)
+    .get(`http://localhost:5050/reservation/date/${date}`)
+    .then((res) => res.data);
+  const tablesData = await axios
+    .get(`http://localhost:5050/table`)
     .then((res) => res.data);
   return {
     props: {
       reservationData,
+      tablesData,
     },
   };
 };
