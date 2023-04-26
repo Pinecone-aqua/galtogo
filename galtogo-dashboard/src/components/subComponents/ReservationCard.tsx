@@ -1,11 +1,11 @@
-import { FC, useState } from "react";
+import { Dispatch, FC, SetStateAction, useState } from "react";
 import Button from "./Button";
 import axios from "axios";
 import { ReservationStatus } from "@/utils/constants";
 
 interface CardProps {
   reservation: IReservation;
-  setReservations: ([]) => IReservation[];
+  setReservations: Dispatch<SetStateAction<IReservation[]>>;
 }
 
 const ReservationCard: FC<CardProps> = ({ reservation, setReservations }) => {
