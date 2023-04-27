@@ -25,14 +25,14 @@ export default function Layout({ children }: PropType) {
       </Head>
       <main className="relative bg-white min-h-screen sm:px-20">
         <Button
-          className="fixed bottom-4 right-3 sm:right-20"
+          className="fixed bottom-4 right-3 sm:right-20 lg:top-8 z-20"
           size="sm"
           onClick={handleClick}
         >
           + Reservation
         </Button>
         <Navigation />
-        <div className="h-[200vh]">{children}</div>
+        <div className="">{children}</div>
         <Footer />
       </main>
     </>

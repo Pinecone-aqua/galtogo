@@ -44,7 +44,7 @@ export default function Carousel({
                 className="hover:bg-black/10 rounded-full cursor-pointer"
                 onClick={() => setSelectedCategory(category.name)}
               >
-                <div className="md:w-[150px] md:h-[150px] w-[100px] h-[100px] bg-slate-200 m-1 rounded-full">
+                <div className="lg:w-[150px] lg:h-[150px] w-[100px] h-[100px] bg-slate-200 m-1 rounded-full">
                   <p className="text-center mx-auto pt-10 text-xs">
                     {category.name}
                   </p>
