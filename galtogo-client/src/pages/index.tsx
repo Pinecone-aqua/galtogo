@@ -1,21 +1,24 @@
-export default function Home() {
-  // function testHandler() {}
+import Carousel from "@/components/Carousel";
+import Layout from "@/components/Layout";
+import MenuField from "@/components/MenuField";
+import SpecialOffer from "@/components/SpecialOffer";
+import { useState } from "react";
+
+export default function Home(): JSX.Element {
+  const [selectedCategory, setSelectedCategory] =
+    useState<string>("Category-1");
   return (
-    <div>
-      <ul className="flex gap-2 text-blue-600 text-xl p-5">
-        <li className="px-6 py-2 border border-sky-600 rounded-full hover:bg-blue-600 hover:text-white transition">
-          Home
-        </li>
-        <li className="px-6 py-2 border border-sky-600 rounded-full hover:bg-blue-600 hover:text-white transition">
-          Order
-        </li>
-        <li className="px-6 py-2 border border-sky-600 rounded-full hover:bg-blue-600 hover:text-white transition">
-          About us
-        </li>
-        <li className="px-6 py-2 border border-sky-600 rounded-full hover:bg-blue-600 hover:text-white transition">
-          Contact
-        </li>
-      </ul>
-    </div>
+    <Layout>
+      <div className="hidden md:block p-3">
+        <SpecialOffer />
+      </div>
+      <div className="p-3">
+        <Carousel setSelectedCategory={setSelectedCategory} />
+      </div>
+      <div className="p-3">
+        <MenuField selectedCategory={selectedCategory} />
+      </div>
+      <div className="p-3">Additional information</div>
+    </Layout>
   );
 }
