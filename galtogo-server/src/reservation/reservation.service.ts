@@ -50,7 +50,8 @@ export class ReservationService {
     await this.reservationModel.findByIdAndUpdate(id, { status }).exec();
     const result = await this.reservationModel
       .find()
-      .populate(['user', 'table']);
+      .populate(['user', 'table'])
+      .sort([['date', 'desc']]);
     return { message: `Reservation with id: ${id} status updated`, result };
   }
 }
