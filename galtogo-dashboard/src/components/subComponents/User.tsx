@@ -52,16 +52,24 @@ const User: React.FC<UserProps> = ({ user, setUsers }) => {
             <AiOutlineEye />
           </button>
           {showReservation && (
-            <div>
-              <p>Reservation dates:</p>
-              {reservations
-                .sort(
-                  (a, b) =>
-                    new Date(a.date).getTime() - new Date(b.date).getTime()
-                )
-                .map((reservation) => (
-                  <p key={reservation._id}>{reservation.date}</p>
-                ))}
+            <div className="absolute z-10 top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
+              <div className="bg-white p-4 rounded-lg">
+                <p className="font-bold text-lg mb-2">Reservation dates:</p>
+                {reservations
+                  .sort(
+                    (a, b) =>
+                      new Date(a.date).getTime() - new Date(b.date).getTime()
+                  )
+                  .map((reservation) => (
+                    <p key={reservation._id}>{reservation.date}</p>
+                  ))}
+                <button
+                  onClick={() => setShowReservation(false)}
+                  className="bg-blue-500 p-2 rounded-lg text-white mt-4"
+                >
+                  Close
+                </button>
+              </div>
             </div>
           )}
         </td>
