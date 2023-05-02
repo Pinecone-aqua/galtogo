@@ -7,15 +7,9 @@ import { BsPersonAdd } from "react-icons/bs";
 const Customers: React.FC = () => {
   const [users, setUsers] = useState<IUser[]>([]);
   const [showAddButton, setShowAddButton] = useState(false);
-  console.log("users:", users);
 
   const buttonShowHandler = () => {
     setShowAddButton(!showAddButton);
-  };
-
-  const handleAddUser = (user: IUser) => {
-    setUsers([...users, user]);
-    setShowAddButton(false);
   };
 
   useEffect(() => {
@@ -24,21 +18,27 @@ const Customers: React.FC = () => {
       const data = await response.json();
       setUsers(data);
     }
-
     fetchUsers();
   }, []);
 
   return (
     <Layout>
-      <div className="p-4 ">
+      <div className="p-4">
         <div className="w-full m-auto p-4 bg-white border rounded-lg overflow-y-auto">
-          <button
-            onClick={buttonShowHandler}
-            className="flex gap-3 bg-gray-100 p-4 rounded-lg inline-block hover:bg-gray-200 cursor-pointers my-4"
-          >
-            Add User <BsPersonAdd size={23} />
-          </button>
-          {showAddButton ? <AddUserButton setUsers={setUsers} /> : <></>}
+          <div className="flex justify-between">
+            <button
+              onClick={buttonShowHandler}
+              className="flex gap-3 bg-gray-100 p-4 rounded-lg inline-block hover:bg-gray-200 cursor-pointers my-4"
+            >
+              Add User <BsPersonAdd size={23} />
+            </button>
+            {showAddButton ? <AddUserButton setUsers={setUsers} /> : <></>}{" "}
+            <input
+              placeholder="Search"
+              type="text"
+              className="border rounded-lg p-4 my-4"
+            />
+          </div>
           <table className="justify-around w-full">
             <thead>
               <tr>

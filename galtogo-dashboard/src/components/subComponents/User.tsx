@@ -38,7 +38,7 @@ const User: React.FC<UserProps> = ({ user, setUsers }) => {
   }
 
   return (
-    <tr className="text-center text-left">
+    <tr className="text-center text-left my-3 p-2 items-center cursor-pointer hover:bg-gray-200 ">
       <td>{user.firstName}</td>
       <td>{user.lastName}</td>
       <td>{user.phone}</td>
@@ -47,7 +47,7 @@ const User: React.FC<UserProps> = ({ user, setUsers }) => {
         <td>
           <button
             onClick={() => showReservationHandler(user._id)}
-            className="bg-blue-500 p-2 rounded-lg text-white"
+            className="bg-yellow-200 p-2 rounded-lg text-black hover:bg-yellow-400"
           >
             <AiOutlineEye />
           </button>
@@ -76,7 +76,7 @@ const User: React.FC<UserProps> = ({ user, setUsers }) => {
         <td>
           <button
             onClick={() => setShowEdit(true)}
-            className="bg-green-500 p-2 rounded-lg text-white"
+            className="bg-green-200 p-2 rounded-lg text-black hover:bg-green-400"
           >
             <AiOutlineEdit />
           </button>
@@ -91,7 +91,7 @@ const User: React.FC<UserProps> = ({ user, setUsers }) => {
         <td>
           <button
             onClick={() => deleteHandler(user._id)}
-            className="bg-red-500 p-2 rounded-lg text-white"
+            className="bg-red-200 p-2 rounded-lg text-black hover:bg-red-400"
           >
             <AiOutlineDelete />
           </button>
