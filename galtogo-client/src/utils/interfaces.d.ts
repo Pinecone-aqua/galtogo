@@ -31,3 +31,9 @@ interface ITable {
   capacity: number;
   isActive: boolean;
 }
+
+interface IDate {
+  year: number;
+  month: number;
+  day: number;
+}
