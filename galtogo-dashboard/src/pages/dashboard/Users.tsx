@@ -7,10 +7,14 @@ import { BsPersonAdd } from "react-icons/bs";
 const Customers: React.FC = () => {
   const [users, setUsers] = useState<IUser[]>([]);
   const [showAddButton, setShowAddButton] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   const buttonShowHandler = () => {
     setShowAddButton(!showAddButton);
   };
+  function handleSearchInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setSearchValue(event.target.value);
+  }
 
   useEffect(() => {
     async function fetchUsers() {
@@ -25,20 +29,21 @@ const Customers: React.FC = () => {
     <Layout>
       <div className="p-4">
         <div className="w-full m-auto p-4 bg-white border rounded-lg overflow-y-auto">
-          <div className="flex justify-between">
-            <button
-              onClick={buttonShowHandler}
-              className="flex gap-3 bg-gray-100 p-4 rounded-lg inline-block hover:bg-gray-200 cursor-pointers my-4"
-            >
-              Add User <BsPersonAdd size={23} />
-            </button>
-            {showAddButton ? <AddUserButton setUsers={setUsers} /> : <></>}{" "}
-            <input
-              placeholder="Search"
-              type="text"
-              className="border rounded-lg p-4 my-4"
-            />
-          </div>
+          <input
+            placeholder="Search"
+            type="text"
+            className="border rounded-lg p-4 my-4"
+            value={searchValue}
+            onChange={handleSearchInputChange}
+          />
+
+          <button
+            onClick={buttonShowHandler}
+            className="flex gap-3 bg-gray-100 p-4 rounded-lg inline-block hover:bg-gray-200 cursor-pointers my-4"
+          >
+            Add User <BsPersonAdd size={23} />
+          </button>
+          {showAddButton ? <AddUserButton setUsers={setUsers} /> : <></>}
           <table className="justify-around w-full">
             <thead>
               <tr>
@@ -49,9 +54,15 @@ const Customers: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
-                <User key={user._id} user={user} setUsers={setUsers} />
-              ))}
+              {users
+                .filter((user) =>
+                  `${user.firstName} ${user.lastName} ${user.phone} ${user.email}`
+                    .toLowerCase()
+                    .includes(searchValue.toLowerCase())
+                )
+                .map((user) => (
+                  <User key={user._id} user={user} setUsers={setUsers} />
+                ))}
             </tbody>
           </table>
         </div>
