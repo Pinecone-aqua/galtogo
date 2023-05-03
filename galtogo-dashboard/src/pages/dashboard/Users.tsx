@@ -39,7 +39,7 @@ const Customers: React.FC = () => {
 
           <button
             onClick={buttonShowHandler}
-            className="flex gap-3 bg-gray-100 p-4 rounded-lg inline-block hover:bg-gray-200 cursor-pointers my-4"
+            className="flex gap-3 bg-gray-100 p-4 rounded-lg inline-block hover:bg-gray-200 cursor-pointers my-4 bg-gray-100 hover:bg-gray-200 bg-sky-800 text-white"
           >
             Add User <BsPersonAdd size={23} />
           </button>
