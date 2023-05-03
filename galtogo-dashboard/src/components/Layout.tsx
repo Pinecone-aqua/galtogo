@@ -2,6 +2,8 @@ import Head from "next/head";
 import Header from "./Header";
 import { ReactNode } from "react";
 import Sidebar from "./Sidebar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type PropTypes = {
   children: ReactNode;
@@ -19,6 +21,13 @@ export default function Layout({ children }: PropTypes): JSX.Element {
       <div>
         <Sidebar>
           <main className="bg-gray-100 min-h-screen">
+            <ToastContainer
+              autoClose={3000}
+              position="top-right"
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+            />
             <Header />
             {children}
           </main>

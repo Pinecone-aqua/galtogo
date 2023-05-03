@@ -8,11 +8,13 @@ import AddReservationModal from "@/components/subComponents/AddReservationModal"
 
 export default function Reservations(props: {
   reservationData: IReservation[];
+  tablesData: ITable[];
 }): JSX.Element {
   const { reservationData } = props;
+  const { tablesData } = props;
   const [reservations, setReservations] = useState(reservationData);
-  const [toggleFilter, setToggleFilter] = useState(true);
-  const [showAddModal, setShowAddModal] = useState(false);
+  const [toggleFilter, setToggleFilter] = useState<boolean>(true);
+  const [showAddModal, setShowAddModal] = useState<boolean>(false);
 
   const handleAdd = () => {
     setShowAddModal((prev) => !prev);
@@ -44,7 +46,10 @@ export default function Reservations(props: {
               Add Reservation
             </Button>
             {showAddModal && (
-              <AddReservationModal setShowAddModal={setShowAddModal} />
+              <AddReservationModal
+                setShowAddModal={setShowAddModal}
+                tablesData={tablesData}
+              />
             )}
             <div>
               Sort by:
@@ -78,14 +83,21 @@ export default function Reservations(props: {
 }
 
 export const getServerSideProps: () => Promise<{
-  props: { reservationData: IReservation[] | null };
+  props: {
+    reservationData: IReservation[] | null;
+    tablesData: ITable[] | null;
+  };
 }> = async () => {
   const reservationData = await axios
     .get(`${process.env.PORT}/reservation?filter=date&isAsc=desc`)
     .then((res) => res.data);
+  const tablesData = await axios
+    .get(`http://localhost:5050/table`)
+    .then((res) => res.data);
   return {
     props: {
       reservationData,
+      tablesData,
     },
   };
 };
