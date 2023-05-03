@@ -3,6 +3,7 @@ import { FiSettings } from "react-icons/fi";
 import { FaRegListAlt } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { RxSketchLogo, RxDashboard, RxPerson } from "react-icons/rx";
+import { BiDish } from "react-icons/bi"
 
 export const menuItems = [
   { name: "Dashboard", path: "/dashboard", image: <RxSketchLogo size={20} /> },
@@ -15,6 +16,11 @@ export const menuItems = [
     name: "Reservations",
     path: "/dashboard/Reservations",
     image: <FaRegListAlt size={20} />,
+  },
+  {
+    name: "Products",
+    path: "/dashboard/products",
+    image: <BiDish size={20} />,
   },
   { name: "Users", path: "/dashboard/Users", image: <RxPerson size={20} /> },
   {
