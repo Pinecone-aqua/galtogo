@@ -31,3 +31,17 @@ interface ITable {
   capacity: number;
   isActive: boolean;
 }
+
+interface IDate {
+  year: number;
+  month: number;
+  day: number;
+}
+
+interface IDisabledDay {
+  _id: mongoose.Schema.Types.ObjectId;
+  year: number;
+  month: number;
+  day: number;
+  description: string;
+}
