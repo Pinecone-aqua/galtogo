@@ -31,7 +31,7 @@ export default function Reservation(props: {
     setSlide(`z-30 w-[100%]`);
   };
   const handleBack = () => {
-    setSlide(`w-1 translate-x-96 invisible text-transparent`);
+    setSlide(`w-1 opacity-0 text-transparent`);
   };
   return (
     <Layout>
@@ -79,7 +79,7 @@ export default function Reservation(props: {
             </div>
           </div>
           <div
-            className={`absolute top-0 left-0 ease-in duration-300 bg-slate-100 p-2 h-[100%] text-center ${slide}`}
+            className={`absolute top-0 left-0 duration-500 bg-slate-100 p-2 h-[100%] text-center transition-all ${slide}`}
           >
             <div className="mb-2 font-bold">Select a time</div>
             <div className="text-gray-300 p-3 bg-slate-500 rounded-xl">

@@ -21,6 +21,11 @@ export class UsersController {
     return this.userService.getUser();
   }
 
+  @Get(':phone')
+  getUserByPhone(@Param('phone') phone: string): Promise<IUser> {
+    return this.userService.getUserByPhone(Number(phone));
+  }
+
   @Post('add')
   addUser(@Body() user: CreateUserDto): Promise<IUser> {
     return this.userService.addUser(user);
