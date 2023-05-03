@@ -1,7 +1,7 @@
 // import axios from "axios";
 
 // export default function AddReservationModal({ setShowAddModal }) {
-//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   eslint-disable-next-line @typescript-eslint/no-explicit-any
 //   async function handleSubmit(e: any) {
 //     e.preventDefault();
 //     const newReservation = {

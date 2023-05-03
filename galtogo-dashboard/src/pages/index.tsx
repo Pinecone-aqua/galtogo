@@ -1,5 +1,12 @@
 import Link from "next/link";
 import { GrRestaurant } from "react-icons/gr";
+
+//theme
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+
+//core
+import "primereact/resources/primereact.min.css";
+
 export default function Home() {
   return (
     <div className="flex flex-col justify-center items-center h-[100vh]">
