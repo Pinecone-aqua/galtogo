@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ReservationModule } from './reservation/reservation.module';
+import { DisabledDayModule } from './days/days.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ReservationModule } from './reservation/reservation.module';
     TableModule,
     UserModule,
     ReservationModule,
+    DisabledDayModule,
   ],
   controllers: [AppController],
   providers: [AppService],

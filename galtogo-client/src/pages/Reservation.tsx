@@ -5,21 +5,12 @@ import moment from "moment";
 import { useState } from "react";
 import { Calendar } from "@amir04lm26/react-modern-calendar-date-picker";
 import "@amir04lm26/react-modern-calendar-date-picker/lib/DatePicker.css";
+import axios from "axios";
 
-const disabledDays = [
-  {
-    year: 2023,
-    month: 5,
-    day: 24,
-  },
-  {
-    year: 2023,
-    month: 5,
-    day: 25,
-  },
-];
-
-export default function Reservation() {
+export default function Reservation(props: {
+  disabledDaysData: IDisabledDay[];
+}): JSX.Element {
+  const { disabledDaysData } = props;
   const [slide, setSlide] = useState(
     `translate-x-96 invisible w-[100%] text-transparent`
   );
@@ -59,7 +50,7 @@ export default function Reservation() {
               <Calendar
                 value={date}
                 onChange={handleClickDay}
-                disabledDays={disabledDays}
+                disabledDays={disabledDaysData}
                 shouldHighlightWeekends
               />
             </div>
@@ -103,3 +94,16 @@ export default function Reservation() {
     </Layout>
   );
 }
+
+export const getStaticProps: () => Promise<{
+  props: { disabledDaysData: IDisabledDay[] | null };
+}> = async () => {
+  const disabledDaysData = await axios
+    .get("http://localhost:5050/days")
+    .then((res) => res.data);
+  return {
+    props: {
+      disabledDaysData,
+    },
+  };
+};
