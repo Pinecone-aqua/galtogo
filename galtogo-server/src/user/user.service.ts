@@ -14,6 +14,11 @@ export class UserService {
     return result;
   }
 
+  async getUserByPhone(phone: number): Promise<IUser> {
+    const result = await this.userModel.findOne({ phone }).exec();
+    return result;
+  }
+
   async addUser(user: CreateUserDto): Promise<IUser> {
     const result = await this.userModel.create(user);
     return result;

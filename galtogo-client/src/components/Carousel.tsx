@@ -38,7 +38,7 @@ export default function Carousel({
       <div className="relative w-full">
         <div id="carousel" className={`overflow-x-auto overflow-hidden`}>
           <div
-            className={`flex -translate-x-${slide} duration-300 sm:justify-center`}
+            className={`flex -translate-x-${slide} duration-300 md:justify-center`}
           >
             {categories.map((category: ICategory, index: number) => (
               <div
