@@ -15,10 +15,10 @@ export const navMenuItems = [
     name: "Contact Us",
     path: "/Contact",
   },
-  {
-    name: "Add Reservation",
-    path: "/Reservation",
-  },
+  // {
+  //   name: "Add Reservation",
+  //   path: "/Reservation",
+  // },
 ];
 
 export const tableTimes = [

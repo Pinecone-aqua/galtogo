@@ -15,6 +15,7 @@ export default function Layout({ children }: PropType) {
     e.preventDefault();
     router.push("Reservation");
   };
+
   return (
     <>
       <Head>
@@ -24,13 +25,15 @@ export default function Layout({ children }: PropType) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="relative bg-white min-h-screen sm:px-20">
-        <Button
-          className="fixed bottom-4 right-3 sm:right-20 lg:top-8 z-20"
-          size="sm"
-          onClick={handleClick}
-        >
-          + Reservation
-        </Button>
+        {router.pathname !== "/Reservation" && (
+          <Button
+            className="fixed top-3 sm:top-7 right-3 sm:right-20 z-20"
+            size="lg"
+            onClick={handleClick}
+          >
+            + Reservation
+          </Button>
+        )}
         <Navigation />
         <div className="">{children}</div>
         <Footer />

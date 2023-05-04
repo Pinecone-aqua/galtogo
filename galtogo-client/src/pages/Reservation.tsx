@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import Button from "@/components/subcomponents/Button";
 import { tableTimes } from "@/utils/constants";
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Calendar } from "@amir04lm26/react-modern-calendar-date-picker";
 import "@amir04lm26/react-modern-calendar-date-picker/lib/DatePicker.css";
 import axios from "axios";
@@ -11,14 +11,37 @@ export default function Reservation(props: {
   disabledDaysData: IDisabledDay[];
 }): JSX.Element {
   const { disabledDaysData } = props;
+  const [occupiedData, setOccupiedData] = useState<IOccupied[]>([]);
   const [slide, setSlide] = useState(
     `translate-x-96 invisible w-[100%] text-transparent`
   );
-
-  const [date, setDate] = useState<IDate>({
+  const today = {
     year: Number(moment().format("YYYY")),
     month: Number(moment().format("M")),
     day: Number(moment().format("D")),
+  };
+  const [date, setDate] = useState<IDate>(today);
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:5050/reservation/time/${date.year}-${
+          date.month < 10 ? "0" : ""
+        }${date.month}-${date.day < 10 ? "0" : ""}${date.day}`
+      )
+      .then((res) => {
+        setOccupiedData(res.data);
+      });
+  }, [date]);
+
+  const tableCells = [...tableTimes];
+
+  tableTimes.forEach((el, i) => {
+    occupiedData.forEach((occupied) => {
+      if (el.time === occupied.time) {
+        tableCells[i] = { time: el.time, isOccupied: true };
+      }
+    });
   });
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -32,6 +55,7 @@ export default function Reservation(props: {
   const handleBack = () => {
     setSlide(`w-1 opacity-0 text-transparent`);
   };
+
   return (
     <Layout>
       <div className="md:grid md:grid-cols-3 h-[500px] border mx-auto bg-slate-50 p-3  max-w-screen-lg justify-center">
@@ -50,6 +74,7 @@ export default function Reservation(props: {
               <Calendar
                 value={date}
                 onChange={handleClickDay}
+                minimumDate={today}
                 disabledDays={disabledDaysData}
                 shouldHighlightWeekends
               />
@@ -65,15 +90,20 @@ export default function Reservation(props: {
           >
             <div className="mb-2 font-bold">Select a time</div>
             <div className="text-gray-300 p-3 bg-slate-500 rounded-xl">
-              Date selected: {`${date.year}-${date.month}-${date.day}`}
+              Date selected:{" "}
+              {`${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${
+                date.day < 10 ? "0" : ""
+              }${date.day}`}
             </div>
             <div className="flex flex-wrap justify-center my-10">
-              {tableTimes.map((table, index) => (
+              {tableCells.map((cell, index) => (
                 <div
                   key={index}
-                  className="m-2 p-3 bg-slate-200 w-20 rounded-xl text-center hover:bg-slate-400 cursor-pointer"
+                  className={`${
+                    cell.isOccupied ? "bg-gray-400" : "bg-gray-200"
+                  } m-2 p-3 bg-slate-200 w-20 rounded-xl text-center hover:bg-slate-400 cursor-pointer`}
                 >
-                  {table.time}
+                  {cell.time}
                 </div>
               ))}
             </div>
@@ -96,11 +126,14 @@ export default function Reservation(props: {
 }
 
 export const getStaticProps: () => Promise<{
-  props: { disabledDaysData: IDisabledDay[] | null };
+  props: {
+    disabledDaysData: IDisabledDay[] | null;
+  };
 }> = async () => {
   const disabledDaysData = await axios
     .get("http://localhost:5050/days")
     .then((res) => res.data);
+
   return {
     props: {
       disabledDaysData,

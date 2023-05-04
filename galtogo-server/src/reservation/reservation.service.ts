@@ -56,4 +56,9 @@ export class ReservationService {
       .sort([['date', 'desc']]);
     return { message: `Reservation with id: ${id} status updated`, result };
   }
+
+  async getOccupied(date: string) {
+    const result = await this.reservationModel.find({ date }).select('time');
+    return result;
+  }
 }

@@ -45,3 +45,7 @@ interface IDisabledDay {
   day: number;
   description: string;
 }
+interface IOccupied {
+  time: string;
+  isOccupied: boolean;
+}

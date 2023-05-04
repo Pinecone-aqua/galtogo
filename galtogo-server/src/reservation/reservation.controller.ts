@@ -54,4 +54,9 @@ export class ReservationController {
     console.log('params: ', status);
     return this.reservationService.updateReservationStatus(id, status);
   }
+
+  @Get('time/:date')
+  getOccupiedTimesByDate(@Param('date') date: string) {
+    return this.reservationService.getOccupied(date);
+  }
 }

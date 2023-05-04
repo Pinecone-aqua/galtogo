@@ -7,6 +7,12 @@ const categories = [
   { name: "Category-4", image: "url-4" },
   { name: "Category-5", image: "url-5" },
 ];
+const translate = {
+  0: "-translate-x-0",
+  1: "-translate-x-[110px] lg:-translate-x-[240px]",
+  2: "-translate-x-[220px] lg:-translate-x-[480px]",
+  3: "-translate-x-[330px] lg:-translate-x-[720px]",
+};
 
 export default function Carousel({
   setSelectedCategory,
@@ -18,8 +24,8 @@ export default function Carousel({
 
   function handleRight(): void {
     console.log(slide);
-    if (slide < 100) {
-      setSlide((prev) => prev + 32);
+    if (slide < 3) {
+      setSlide((prev) => prev + 1);
     } else {
       setSlide(0);
     }
@@ -27,10 +33,10 @@ export default function Carousel({
 
   function handleLeft(): void {
     console.log(slide);
-    if (slide <= 96 && slide > 0) {
-      setSlide((prev) => prev - 32);
+    if (slide <= 3 && slide > 0) {
+      setSlide((prev) => prev - 1);
     } else {
-      setSlide(96);
+      setSlide(3);
     }
   }
   return (
@@ -38,7 +44,7 @@ export default function Carousel({
       <div className="relative w-full">
         <div id="carousel" className={`overflow-x-auto overflow-hidden`}>
           <div
-            className={`flex -translate-x-${slide} duration-300 md:justify-center`}
+            className={`flex ${translate[slide]} duration-300 md:justify-center`}
           >
             {categories.map((category: ICategory, index: number) => (
               <div
@@ -58,7 +64,7 @@ export default function Carousel({
         <button
           onClick={handleLeft}
           type="button"
-          className="absolute top-28 left-0 z-10 flex items-center justify-center px-4 cursor-pointer group focus:outline-none"
+          className="absolute top-10 left-0 z-10 flex items-center justify-center px-4 cursor-pointer group focus:outline-none"
           data-carousel-prev
         >
           <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/80 dark:bg-gray-800/30 group-hover:bg-white dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
@@ -82,7 +88,7 @@ export default function Carousel({
         <button
           onClick={handleRight}
           type="button"
-          className="absolute top-28 right-0 z-10 flex items-center justify-center px-4 cursor-pointer group focus:outline-none"
+          className="absolute top-10 right-0 z-10 flex items-center justify-center px-4 cursor-pointer group focus:outline-none"
           data-carousel-next
         >
           <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/80 dark:bg-gray-800/30 group-hover:bg-white dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
