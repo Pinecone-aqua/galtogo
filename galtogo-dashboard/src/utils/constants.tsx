@@ -88,3 +88,8 @@ export interface Inputs {
   desc: string;
   file: string;
 }
+
+export interface ICategory {
+  name: string;
+  _id: string;
+}
