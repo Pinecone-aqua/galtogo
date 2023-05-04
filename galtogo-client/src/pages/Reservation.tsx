@@ -57,6 +57,20 @@ export default function Reservation(props: {
     setSlide(`w-1 opacity-0 text-transparent`);
   };
 
+  // const newReservation = {
+  //   time: e.target.time.value,
+  //   date: e.target.date.value,
+  //   persons: e.target.persons.value,
+  //   user: userId._id,
+  //   table: e.target.table.value,
+  //   status: "pending",
+  // };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleClickTime = (e: any) => {
+    console.log("Date: ", date, "clickTime: ", e.target.id);
+  };
+
   return (
     <Layout>
       <Breadcrumbs
@@ -115,14 +129,19 @@ export default function Reservation(props: {
             </div>
             <div className="flex flex-wrap justify-center my-10">
               {tableCells.map((cell, index) => (
-                <div
+                <button
                   key={index}
+                  onClick={handleClickTime}
+                  id={cell.time}
+                  disabled={cell.isOccupied}
                   className={`${
-                    cell.isOccupied ? "bg-gray-400" : "bg-gray-200"
-                  } m-2 p-3 bg-slate-200 w-20 rounded-xl text-center hover:bg-slate-400 cursor-pointer`}
+                    cell.isOccupied
+                      ? "bg-gray-400"
+                      : "bg-gray-200 cursor-pointer"
+                  } m-2 p-3 bg-slate-200 w-20 rounded-xl text-center hover:bg-slate-400 `}
                 >
                   {cell.time}
-                </div>
+                </button>
               ))}
             </div>
             <div className="my-6">
