@@ -3,19 +3,15 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "primeicons/primeicons.css";
-import { Dropdown } from "primereact/dropdown";
+
 import { Button } from "primereact/button";
+
 
 export default function CreateFood() {
   const [categories, setCategories] = useState<any[]>([]);
-  const [selectedCity, setSelectedCity] = useState(null);
-  const cities = [
-    { name: "New York", code: "NY" },
-    { name: "Rome", code: "RM" },
-    { name: "London", code: "LDN" },
-    { name: "Istanbul", code: "IST" },
-    { name: "Paris", code: "PRS" },
-  ];
+
+
+
   useEffect(() => {
     axios
       .get("http://localhost:3001/category")
@@ -26,55 +22,60 @@ export default function CreateFood() {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", e.target.imageURL.files[0]);
-    const newfood: any = {
+    const foodlist: any = {
       title: e.target.title.value,
       desc: e.target.desc.value,
       category: e.target.category.value,
       price: e.target.price.value,
+      imageURL: e.target.imageURL.value
     };
-    formData.append("newfood", JSON.stringify(newfood));
+    console.log(foodlist);
+    formData.append("foodlist", JSON.stringify(foodlist));
     axios
       .post("http://localhost:3001/product/add", formData)
       .then((res) => console.log(res));
   }
 
   return (
-    <div className="w-full mt-2">
+    <div className="w-full mt-2 p-4 bg-white rounded-lg border">
+
+      <h1 className="text-lg font-bold text-sky-800 p-2">Create product</h1>
+
       <form onSubmit={(e) => onSubmit(e)}>
-        <input className="w-full p-[16px]" placeholder="Name" name="title" />
+        <input
+          className="w-full mt-2 p-4 rounded-lg bg-slate-50"
+          placeholder="Name"
+          name="title" />
 
         <input
-          className="w-full p-[16px]"
+          className="w-full mt-2 p-4 rounded-lg bg-slate-50"
           placeholder="Description"
           name="desc"
         />
-        <select className="w-full py-[16px] border rounded-md" name="category">
-          {categories.map((category, index) => (
-            <option key={index}>{category.name}</option>
-          ))}
-        </select>
 
-        <Button label="aaaa" size={"small"} />
+        <div className="mt-2 w-full ">
+         <select className="w-full border p-4 rounded-lg" placeholder="Categories" name="category">
+          {categories.map((item:any, index:number) => 
+            <option key={index} value={item._id}>{item.name}</option>
+          )}
+         </select>
+        </div>
 
-        <input className="w-full p-[16px]" placeholder="Price" name="price" />
-        <input className="w-full p-[16px]" type="file" name="imageURL" />
 
-        <button
-          className="w-full border mt-[16px] p-[8px] rounded-md bg-purple-600 text-white"
-          type="submit"
-        >
-          Submit
-        </button>
+
+        <input
+          className="w-full mt-2 p-4 rounded-lg bg-slate-50"
+          placeholder="Price"
+          name="price" />
+        <input
+          className="w-full mt-2 p-4 rounded-lg bg-slate-50"
+          type="file"
+          name="imageURL" />
+        <div className="w-full mt-3">
+          <Button className="w-full" label="Submit" size={"small"} />
+        </div>
       </form>
-      <div className="w-[250px]">
-        <Dropdown
-          value={selectedCity}
-          onChange={(e) => setSelectedCity(e.value)}
-          options={cities}
-          optionLabel="name"
-          placeholder="Select a City"
-        />
-      </div>
+
     </div>
   );
 }
