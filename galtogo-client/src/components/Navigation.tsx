@@ -1,6 +1,7 @@
 import { navMenuItems } from "@/utils/constants";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { FaUser } from "react-icons/fa";
 
 export default function Navigation() {
   const { pathname } = useRouter();

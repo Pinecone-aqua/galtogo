@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Calendar } from "@amir04lm26/react-modern-calendar-date-picker";
 import "@amir04lm26/react-modern-calendar-date-picker/lib/DatePicker.css";
 import axios from "axios";
+import router, { useRouter } from "next/router";
 
 export default function Reservation(props: {
   disabledDaysData: IDisabledDay[];
@@ -20,7 +21,7 @@ export default function Reservation(props: {
     month: Number(moment().format("M")),
     day: Number(moment().format("D")),
   });
-
+  const router = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleClickDay = (d: any) => {
     setDate(d);
@@ -84,7 +85,13 @@ export default function Reservation(props: {
             </div>
 
             <div className="flex justify-center">
-              <Button variant="default" size="sm">
+              <Button
+                variant="default"
+                size="sm"
+                onClick={() => {
+                  router.push("/Login");
+                }}
+              >
                 Confirm Reservation
               </Button>
             </div>
