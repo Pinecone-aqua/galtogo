@@ -10,13 +10,9 @@ export class CategoryService {
     @InjectModel(category.name) private categoryModel: Model<category>,
   ) {}
 
-  async create(createCategoryDto: createCategoryDto): Promise<category> {
-    try {
-      const createCategory = new this.categoryModel(createCategoryDto);
-      return createCategory.save();
-    } catch (err) {
-      return err.message;
-    }
+  async create(createCategory: createCategoryDto): Promise<any> {
+    const result = await this.categoryModel.create(createCategory);
+    return result;
   }
 
   async findAll(): Promise<category[]> {

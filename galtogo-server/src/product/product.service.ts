@@ -14,19 +14,9 @@ export class ProductService {
 
   async create(createFood: CreateProductDto): Promise<any> {
     console.log('create:', createFood);
+    const result = await this.productModel.create(createFood);
 
-    const findCategory: any = await this.categoryModel
-      .find({
-        name: createFood.category,
-      })
-      .select({ name: 1 });
-    const createProduct = new this.productModel({
-      title: createFood.title,
-      desc: createFood.desc,
-      img: createFood.img,
-      category: findCategory.name,
-    });
-    return createProduct.save();
+    return result.save();
   }
 
   async findAll(): Promise<product[]> {

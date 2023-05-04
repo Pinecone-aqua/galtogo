@@ -19,11 +19,11 @@ export class ProductController {
 
   @Post('add')
   @UseInterceptors(FileInterceptor('file'))
-  async createProduct(@UploadedFile() file: any, @Body() body: any) {
-    const uploading = await this.cloudinary.uploadImage(file);
-    console.log(uploading);
+  async createProduct(@UploadedFile() files: any, @Body() body: any) {
+    const uploading = await this.cloudinary.uploadImage(files);
+    console.log(body);
     const data = await {
-      ...JSON.parse(body.newfood),
+      ...JSON.parse(body.foodlist),
       img: uploading.secure_url,
     };
     return this.productService.create(data);
