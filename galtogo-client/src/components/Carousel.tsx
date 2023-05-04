@@ -1,17 +1,17 @@
 import { useState } from "react";
 
-
-
 export default function Carousel({
-  setSelectedCategory, categoryData
+  setSelectedCategory,
+  categoryData,
+  selectedCategory,
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setSelectedCategory: any; 
-  categoryData:ICategory[];
+  setSelectedCategory: any;
+  categoryData: ICategory[];
+  selectedCategory: string | null;
 }): JSX.Element {
   const [slide, setSlide] = useState(0);
-
-
+  console.log("cate", selectedCategory);
 
   function handleRight(): void {
     if (slide < 330) {
@@ -29,23 +29,26 @@ export default function Carousel({
     }
   }
   return (
-    <div className="px-5 py-10">
+    <div className="px-5">
       <div className="relative w-full">
         <div id="carousel" className={`hover:overflow-x-auto overflow-hidden`}>
           <div
-            className={`flex -translate-x-[${slide}px] duration-300 sm:justify-center`}
+            className={`flex gap-4 -translate-x-[${slide}px] duration-300 sm:justify-center`}
           >
             {categoryData.map((category: ICategory, index: number) => (
               <div
                 key={index}
-                className="hover:bg-black/10 cursor-pointer"
-                onClick={() => setSelectedCategory(category)}
+                className={
+                  selectedCategory == category.name
+                    ? "cursor-pointer p-2 bg-white border w-[120px] rounded-lg text-center text-sky-800"
+                    : "cursor-pointer p-2 border border-slate-50  w-[120px] rounded-lg text-center"
+                }
+                onClick={() => {
+                  setSelectedCategory(category.name),
+                    localStorage.setItem("active", category.name);
+                }}
               >
-                <div className="w-[100px] h-[100px] bg-slate-200 m-1  overflow-hidden">
-                  <picture>
-                  <img src = {category.img}className="text-center mx-auto object-cover -translate-y-7"  alt="pic"/>
-                  </picture>
-                </div>
+                {category.name}
               </div>
             ))}
           </div>
