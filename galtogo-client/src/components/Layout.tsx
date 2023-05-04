@@ -16,6 +16,7 @@ export default function Layout({ children }: PropType) {
     e.preventDefault();
     router.push("Reservation2");
   };
+
   return (
     <>
       <Head>

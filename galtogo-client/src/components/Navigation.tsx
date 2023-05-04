@@ -27,7 +27,7 @@ export default function Navigation() {
           ))}
         </div>
       </div>
-      <div className="flex sm:hidden justify-end p-3 bg-slate-600 min-w-fit cursor-pointer">
+      <div className="flex sm:hidden justify-start p-3 bg-slate-600 min-w-fit cursor-pointer">
         O
       </div>
     </div>
