@@ -3,35 +3,38 @@ import Layout from "@/components/Layout";
 import MenuField from "@/components/MenuField";
 import SpecialOffer from "@/components/SpecialOffer";
 import { useState } from "react";
+import axios from 'axios'
 
-const items = [
-  { name: "Item-1", category: "Category-1", price: "ItemPrice-1-1" },
-  { name: "Item-2", category: "Category-1", price: "ItemPrice-2-1" },
-  { name: "Item-3", category: "Category-1", price: "ItemPrice-3-1" },
-  { name: "Item-4", category: "Category-1", price: "ItemPrice-4-1" },
-  { name: "Item-5", category: "Category-1", price: "ItemPrice-5-1" },
-  { name: "Item-1", category: "Category-2", price: "ItemPrice-1-2" },
-  { name: "Item-2", category: "Category-2", price: "ItemPrice-2-2" },
-  { name: "Item-3", category: "Category-2", price: "ItemPrice-3-2" },
-  { name: "Item-4", category: "Category-2", price: "ItemPrice-4-2" },
-  { name: "Item-5", category: "Category-2", price: "ItemPrice-5-2" },
-];
 
-export default function Home(): JSX.Element {
-  const [selectedCategory, setSelectedCategory] =
-    useState<string>("Category-1");
+
+export default function Home(props: { productData: IProduct[] , categoryData: ICategory[]}): JSX.Element {
+  const {productData, categoryData} = props
+  const [selectedCategory, setSelectedCategory] = useState<ICategory>(categoryData[0]);
   return (
     <Layout>
       <div className="hidden md:block p-3">
         <SpecialOffer />
       </div>
       <div className="p-3">
-        <Carousel setSelectedCategory={setSelectedCategory} />
+        <Carousel setSelectedCategory={setSelectedCategory} categoryData={categoryData}/>
       </div>
       <div className="p-3">
-        <MenuField selectedCategory={selectedCategory} items={items} />
+        <MenuField selectedCategory={selectedCategory} productData={productData} />
       </div>
+   
       <div className="p-3">Additional information</div>
     </Layout>
   );
+}
+
+
+export const getStaticProps = async () => {
+  const productData = await axios
+    .get('http://localhost:3001/product')
+    .then((res) => res.data)
+    const categoryData = await axios
+    .get('http://localhost:3001/category')
+    .then((res) => res.data)
+   
+  return { props: { productData, categoryData} }
 }

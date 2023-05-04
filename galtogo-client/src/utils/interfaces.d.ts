@@ -8,14 +8,21 @@ interface IReservation {
   status: string;
 }
 
+
 interface ICategory {
-  name: string;
+  _id: string,
+  name: string,
+  img: string,
 }
 
 interface IProduct {
-  name: string;
-  category: string;
-  price: string;
+  title: string,
+  _id: string,
+  desc: string,
+  price: number,
+  img: string,
+  category: ICategory,
+
 }
 
 interface IUser {

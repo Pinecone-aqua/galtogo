@@ -2,18 +2,19 @@ import MenuCard from "./subcomponents/MenuCard";
 
 export default function MenuField({
   selectedCategory,
-  items,
+  productData,
 }: {
-  selectedCategory: string;
-  items: IProduct[];
+  selectedCategory: ICategory;
+  productData: IProduct[];
 }) {
+ 
   return (
-    <div className="flex flex-wrap justify-center">
-      {items.map(
-        (item, index) =>
-          item.category === selectedCategory && (
-            <div key={index} className="flex flex-wrap justify-center">
-              <MenuCard product={item} />
+    <div className="mx-auto flex flex-wrap justify-start gap-[16px] w-[1364px]">
+      {productData.map(
+        (product, index) =>
+        product.category._id === selectedCategory._id && (
+            <div key={index}>
+              <MenuCard product={product} />
             </div>
           )
       )}

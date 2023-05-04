@@ -1,20 +1,17 @@
 import { useState } from "react";
 
-const categories = [
-  { name: "Category-1", image: "url-1" },
-  { name: "Category-2", image: "url-2" },
-  { name: "Category-3", image: "url-3" },
-  { name: "Category-4", image: "url-4" },
-  { name: "Category-5", image: "url-5" },
-];
+
 
 export default function Carousel({
-  setSelectedCategory,
+  setSelectedCategory, categoryData
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setSelectedCategory: any;
+  setSelectedCategory: any; 
+  categoryData:ICategory[];
 }): JSX.Element {
   const [slide, setSlide] = useState(0);
+
+
 
   function handleRight(): void {
     if (slide < 330) {
@@ -38,16 +35,16 @@ export default function Carousel({
           <div
             className={`flex -translate-x-[${slide}px] duration-300 sm:justify-center`}
           >
-            {categories.map((category: ICategory, index: number) => (
+            {categoryData.map((category: ICategory, index: number) => (
               <div
                 key={index}
-                className="hover:bg-black/10 rounded-full cursor-pointer"
-                onClick={() => setSelectedCategory(category.name)}
+                className="hover:bg-black/10 cursor-pointer"
+                onClick={() => setSelectedCategory(category)}
               >
-                <div className="lg:w-[150px] lg:h-[150px] w-[100px] h-[100px] bg-slate-200 m-1 rounded-full">
-                  <p className="text-center mx-auto pt-10 text-xs">
-                    {category.name}
-                  </p>
+                <div className="w-[100px] h-[100px] bg-slate-200 m-1  overflow-hidden">
+                  <picture>
+                  <img src = {category.img}className="text-center mx-auto object-cover -translate-y-7"  alt="pic"/>
+                  </picture>
                 </div>
               </div>
             ))}
