@@ -10,11 +10,15 @@ export class User {
   lastName: string;
   @Prop({ required: true, unique: true })
   email: string;
-  @Prop({ required: true, unique: true, max: 99999999 })
+  @Prop({ required: false, unique: true, max: 99999999 })
   phone: number;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
+
+export class UpdateUserInput extends User {
+  _id: string;
+}
 
 export interface IUser {
   lastName: string;

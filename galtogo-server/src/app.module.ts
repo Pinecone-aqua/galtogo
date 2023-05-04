@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ReservationModule } from './reservation/reservation.module';
 import { DisabledDayModule } from './days/days.module';
+import { GoogleLoginModule } from './google-login/google-login.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { DisabledDayModule } from './days/days.module';
     UserModule,
     ReservationModule,
     DisabledDayModule,
+    GoogleLoginModule,
   ],
   controllers: [AppController],
   providers: [AppService],
