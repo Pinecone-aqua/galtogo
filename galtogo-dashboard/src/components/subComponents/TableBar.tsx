@@ -1,5 +1,6 @@
 import { MdTableRestaurant } from "react-icons/md";
 import { tableTimes } from "@/utils/constants";
+import Button from "./Button";
 
 interface TableBarProps {
   reservations: IReservation[];
@@ -20,6 +21,11 @@ export default function TableBar({ reservations, table }: TableBarProps) {
     });
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function handleAdd(e: any) {
+    e.preventDefault();
+    console.log(table._id);
+  }
   return (
     <div className="bg-gray-50 hover:bg-gray-100 p-2 rounded-lg my-3">
       <div className="flex items-center ">
@@ -27,6 +33,15 @@ export default function TableBar({ reservations, table }: TableBarProps) {
           <MdTableRestaurant className="text-purple-800" />
         </div>
         <p className="pl-4">Table {table.name}</p>
+        <Button
+          type="button"
+          variant="red"
+          size="sm"
+          className="sm:mx-6 m-3"
+          onClick={handleAdd}
+        >
+          Delete Table
+        </Button>
       </div>
       <div className="bg-gray-50 hover:bg-gray-100 rounded-lg my-3 p-2 grid md:grid-cols-12 sm:grid-cols-6 grid-cols-3 gap-1 items-center justify-between cursor-pointer">
         {tableCells.map((tableCell, index: number) => (
