@@ -4,6 +4,7 @@ import MenuField from "@/components/MenuField";
 import SpecialOffer from "@/components/SpecialOffer";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import BranchSection from "@/components/BranchSection";
 
 export default function Home(props: {
   productData: IProduct[];
@@ -25,7 +26,7 @@ export default function Home(props: {
       <div className="hidden md:block p-3">
         <SpecialOffer />
       </div>
-      <div className="p-3">
+      <div className="p-3 mt-5 mb-10">
         <Carousel
           setSelectedCategory={setSelectedCategory}
           selectedCategory={selectedCategory}
@@ -39,7 +40,9 @@ export default function Home(props: {
         />
       </div>
 
-      <div className="p-3">Additional information</div>
+      <div className="p-3">
+        <BranchSection />
+      </div>
     </Layout>
   );
 }

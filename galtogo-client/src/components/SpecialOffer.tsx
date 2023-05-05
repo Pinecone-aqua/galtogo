@@ -17,7 +17,7 @@ export default function SpecialOffer() {
             Details
           </div>
           <div className="py-2 px-6 rounded-md border border-white ">
-            Order ticket
+            Make order
           </div>
         </div>
       </div>

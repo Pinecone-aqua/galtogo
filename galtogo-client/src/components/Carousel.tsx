@@ -11,7 +11,7 @@ export default function Carousel({
   selectedCategory: string | null;
 }): JSX.Element {
   const [slide, setSlide] = useState(0);
-  console.log("cate", selectedCategory);
+
 
   function handleRight(): void {
     if (slide < 330) {
@@ -31,7 +31,7 @@ export default function Carousel({
   return (
     <div className="px-5">
       <div className="relative w-full">
-        <div id="carousel" className={`hover:overflow-x-auto overflow-hidden`}>
+        <div id="carousel" className={`hover:overflow-x-auto `}>
           <div
             className={`flex gap-4 -translate-x-[${slide}px] duration-300 sm:justify-center`}
           >
@@ -40,8 +40,8 @@ export default function Carousel({
                 key={index}
                 className={
                   selectedCategory == category.name
-                    ? "cursor-pointer p-2 bg-white border w-[120px] rounded-lg text-center text-sky-800"
-                    : "cursor-pointer p-2 border border-slate-50  w-[120px] rounded-lg text-center"
+                    ? "cursor-pointer p-4 bg-white shadow-[0_05px_20px_rgb(0,0,0,0.10)] border border-sky-800 w-[220px] rounded-lg text-center text-sky-800 font-medium"
+                    : "cursor-pointer p-4 border border-slate-50  w-[220px] rounded-lg text-center"
                 }
                 onClick={() => {
                   setSelectedCategory(category.name),
