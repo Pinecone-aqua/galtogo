@@ -12,6 +12,7 @@ export default function Reservation(props: {
 }): JSX.Element {
   const { disabledDaysData } = props;
   const [occupiedData, setOccupiedData] = useState<IOccupied[]>([]);
+  const [current, setCurrent] = useState("");
   const [slide, setSlide] = useState(
     `translate-x-96 invisible w-[100%] text-transparent`
   );
@@ -21,6 +22,7 @@ export default function Reservation(props: {
     day: Number(moment().format("D")),
   };
   const [date, setDate] = useState<IDate>(today);
+  const [tables, setTables] = useState<ITable[]>([]);
 
   useEffect(() => {
     axios
@@ -54,6 +56,7 @@ export default function Reservation(props: {
   };
   const handleBack = () => {
     setSlide(`w-1 opacity-0 text-transparent`);
+    setCurrent("");
   };
 
   // const newReservation = {
@@ -66,13 +69,17 @@ export default function Reservation(props: {
   // };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleClickTime = (e: any) => {
+  const handleClickTime = async (e: any) => {
     console.log("Date: ", date, "clickTime: ", e.target.id);
+    setCurrent(e.target.id);
+    await axios
+      .get("http://localhost:5050/table")
+      .then((res) => setTables(res.data));
   };
 
   return (
     <Layout>
-      <div className="md:grid md:grid-cols-3 h-[500px] border mx-auto bg-slate-50 p-3  max-w-screen-lg justify-center">
+      <div className="md:grid md:grid-cols-3 h-[800px] border mx-auto bg-slate-50 p-3  max-w-screen-lg justify-center">
         <div className="hidden md:block md:col-span-1 bg-slate-200 p-3 text-gray-500">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde ipsa
           eligendi quam rerum iste voluptate minus pariatur hic ut, saepe
@@ -118,14 +125,28 @@ export default function Reservation(props: {
                   disabled={cell.isOccupied}
                   className={`${
                     cell.isOccupied
-                      ? "bg-gray-400"
-                      : "bg-gray-200 cursor-pointer"
-                  } m-2 p-3 bg-slate-200 w-20 rounded-xl text-center hover:bg-slate-400 `}
+                      ? "bg-slate-400"
+                      : "bg-slate-200 cursor-pointer"
+                  } m-2 p-3 ${
+                    cell.time === current ? "bg-green-400" : "bg-slate-200"
+                  } w-20 rounded-xl text-center hover:bg-slate-400 `}
                 >
                   {cell.time}
                 </button>
               ))}
             </div>
+            {current && (
+              <div>
+                {tables.map((table, index) => (
+                  <div
+                    key={index}
+                    className="p-3 m-2 rounded-xl bg-slate-200 hover:bg-slate-400"
+                  >
+                    Table#{table.name}
+                  </div>
+                ))}
+              </div>
+            )}
             <div className="my-6">
               <Button variant="ghost" size="sm" onClick={handleBack}>
                 {"< Back"}
@@ -152,7 +173,7 @@ export const getStaticProps: () => Promise<{
   const disabledDaysData = await axios
     .get("http://localhost:5050/days")
     .then((res) => res.data);
-
+  console.log(disabledDaysData);
   return {
     props: {
       disabledDaysData,
