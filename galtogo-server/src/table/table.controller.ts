@@ -6,6 +6,7 @@ import {
   Post,
   Delete,
   Patch,
+  Query,
 } from '@nestjs/common';
 import { CreateTableDto } from './dto/create-table.dto';
 import { TableService } from './table.service';
@@ -33,5 +34,15 @@ export class TableController {
   @Delete(':id')
   deleteTable(@Param('id') id: string) {
     return this.tableService.deleteTable(id);
+  }
+
+  @Patch(':id/coords')
+  positionTable(
+    @Param('id') id: string,
+    @Query('posX') posX: number,
+    @Query('posY') posY: number,
+  ) {
+    console.log('id:', id, ', posX: ', posX, ', posY: ', posY);
+    return this.tableService.positionTable(id, posX, posY);
   }
 }

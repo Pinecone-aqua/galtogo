@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const navMenuItems = [
   {
     name: "Home",
@@ -35,3 +37,9 @@ export const tableTimes = [
   { time: "20:00", isOccupied: false },
   { time: "21:00", isOccupied: false },
 ];
+
+export const today = {
+  year: Number(moment().format("YYYY")),
+  month: Number(moment().format("M")),
+  day: Number(moment().format("D")),
+};

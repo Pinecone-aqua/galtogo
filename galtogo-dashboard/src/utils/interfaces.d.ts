@@ -21,6 +21,10 @@ interface ITable {
   name: number;
   capacity: number;
   isActive: boolean;
+  coords: {
+    posX: number;
+    posY: number;
+  };
 }
 
 interface IDisabledDay {

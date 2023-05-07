@@ -27,7 +27,7 @@ export default function TableBar({ reservations, table }: TableBarProps) {
     console.log(table._id);
   }
   return (
-    <div className="bg-gray-50 hover:bg-gray-100 p-2 rounded-lg my-3">
+    <div className="bg-gray-50 hover:bg-gray-100 p-2 rounded-lg m-3">
       <div className="flex items-center ">
         <div className="bg-purple-200 rounded-lg p-3">
           <MdTableRestaurant className="text-purple-800" />
@@ -43,7 +43,7 @@ export default function TableBar({ reservations, table }: TableBarProps) {
           Delete Table
         </Button>
       </div>
-      <div className="bg-gray-50 hover:bg-gray-100 rounded-lg my-3 p-2 grid md:grid-cols-12 sm:grid-cols-6 grid-cols-3 gap-1 items-center justify-between cursor-pointer">
+      <div className="bg-gray-50 hover:bg-gray-100 rounded-lg my-3 p-2 grid  sm:grid-cols-6 grid-cols-3 gap-1 items-center justify-between cursor-pointer">
         {tableCells.map((tableCell, index: number) => (
           <div
             key={index}
