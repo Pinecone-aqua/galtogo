@@ -10,6 +10,18 @@ export class Table {
 
   @Prop({ default: true })
   isActive: boolean;
+
+  @Prop({
+    required: true,
+    type: {
+      posX: { type: Number, default: 0 },
+      posY: { type: Number, default: 0 },
+    },
+  })
+  coords: {
+    posX: number;
+    posY: number;
+  };
 }
 
 export const TableSchema = SchemaFactory.createForClass(Table);
@@ -18,4 +30,8 @@ export interface ITable {
   name: number;
   capacity: number;
   isActive: boolean;
+  coords: {
+    posX: number;
+    posY: number;
+  };
 }

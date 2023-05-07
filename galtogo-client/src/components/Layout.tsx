@@ -1,9 +1,10 @@
 import Head from "next/head";
 import { ReactNode } from "react";
-// import Navigation from "./Navigation";
-// import Footer from "./Footer";
 import Button from "./subcomponents/Button";
 import { NextRouter, useRouter } from "next/router";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Navigation from "./Navigation";
 import Footer from "./Footer";
 
 type PropType = {
@@ -25,15 +26,23 @@ export default function Layout({ children }: PropType) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="bg-white w-full">
+      <main className="relative bg-white min-h-screen sm:px-20">
         <Button
-          className="fixed bottom-4 right-3 sm:right-20 lg:top-8 z-20"
-          size="sm"
+          className="fixed top-3 sm:top-7 right-3 sm:right-20 z-40"
+          size="lg"
           onClick={handleClick}
         >
           + Reservation
         </Button>
-        {/* <Navigation /> */}
+
+        <Navigation />
+        <ToastContainer
+          autoClose={3000}
+          position="top-right"
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+        />
         <div className="">{children}</div>
         <Footer />
       </main>

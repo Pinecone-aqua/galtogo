@@ -3,9 +3,8 @@ interface IReservation {
   time: string;
   date: string;
   persons: number;
-  user: IUser;
-  table: ITable;
-  status: string;
+  user: IUser | string;
+  table: ITable | string;
 }
 
 
@@ -33,9 +32,14 @@ interface IUser {
 }
 
 interface ITable {
+  _id: mongoose.Schema.Types.ObjectId;
   name: number;
   capacity: number;
   isActive: boolean;
+  coords: {
+    posX: number;
+    posY: number;
+  };
 }
 
 interface IDate {

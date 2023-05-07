@@ -24,6 +24,12 @@ export class TableService {
     return { message: `Table updated with id: ${id}` };
   }
 
+  async positionTable(id: string, posX: number, posY: number) {
+    const coords = { posX, posY };
+    await this.tableModel.findByIdAndUpdate(id, { coords }).exec();
+    return { message: `Table updated with id: ${id}` };
+  }
+
   async deleteTable(id: string) {
     await this.tableModel.findByIdAndDelete(id).exec();
     return { message: `Table deleted with id: ${id}` };

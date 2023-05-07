@@ -15,22 +15,23 @@ export default function Sidebar({ children }: PageProp): JSX.Element {
 
   return (
     <div className="flex">
-      <div className="fixed w-20 h-screen p-4 bg-white border-r-[1px] flex flex-col justify-between">
+      <div className="fixed w-52 h-screen p-4 bg-white border-r-[1px] flex flex-col justify-between">
         <div className="flex flex-col items-center">
           {menuItems.map((item, index) => (
             <Link href={item.path} key={index}>
               <div
                 className={`${
                   item.path !== currentPath.pathname ? inActive : active
-                } cursor-pointer my-4 p-3 rounded-lg inline-block`}
+                } flex items-center cursor-pointer my-4 p-3 w-36 rounded-lg `}
               >
-                {item.image}
+                <div>{item.image}</div>
+                <div className="ms-2">{item.name}</div>
               </div>
             </Link>
           ))}
         </div>
       </div>
-      <main className="ml-20 w-full">{children}</main>
+      <main className="ml-52 w-full">{children}</main>
     </div>
   );
 }
