@@ -7,6 +7,12 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
+  save(
+    user: import('mongoose').Document<unknown, {}, User> &
+      Omit<User & { _id: import('mongoose').Types.ObjectId }, never>,
+  ) {
+    throw new Error('Method not implemented.');
+  }
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   async getUser(): Promise<IUser[]> {

@@ -1,20 +1,30 @@
 import Head from "next/head";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
 import Button from "./subcomponents/Button";
 import { NextRouter, useRouter } from "next/router";
+import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
 
 type PropType = {
   children: ReactNode;
 };
 export default function Layout({ children }: PropType) {
   const router: NextRouter = useRouter();
+  const [user, setUser] = useState();
+  const token: any = Cookies.get("token");
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleClick = (e: any) => {
     e.preventDefault();
     router.push("Reservation");
   };
+
+  useEffect(() => {
+    if (token) setUser(jwtDecode(token));
+  }, [token]);
+
   return (
     <>
       <Head>
@@ -31,7 +41,7 @@ export default function Layout({ children }: PropType) {
         >
           + Reservation
         </Button>
-        <Navigation />
+        <Navigation user={user} setUser={setUser} />
         <div className="">{children}</div>
         <Footer />
       </main>

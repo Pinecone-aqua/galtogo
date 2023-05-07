@@ -1,10 +1,18 @@
 import { navMenuItems } from "@/utils/constants";
+import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FaUser } from "react-icons/fa";
 
-export default function Navigation() {
+interface NavType {
+  user: any;
+  setUser: (arg: any) => void;
+}
+
+export default function Navigation({ user, setUser }: NavType) {
   const { pathname } = useRouter();
+  const router = useRouter();
+  console.log(user);
 
   return (
     <div className="p-3">
@@ -28,6 +36,29 @@ export default function Navigation() {
           ))}
         </div>
       </div>
+      {user ? (
+        <div className="flex gap-5">
+          <div>hello {user.name}</div>
+          <div
+            className="cursor-pointer"
+            onClick={() => {
+              Cookies.remove("token");
+              setUser("");
+            }}
+          >
+            logout
+          </div>
+        </div>
+      ) : (
+        <div
+          className="cursor-pointer flex items-center"
+          onClick={() => {
+            router.push("/Login");
+          }}
+        >
+          <FaUser />
+        </div>
+      )}
       <div className="flex sm:hidden justify-end p-3 bg-slate-600 min-w-fit cursor-pointer">
         O
       </div>
