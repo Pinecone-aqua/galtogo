@@ -49,10 +49,10 @@ export default function Home(props: {
 
 export const getStaticProps = async () => {
   const productData = await axios
-    .get("http://localhost:3001/product")
+    .get("http://localhost:5050/product")
     .then((res) => res.data);
   const categoryData = await axios
-    .get("http://localhost:3001/category")
+    .get("http://localhost:5050/category")
     .then((res) => res.data);
 
   return { props: { productData, categoryData } };

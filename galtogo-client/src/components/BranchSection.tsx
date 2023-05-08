@@ -1,4 +1,3 @@
-
 import { BranchItems, ILocation } from "@/utils/constants"
 import { useState } from "react";
 import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
@@ -10,10 +9,10 @@ export default function BranchSection() {
   const [listId, setListId] = useState<string | number>(0);
   const [currentLocation, setCurrentLocation] = useState<ILocation>({ lat: 47.903535, lng: 106.942957 })
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyDa-pNru7NHz88HgPZlCrtqRnqOpm5LUNg',
+    googleMapsApiKey: `${process.env.NEXT_PUBLIC_GOOGLEMAP_API}`
   });
 
-  console.log(currentLocation)
+
 
 
 
