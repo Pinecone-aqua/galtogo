@@ -1,30 +1,26 @@
-import { today } from "@/utils/constants";
 import { tableTimes } from "@/utils/constants";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
 const TimeTable = ({
   setNewReservation,
+  newReservation,
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setNewReservation: any;
+  newReservation: IReservation;
 }): JSX.Element => {
   const tableCells = [...tableTimes];
   const [occupiedData, setOccupiedData] = useState<IOccupied[]>([]);
-  const [date, setDate] = useState<IDate>(today);
   const [current, setCurrent] = useState("");
 
   useEffect(() => {
     axios
-      .get(
-        `http://localhost:5050/reservation/time/${date.year}-${
-          date.month < 10 ? "0" : ""
-        }${date.month}-${date.day < 10 ? "0" : ""}${date.day}`
-      )
+      .get(`http://localhost:5050/reservation/time/${newReservation.date}`)
       .then((res) => {
         setOccupiedData(res.data);
       });
-  }, [date]);
+  }, [newReservation.date]);
 
   tableTimes.forEach((el, i) => {
     occupiedData.forEach((occupied) => {
@@ -52,7 +48,7 @@ const TimeTable = ({
               ? "bg-slate-400"
               : "bg-slate-200 hover:bg-green-500 active:scale-95 active:bg-green-600 cursor-pointer"
           } m-2 p-3 ${
-            cell.time === current ? "bg-green-500" : "bg-slate-200"
+            cell.time === current ? "bg-green-400" : "bg-slate-200"
           } w-20 rounded-xl text-center `}
         >
           {cell.time}

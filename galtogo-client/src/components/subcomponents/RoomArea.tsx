@@ -4,6 +4,7 @@ import TimeTable from "./TimeTable";
 const RoomArea = ({
   tablesData,
   setNewReservation,
+  newReservation,
 }: {
   tablesData: ITable[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -43,7 +44,12 @@ const RoomArea = ({
           </div>
         ))}
       </div>
-      {current && <TimeTable setNewReservation={setNewReservation} />}
+      {current && (
+        <TimeTable
+          setNewReservation={setNewReservation}
+          newReservation={newReservation}
+        />
+      )}
     </div>
   );
 };
