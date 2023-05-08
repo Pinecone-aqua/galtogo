@@ -21,3 +21,13 @@ interface ITable {
   capacity: number;
   isActive: boolean;
 }
+
+interface ICategory {
+  name: string,
+  _id: mongoose.Schema.Types.ObjectId;
+  img: string,
+}
+
+interface IProduct {
+  _id:
+}

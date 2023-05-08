@@ -2,27 +2,28 @@
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import axios from "axios";
 import "primeicons/primeicons.css";
-import { Button } from "primereact/button";
+import Button from "./Button";
+
 export default function CreateCategory(): JSX.Element {
   function onSubmit(e: any) {
     e.preventDefault();
     const formData = new FormData();
     formData.append("file", e.target.categoryImg.files[0]);
     const categorylist: any = {
-      category: e.target.category.value,
+      name: e.target.category.value,
       categoryImg: e.target.categoryImg.value,
     };
     console.log(categorylist);
     formData.append("categorylist", JSON.stringify(categorylist));
     axios
-      .post("http://localhost:3001/category/add", formData)
+      .post("http://localhost:5050/category/add", formData)
       .then((res) => console.log(res));
   }
 
   return (
     <div className="w-[50%] mt-2 p-4 bg-white rounded-lg border">
       <h1 className="text-lg font-bold text-sky-800 p-2 rounded-lg">
-        Create product
+        Create Category
       </h1>
 
       <form onSubmit={(e) => onSubmit(e)}>
@@ -38,7 +39,7 @@ export default function CreateCategory(): JSX.Element {
           name="categoryImg"
         />
         <div className="w-full mt-3">
-          <Button className="w-full" label="Submit" size={"small"} />
+          <Button variant={'ghost'} size={'sm'} type='submit'>submit</Button>
         </div>
       </form>
     </div>

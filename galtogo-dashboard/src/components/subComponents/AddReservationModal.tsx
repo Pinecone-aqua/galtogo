@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default function AddReservationModal({ setShowAddModal }) {
+export default function AddReservationModal({ setShowAddModal }: { setShowAddModal: any }) {
 
   async function handleSubmit(e: any) {
     e.preventDefault();
@@ -12,7 +12,7 @@ export default function AddReservationModal({ setShowAddModal }) {
       table: e.target.table.value,
       status: "pending",
     };
-    setShowAddModal((prev) => !prev);
+    setShowAddModal((prev: boolean) => !prev);
     try {
       await axios
         .post("http://localhost:5050/reservation/add", newReservation)

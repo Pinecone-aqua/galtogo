@@ -8,13 +8,13 @@ import { Button } from "primereact/button";
 
 
 export default function CreateFood() {
-  const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<ICategory[]>([]);
 
 
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/category")
+      .get("http://localhost:5050/category")
       .then((res) => setCategories(res.data));
   }, []);
 
@@ -29,10 +29,10 @@ export default function CreateFood() {
       price: e.target.price.value,
       imageURL: e.target.imageURL.value
     };
-    console.log(foodlist);
+
     formData.append("foodlist", JSON.stringify(foodlist));
     axios
-      .post("http://localhost:3001/product/add", formData)
+      .post("http://localhost:5050/product/add", formData)
       .then((res) => console.log(res));
   }
 
@@ -54,11 +54,11 @@ export default function CreateFood() {
         />
 
         <div className="mt-2 w-full ">
-         <select className="w-full border p-4 rounded-lg" placeholder="Categories" name="category">
-          {categories.map((item:any, index:number) => 
-            <option key={index} value={item._id}>{item.name}</option>
-          )}
-         </select>
+          <select className="w-full border p-4 rounded-lg" placeholder="Categories" name="category">
+            {categories.map((item: any, index: number) =>
+              <option key={index} value={item._id}>{item.name}</option>
+            )}
+          </select>
         </div>
 
 

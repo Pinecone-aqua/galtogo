@@ -19,7 +19,6 @@
     "clsx": "^1.2.1",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
-    "i": "^0.3.7",
     "lucide-react": "^0.144.0",
     "moment": "^2.29.4",
     "next": "13.3.0",

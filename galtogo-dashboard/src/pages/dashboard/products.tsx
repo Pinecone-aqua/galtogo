@@ -28,7 +28,7 @@ export default function Products(props: {
 
 export const getStaticProps = async () => {
   const categoryList = await axios
-    .get("http://localhost:3001/category")
+    .get("http://localhost:5050/category")
     .then((res) => res.data);
 
   return { props: { categoryList } };
