@@ -1,4 +1,16 @@
 import { Module } from '@nestjs/common';
+import { CloudinaryModule } from 'src/cloudinary/cloudinary.module';
+import { BannerController } from './banner.controller';
+import bannerSchema, { banner } from './bannerSchema';
+import { BannerService } from './banner.service';
+import { MongooseModule } from '@nestjs/mongoose';
 
-@Module({})
+@Module({
+  imports: [
+    CloudinaryModule,
+    MongooseModule.forFeature([{ name: banner.name, schema: bannerSchema }]),
+  ],
+  controllers: [BannerController],
+  providers: [BannerService],
+})
 export class BannerModule {}

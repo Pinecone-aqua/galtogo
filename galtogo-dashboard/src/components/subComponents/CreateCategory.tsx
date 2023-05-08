@@ -7,18 +7,18 @@ import Button from "./Button";
 export default function CreateCategory(): JSX.Element {
   function onSubmit(e: any) {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("file", e.target.categoryImg.files[0]);
+    
     const categorylist: any = {
       name: e.target.category.value,
-      categoryImg: e.target.categoryImg.value,
     };
-    console.log(categorylist);
-    formData.append("categorylist", JSON.stringify(categorylist));
+
+
     axios
-      .post("http://localhost:5050/category/add", formData)
+      .post("http://localhost:5050/category/add", categorylist)
       .then((res) => console.log(res));
+      console.log(categorylist);
   }
+  
 
   return (
     <div className="w-[50%] mt-2 p-4 bg-white rounded-lg border">
@@ -29,17 +29,13 @@ export default function CreateCategory(): JSX.Element {
       <form onSubmit={(e) => onSubmit(e)}>
         <input
           className="w-full mt-2 p-4 rounded-lg bg-slate-50"
-          placeholder="Name"
+          placeholder="Category Name"
           name="category"
         />
-
-        <input
-          className="w-full mt-2 p-4 rounded-lg bg-slate-50"
-          type="file"
-          name="categoryImg"
-        />
         <div className="w-full mt-3">
-          <Button variant={'ghost'} size={'sm'} type='submit'>submit</Button>
+          <Button variant={"default"} size={"lg"} type="submit">
+            submit
+          </Button>
         </div>
       </form>
     </div>

@@ -13,7 +13,6 @@ export class ProductService {
   ) {}
 
   async create(createFood: CreateProductDto): Promise<any> {
-    console.log('create:', createFood);
     const result = await this.productModel.create(createFood);
 
     return result.save();

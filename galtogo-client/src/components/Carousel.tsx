@@ -28,6 +28,9 @@ export default function Carousel({
       setSlide(330);
     }
   }
+
+  const selected = 'p-4 bg-white shadow-[0_05px_20px_rgb(0,0,0,0.10)] border border-sky-800 w-[220px] rounded-lg text-center text-sky-800 font-medium'
+
   return (
     <div className="px-5">
       <div className="relative w-full">
@@ -39,9 +42,7 @@ export default function Carousel({
               <div
                 key={index}
                 className={
-                  selectedCategory == category.name
-                    ? "cursor-pointer p-4 bg-white shadow-[0_05px_20px_rgb(0,0,0,0.10)] border border-sky-800 w-[220px] rounded-lg text-center text-sky-800 font-medium"
-                    : "cursor-pointer p-4 border border-slate-50  w-[220px] rounded-lg text-center"
+                  selectedCategory == category.name ? `${selected} bg-green-800 text-white` : `${selected}`
                 }
                 onClick={() => {
                   setSelectedCategory(category.name),

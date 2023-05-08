@@ -10,9 +10,8 @@ interface IReservation {
 
 
 interface ICategory {
-  _id: string,
+  _id:  mongoose.Schema.Types.ObjectId;
   name: string,
-  img: string,
 }
 
 interface IProduct {

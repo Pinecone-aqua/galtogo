@@ -21,14 +21,15 @@ export default function CreateFood() {
   function onSubmit(e: any) {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("file", e.target.imageURL.files[0]);
     const foodlist: any = {
       title: e.target.title.value,
       desc: e.target.desc.value,
       category: e.target.category.value,
       price: e.target.price.value,
-      imageURL: e.target.imageURL.value
     };
+
+    formData.append('file',  e.target.imageURL.files[0]);
+    
 
     formData.append("foodlist", JSON.stringify(foodlist));
     axios

@@ -7,17 +7,17 @@ import axios from "axios";
 import BranchSection from "@/components/BranchSection";
 
 export default function Home(props: {
-  productData: IProduct[];
-  categoryData: ICategory[];
+  products: IProduct[];
+  categories: ICategory[];
 }): JSX.Element {
-  const { productData, categoryData } = props;
+  const { products, categories } = props;
   const [selectedCategory, setSelectedCategory] = useState<string | null>("");
 
   useEffect(() => {
     setSelectedCategory(
       localStorage.getItem("active")
         ? localStorage.getItem("active")
-        : "Beverages"
+        : "Үндсэн цэс"
     );
   }, []);
 
@@ -30,13 +30,13 @@ export default function Home(props: {
         <Carousel
           setSelectedCategory={setSelectedCategory}
           selectedCategory={selectedCategory}
-          categoryData={categoryData}
+          categoryData={categories}
         />
       </div>
       <div className="p-3">
         <MenuField
           selectedCategory={selectedCategory}
-          productData={productData}
+          products={products}
         />
       </div>
 
@@ -48,12 +48,12 @@ export default function Home(props: {
 }
 
 export const getStaticProps = async () => {
-  const productData = await axios
-    .get("http://localhost:5050/product")
+  const products = await axios
+    .get(`${process.env.PORT}/product`)
     .then((res) => res.data);
-  const categoryData = await axios
-    .get("http://localhost:5050/category")
+  const categories = await axios
+    .get(`${process.env.PORT}/category`)
     .then((res) => res.data);
 
-  return { props: { productData, categoryData } };
+  return { props: { products, categories } };
 };

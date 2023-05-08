@@ -2,6 +2,6 @@ import { IsString } from 'class-validator';
 
 export class createBannerDto {
   @IsString()
-  img: string;
+  imageURL: string;
 }
 export default createBannerDto;

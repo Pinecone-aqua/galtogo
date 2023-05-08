@@ -1,10 +1,22 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 /* eslint-disable @next/next/no-img-element */
 export default function SpecialOffer() {
+  
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [images, setImages] = useState<any>()
+//Udahgui zuragnuud nemeg ymaa IMAGES :)))
+  useEffect (() => {
+    axios .get('http://localhost:5050/banner')
+    .then ((res) => setImages(res.data))
+  }, [])
+   
   return (
     <div className="w-full relative overflow-hidden rounded-[18px]">
       <img
         className="h-[520px] w-full object-cover "
-        src="./banner.jpg"
+        src={images && images[0].imageURL}
         alt="pic"
       />
       <div className="absolute w-full py-5 bottom-[23%] inset-x-0 text-white text-center z-10">

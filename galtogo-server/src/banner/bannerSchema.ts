@@ -6,7 +6,7 @@ export type bannerDocument = HydratedDocument<banner>;
 @Schema()
 export class banner {
   @Prop()
-  img: string;
+  imageURL: string;
 }
 
 const bannerSchema = SchemaFactory.createForClass(banner);

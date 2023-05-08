@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import AddBanner from "@/components/subComponents/AddBanner";
 import CreateCategory from "@/components/subComponents/CreateCategory";
 
 import CreateFood from "@/components/subComponents/CreateFood";
@@ -21,6 +22,7 @@ export default function Products(props: {
           <EditCategory categoryList={categoryList} />
         </div>
         <CreateFood />
+        <AddBanner/>
       </div>
     </Layout>
   );

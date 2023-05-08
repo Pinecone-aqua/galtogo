@@ -25,9 +25,13 @@ interface ITable {
 interface ICategory {
   name: string,
   _id: mongoose.Schema.Types.ObjectId;
-  img: string,
 }
 
 interface IProduct {
-  _id:
+  _id: string,
+  desc: string,
+  price: number,
+  category: mongoose.Schema.Types.ObjectId;
+  img: string,
 }
+

@@ -3,7 +3,7 @@ import { Rating } from "primereact/rating";
 import Button from './Button';
 
 export default function MenuCard({ product, }: { product: IProduct; }): JSX.Element {
-
+console.log("asodfsapidjnas",product);
   return (
     <div className="w-[260px] h-full overflow-hidden">
 

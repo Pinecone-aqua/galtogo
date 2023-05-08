@@ -1,31 +1,14 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  UploadedFile,
-  UseInterceptors,
-} from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+
 import { CategoryService } from './category.service';
 
 @Controller('category')
 export class CategoryController {
-  constructor(
-    private readonly categoryService: CategoryService,
-    private readonly cloudinary: CloudinaryService,
-  ) {}
+  constructor(private readonly categoryService: CategoryService) {}
   @Post('add')
-  @UseInterceptors(FileInterceptor('file'))
-  async createCategory(@UploadedFile() files: any, @Body() body: any) {
-    const uploading = await this.cloudinary.uploadImage(files);
+  async createCategory(@Body() body: any) {
     console.log(body);
-    const data = await {
-      ...JSON.parse(body.categorylist),
-      img: uploading.secure_url,
-    };
-    return this.categoryService.create(data);
+    return this.categoryService.create(body);
   }
 
   @Get()

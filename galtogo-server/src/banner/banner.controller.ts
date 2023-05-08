@@ -1,5 +1,4 @@
 import {
-  Body,
   Controller,
   Get,
   Post,
@@ -8,28 +7,24 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
-import { ProductService } from './product.service';
+import { BannerService } from './banner.service';
 
-@Controller('product')
-export class ProductController {
+@Controller('banner')
+export class BannerController {
   constructor(
-    private readonly productService: ProductService,
+    private readonly bannerService: BannerService,
     private readonly cloudinary: CloudinaryService,
   ) {}
-
   @Post('add')
   @UseInterceptors(FileInterceptor('file'))
-  async createProduct(@UploadedFile() files: any, @Body() body: any) {
+  async createBanner(@UploadedFile() files: any) {
     const uploading = await this.cloudinary.uploadImage(files);
-    const data = await {
-      ...JSON.parse(body.foodlist),
-      img: uploading.secure_url,
-    };
-    return this.productService.create(data);
-  }
 
+    console.log(uploading);
+    return this.bannerService.create(uploading.secure_url);
+  }
   @Get()
   findAll() {
-    return this.productService.findAll();
+    return this.bannerService.findAll();
   }
 }
