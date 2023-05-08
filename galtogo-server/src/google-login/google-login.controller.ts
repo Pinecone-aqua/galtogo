@@ -62,7 +62,9 @@ export class GoogleLoginController {
       };
       user = await this.usersService.addUser(userInput);
     }
-
+    if (!user.phone) {
+      return res.redirect(`http://localhost:3000/phone-inserting`);
+    }
     const payload = {
       firstName: user.firstName,
       lastName: user.lastName,
