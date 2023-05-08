@@ -1,16 +1,25 @@
-export default function MenuCard({
-  product,
-}: {
-  product: IProduct;
-}): JSX.Element {
+import React from 'react';
+import { Rating } from "primereact/rating";
+import Button from './Button';
+
+export default function MenuCard({ product, }: { product: IProduct; }): JSX.Element {
+console.log("asodfsapidjnas",product);
   return (
-    <div className="bg-slate-200 md:w-60 md:h-[400px] w-40 h-[300px] rounded-lg p-2 m-3">
-      <div className="m-1 p-1 bg-slate-400 h-[60%]">
-        {product.category} image
+    <div className="w-[260px] h-full overflow-hidden">
+
+      <picture>
+        <img className="w-full h-[250px] object-cover rounded-lg" src={product.img} alt="pic" />
+      </picture>
+
+      <div className="bg-white mt-2">
+        <div className="p-1 font-bold text-gray-700">{product.title}</div>
+        <div className="p-1 text-sm w-full h-[64px] overflow-hidden">{product.desc}</div>
+        <div className="p-1 mt-1">
+          <Rating value={3} readOnly cancel={false} />
+        </div>
+
+        <Button className='w-full mt-4' size={'lg'}>{product.price}₮</Button>
       </div>
-      <div className="m-1 p-1 bg-slate-400">{product.name}</div>
-      <div className="m-1 p-1 bg-slate-400">{product.price}</div>
-      <div className="m-1 p-1 bg-slate-400">itemDesc-1</div>
     </div>
   );
 }

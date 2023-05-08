@@ -8,14 +8,20 @@ interface IReservation {
   status: string;
 }
 
+
 interface ICategory {
-  name: string;
+  _id:  mongoose.Schema.Types.ObjectId;
+  name: string,
 }
 
 interface IProduct {
-  name: string;
-  category: string;
-  price: string;
+  title: string,
+  _id: string,
+  desc: string,
+  price: number,
+  img: string,
+  category: ICategory,
+
 }
 
 interface IUser {

@@ -1,6 +1,8 @@
 import axios from "axios";
 
-export default function AddReservationModal({ setShowAddModal }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function AddReservationModal({ setShowAddModal }: { setShowAddModal: any }) {
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async function handleSubmit(e: any) {
     e.preventDefault();
@@ -12,7 +14,7 @@ export default function AddReservationModal({ setShowAddModal }) {
       table: e.target.table.value,
       status: "pending",
     };
-    setShowAddModal((prev) => !prev);
+    setShowAddModal((prev: boolean) => !prev);
     try {
       await axios
         .post("http://localhost:5050/reservation/add", newReservation)
@@ -24,6 +26,7 @@ export default function AddReservationModal({ setShowAddModal }) {
   return (
     <form
       className="absolute top-20 left-0 bg-slate-200 p-3 flex flex-col z-10 rounded-xl"
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onSubmit={handleSubmit}
     >
       <input
