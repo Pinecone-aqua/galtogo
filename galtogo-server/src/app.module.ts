@@ -8,20 +8,20 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ReservationModule } from './reservation/reservation.module';
 import { CategoryModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
+import { BannerModule } from './banner/banner.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot(
-      'mongodb+srv://database:1234@cluster0.pxig3vm.mongodb.net/test',
-    ),
+    MongooseModule.forRoot(process.env.MONGODB_URL),
     TableModule,
     UserModule,
     ReservationModule,
     CategoryModule,
     ProductModule,
+    BannerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
