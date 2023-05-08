@@ -14,18 +14,20 @@ export default function Carousel({
 
 
   function handleRight(): void {
-    if (slide < 330) {
-      setSlide((prev) => prev + 110);
+    console.log(slide);
+    if (slide < 100) {
+      setSlide((prev) => prev + 32);
     } else {
       setSlide(0);
     }
   }
 
   function handleLeft(): void {
-    if (slide >= 330) {
-      setSlide((prev) => prev - 110);
+    console.log(slide);
+    if (slide <= 96 && slide > 0) {
+      setSlide((prev) => prev - 32);
     } else {
-      setSlide(330);
+      setSlide(96);
     }
   }
 
@@ -34,9 +36,9 @@ export default function Carousel({
   return (
     <div className="px-5">
       <div className="relative w-full">
-        <div id="carousel" className={`hover:overflow-x-auto `}>
+        <div id="carousel" className={`hover:overflow-x-auto overflow-hidden`}>
           <div
-            className={`flex gap-4 -translate-x-[${slide}px] duration-300 sm:justify-center`}
+            className={`flex -translate-x-${slide} duration-300 sm:justify-center`}
           >
             {categoryData.map((category: ICategory, index: number) => (
               <div

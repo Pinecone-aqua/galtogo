@@ -9,6 +9,7 @@ import { ReservationModule } from './reservation/reservation.module';
 import { CategoryModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
 import { BannerModule } from './banner/banner.module';
+import { DisabledDayModule } from './days/days.module';
 
 @Module({
   imports: [
@@ -20,8 +21,9 @@ import { BannerModule } from './banner/banner.module';
     CategoryModule,
     ProductModule,
     BannerModule,
+    DisabledDayModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

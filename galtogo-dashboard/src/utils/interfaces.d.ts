@@ -35,3 +35,11 @@ interface IProduct {
   img: string,
 }
 
+
+interface IDisabledDay {
+  _id: mongoose.Schema.Types.ObjectId;
+  year: number;
+  month: number;
+  day: number;
+  description: string;
+}
