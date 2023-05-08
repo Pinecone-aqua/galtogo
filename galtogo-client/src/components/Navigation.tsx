@@ -12,7 +12,7 @@ interface NavType {
 export default function Navigation({ user, setUser }: NavType) {
   const { pathname } = useRouter();
   const router = useRouter();
-  console.log(user);
+  console.log("FE", user);
 
   return (
     <div className="p-3">
@@ -38,7 +38,7 @@ export default function Navigation({ user, setUser }: NavType) {
       </div>
       {user ? (
         <div className="flex gap-5">
-          <div>hello {user.name}</div>
+          <div>hello {user.email}</div>
           <div
             className="cursor-pointer"
             onClick={() => {

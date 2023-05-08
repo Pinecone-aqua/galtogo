@@ -1,25 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
 
-interface PhoneInsertingProps {
-  token: string;
-}
-
-export default function PhoneInserting({ token }: PhoneInsertingProps) {
+export default function PhoneInserting() {
   const router = useRouter();
+  const [users, setUsers] = useState<IUser[]>([]);
   const [phone, setPhone] = useState("");
 
-  const handleSubmit = async (e: any) => {
+  useEffect(() => {
+    fetch("http://localhost:5050/user")
+      .then((res) => res.json())
+      .then((res) => setUsers(res));
+  }, []);
+
+  console.log("user FE", users);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("/api/user/phone", {
-        token,
-        phone,
-      });
+    const response = await fetch(`http://localhost:5050/user/${user._id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ phone }),
+    });
+    if (response.ok) {
+      // setUsers((prevUsers) =>
+      //   prevUsers.map((prevUser) =>
+      //     prevUser._id === user._id ? { ...prevUser, phone } : prevUser
+      //   )
+      // );
       router.push("/");
-    } catch (error) {
-      console.error(error);
     }
   };
 
