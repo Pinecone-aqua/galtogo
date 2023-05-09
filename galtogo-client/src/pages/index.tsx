@@ -5,6 +5,7 @@ import SpecialOffer from "@/components/SpecialOffer";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import BranchSection from "@/components/BranchSection";
+import CategoryMobile from "@/components/subcomponents/CategoryMobile";
 
 export default function Home(props: {
   products: IProduct[];
@@ -23,17 +24,20 @@ export default function Home(props: {
 
   return (
     <Layout>
-      <div className="hidden md:block p-3">
+      <div className="">
         <SpecialOffer />
+        <div className="hidden md:block w-[80%] mx-auto bottom-[-24px] -translate-y-6">
+          <Carousel
+            setSelectedCategory={setSelectedCategory}
+            selectedCategory={selectedCategory}
+            categories={categories}
+          />
+        </div>
+        <div className="w-full overflow-x-auto snap-x snap-mandatory sm:hidden md:hidden lg:hidden">
+            <CategoryMobile setSelectedCategory={setSelectedCategory} selectedCategory={selectedCategory} categories={categories}/>
+          </div>
       </div>
-      <div className="p-3 mt-5 mb-10">
-        <Carousel
-          setSelectedCategory={setSelectedCategory}
-          selectedCategory={selectedCategory}
-          categoryData={categories}
-        />
-      </div>
-      <div className="p-3">
+      <div className="w-full overflow-x-auto snap-x snap-mandatory rounded-lg">
         <MenuField
           selectedCategory={selectedCategory}
           products={products}

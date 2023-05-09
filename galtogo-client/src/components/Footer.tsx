@@ -2,7 +2,7 @@ import { socialIcons } from "@/utils/constants";
 import { TbChefHat } from 'react-icons/tb'
 
 export default function Footer() {
-  return <div><div className="flex justify-between gap-10 w-full p-10 mt-20">
+  return <div><div className="sm:flex sm:flex-col justify-between gap-10 w-full p-10 mt-20">
     <div className="w-1/4">
       <h1 className="font-bold p-2 text-lg text-orange-500">Байршил</h1>
       <p className="p-2 text-gray-400 w-[250px]">Олимпын гудамж, 1-р хороо, Сүхбаатар дүүрэг, Улаанбаатар хот, Монгол улс NewHorizon center - 401 тоот</p>
@@ -31,7 +31,7 @@ export default function Footer() {
 
 
   </div>
-    <div className="flex justify-between items-center">
+    <div className="sm:flex sm:flex-col md:flex md:flex-row justify-between items-center">
       <div className="flex items-center gap-3 p-4">
         <TbChefHat />
 

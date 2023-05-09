@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { ReactNode } from "react";
 import Navigation from "./Navigation";
-import Footer from "./Footer";
+// import Footer from "./Footer";
 import Button from "./subcomponents/Button";
 import { NextRouter, useRouter } from "next/router";
 
@@ -23,7 +23,7 @@ export default function Layout({ children }: PropType) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="relative bg-white min-h-screen sm:px-20">
+      <main className="bg-white w-full">
         <Button
           className="fixed bottom-4 right-3 sm:right-20 lg:top-8 z-20"
           size="sm"
@@ -33,7 +33,7 @@ export default function Layout({ children }: PropType) {
         </Button>
         <Navigation />
         <div className="">{children}</div>
-        <Footer />
+        {/* <Footer /> */}
       </main>
     </>
   );

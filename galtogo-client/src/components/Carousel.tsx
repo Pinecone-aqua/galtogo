@@ -1,111 +1,37 @@
-import { useState } from "react";
-
 export default function Carousel({
   setSelectedCategory,
-  categoryData,
+  categories,
   selectedCategory,
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setSelectedCategory: any;
-  categoryData: ICategory[];
+  categories: ICategory[];
   selectedCategory: string | null;
 }): JSX.Element {
-  const [slide, setSlide] = useState(0);
-
-
-  function handleRight(): void {
-    console.log(slide);
-    if (slide < 100) {
-      setSlide((prev) => prev + 32);
-    } else {
-      setSlide(0);
-    }
-  }
-
-  function handleLeft(): void {
-    console.log(slide);
-    if (slide <= 96 && slide > 0) {
-      setSlide((prev) => prev - 32);
-    } else {
-      setSlide(96);
-    }
-  }
-
-  const selected = 'p-4 bg-white shadow-[0_05px_20px_rgb(0,0,0,0.10)] border border-sky-800 w-[220px] rounded-lg text-center text-sky-800 font-medium'
+  const selected = 'p-2 rounded-lg text-center font-medium text-[4px]'
 
   return (
-    <div className="px-5">
-      <div className="relative w-full">
-        <div id="carousel" className={`hover:overflow-x-auto overflow-hidden`}>
+
+    <div className="mx-auto rounded-lg bg-white shadow-[0_05px_20px_rgb(0,0,0,0.10)]">
+      <div
+        className="flex justify-center w-full center px-[8px] py-[8px] gap-[4px]"
+      >
+        {categories.map((category: ICategory, index: number) => (
           <div
-            className={`flex -translate-x-${slide} duration-300 sm:justify-center`}
+            key={index}
+            className={
+              selectedCategory == category.name ? `${selected} bg-[#0D5C63] text-white text-[4px]` : `${selected} text-[#505D6F]`
+            }
+            onClick={() => {
+              setSelectedCategory(category.name),
+                localStorage.setItem("active", category.name);
+            }}
           >
-            {categoryData.map((category: ICategory, index: number) => (
-              <div
-                key={index}
-                className={
-                  selectedCategory == category.name ? `${selected} bg-green-800 text-white` : `${selected}`
-                }
-                onClick={() => {
-                  setSelectedCategory(category.name),
-                    localStorage.setItem("active", category.name);
-                }}
-              >
-                {category.name}
-              </div>
-            ))}
+            {category.name}
           </div>
-        </div>
-        <button
-          onClick={handleLeft}
-          type="button"
-          className="absolute top-28 left-0 z-10 flex items-center justify-center px-4 cursor-pointer group focus:outline-none"
-          data-carousel-prev
-        >
-          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/80 dark:bg-gray-800/30 group-hover:bg-white dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg
-              aria-hidden="true"
-              className="w-6 h-6 text-[#757A84] group-hover:text-blue-800 dark:text-gray-800"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="4"
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </span>
-        </button>
-        <button
-          onClick={handleRight}
-          type="button"
-          className="absolute top-28 right-0 z-10 flex items-center justify-center px-4 cursor-pointer group focus:outline-none"
-          data-carousel-next
-        >
-          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/80 dark:bg-gray-800/30 group-hover:bg-white dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg
-              aria-hidden="true"
-              className="w-6 h-6 text-[#757A84] group-hover:text-blue-800 dark:text-gray-800"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="4"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-            <span className="sr-only">Next</span>
-          </span>
-        </button>
+        ))}
       </div>
     </div>
+
   );
 }

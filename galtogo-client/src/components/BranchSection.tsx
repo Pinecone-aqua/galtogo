@@ -18,30 +18,29 @@ export default function BranchSection() {
 
   return (
     <div>
-      <div className="mx-auto flex flex-col justify-center w-[1364px]  py-20">
-        <div className="flex justify-center text-[64px]">
-          <h1 className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent font-extrabold px-2">Yuna restaurant’s</h1>
-          <h1 className="px-2 font-extrabold">branches&</h1>
+      <div className="mx-auto ">
+        <div className="flex justify-center my-10">
+          <h1 className="font-extrabold w-full text-center text-[24px] sm:text-[32px] md:text-[40px]"><span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent ">Yuna restaurant’s</span> branches & locations</h1>
         </div>
-        <h1 className="mx-auto text-[64px] font-extrabold px-2">locations</h1>
       </div>
-      <div className="mx-auto flex gap-[16px] w-[1364px]">
-        <div className="flex flex-col justify-center gap-3">
+      
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-wrap justify-center gap-2">
           {BranchItems.map((item, index) =>
             listId == index ? (
-              <div key={index} className="flex gap-2 items-center bg-white shadow-[0_2px_20px_rgb(0,0,0,0.05)] p-5 w-[350px] rounded-lg cursor-pointer font-medium" onClick={() => { setListId(item.id), setCurrentLocation(item.location) }}>
+              <div key={index} className="flex gap-2 items-center p-3 bg-white shadow-[0_2px_20px_rgb(0,0,0,0.05)] rounded-lg cursor-pointer font-medium" onClick={() => { setListId(item.id), setCurrentLocation(item.location) }}>
                 <div className="text-[#7136ED]">{item.icon}</div>
-                <div className="text-lg text-[#393939]">{item.branch}</div>
+                <div className="text-sm text-[#393939]">{item.branch}</div>
               </div>
             ) : (
-              <div key={index} className="flex gap-2 items-center bg-white  p-5 w-[350px] rounded-lg cursor-pointer" onClick={() => { setListId(item.id), setCurrentLocation(item.location) }}>
+              <div key={index} className="flex gap-2 items-center p-3 bg-white rounded-lg cursor-pointer" onClick={() => { setListId(item.id), setCurrentLocation(item.location) }}>
                 <div className="text-slate-400">{item.icon}</div>
-                <div className="text-lg text-slate-400">{item.branch}</div>
+                <div className="text-sm text-slate-400">{item.branch}</div>
               </div>
             ))}
         </div>
 
-        <div className="w-full rounded-lg overflow-hidden h-[520px]">
+        <div className="w-full h-[320px] rounded-lg overflow-auto">
           {!isLoaded ? (
             <h1>Loading...</h1>
           ) : (

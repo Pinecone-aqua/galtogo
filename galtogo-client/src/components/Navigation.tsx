@@ -6,7 +6,7 @@ export default function Navigation() {
   const { pathname } = useRouter();
 
   return (
-    <div className="p-3">
+    <div className="">
       <div className="hidden sm:flex flex-lg justify-between items-center h-20">
         <picture>
           <img alt="logoPng" src="./logo.png" width={100} height={100} />
