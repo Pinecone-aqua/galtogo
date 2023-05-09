@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import BranchSection from "@/components/BranchSection";
 import CategoryMobile from "@/components/subcomponents/CategoryMobile";
-
+import Footer from "@/components/Footer";
 import Membership from "@/components/Membership";
 import GreetingBanner from "@/components/GreetingBanner";
 
@@ -58,7 +58,7 @@ export default function Home(props: {
         <BranchSection />
       </div>
 
-
+    <Footer/>
     </Layout>
   );
 }
