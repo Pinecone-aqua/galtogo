@@ -1,4 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose from 'mongoose';
+import { Reservation } from 'src/reservation/reservation.schema';
 
 @Schema({ timestamps: true })
 export class User {

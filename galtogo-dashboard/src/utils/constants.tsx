@@ -3,28 +3,42 @@ import { FiSettings } from "react-icons/fi";
 import { FaRegListAlt } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { RxSketchLogo, RxDashboard, RxPerson } from "react-icons/rx";
+import { BiDish } from "react-icons/bi";
 
 export const menuItems = [
-  { name: "Dashboard", path: "/dashboard", image: <RxSketchLogo size={20} /> },
+  {
+    name: "Dashboard",
+    path: "/dashboard",
+    image: <RxSketchLogo size={20} />,
+  },
   {
     name: "Tables",
-    path: "/dashboard/Tables",
+    path: "/dashboard/tables",
     image: <RxDashboard size={20} />,
   },
   {
     name: "Reservations",
-    path: "/dashboard/Reservations",
+    path: "/dashboard/reservations",
     image: <FaRegListAlt size={20} />,
   },
-  { name: "Users", path: "/dashboard/Users", image: <RxPerson size={20} /> },
+  {
+    name: "Products",
+    path: "/dashboard/products",
+    image: <BiDish size={20} />,
+  },
+  {
+    name: "Users",
+    path: "/dashboard/Users",
+    image: <RxPerson size={20} />,
+  },
   {
     name: "Orders",
-    path: "/dashboard/Orders",
+    path: "/dashboard/orders",
     image: <HiOutlineShoppingBag size={20} />,
   },
   {
     name: "Settings",
-    path: "/dashboard/Settings",
+    path: "/dashboard/settings",
     image: <FiSettings size={20} />,
   },
 ];
@@ -55,3 +69,27 @@ export const tableTimes = [
   { time: "20:00", isOccupied: false },
   { time: "21:00", isOccupied: false },
 ];
+
+export interface ICard {
+  img: string;
+  foodname: string;
+  price: number;
+  desc: string;
+  category: {
+    name: string;
+  };
+}
+
+export interface Inputs {
+  category: string;
+  exampleRequired: string;
+  foodname: string;
+  price: string;
+  desc: string;
+  file: string;
+}
+
+export interface ICategory {
+  name: string;
+  _id: string;
+}

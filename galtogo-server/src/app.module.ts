@@ -6,6 +6,9 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ReservationModule } from './reservation/reservation.module';
+import { CategoryModule } from './category/category.module';
+import { ProductModule } from './product/product.module';
+import { BannerModule } from './banner/banner.module';
 import { DisabledDayModule } from './days/days.module';
 
 @Module({
@@ -15,6 +18,9 @@ import { DisabledDayModule } from './days/days.module';
     TableModule,
     UserModule,
     ReservationModule,
+    CategoryModule,
+    ProductModule,
+    BannerModule,
     DisabledDayModule,
   ],
   controllers: [AppController],

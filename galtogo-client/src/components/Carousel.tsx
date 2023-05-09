@@ -1,12 +1,5 @@
 import { useState } from "react";
 
-const categories = [
-  { name: "Category-1", image: "url-1" },
-  { name: "Category-2", image: "url-2" },
-  { name: "Category-3", image: "url-3" },
-  { name: "Category-4", image: "url-4" },
-  { name: "Category-5", image: "url-5" },
-];
 const translate = {
   0: "-translate-x-0",
   1: "-translate-x-[110px] lg:-translate-x-[240px]",
@@ -16,9 +9,13 @@ const translate = {
 
 export default function Carousel({
   setSelectedCategory,
+  categoryData,
+  selectedCategory,
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setSelectedCategory: any;
+  categoryData: ICategory[];
+  selectedCategory: string | null;
 }): JSX.Element {
   const [slide, setSlide] = useState(0);
 
@@ -39,24 +36,31 @@ export default function Carousel({
       setSlide(3);
     }
   }
+
+  const selected =
+    "p-4 bg-white shadow-[0_05px_20px_rgb(0,0,0,0.10)] border border-sky-800 w-[220px] rounded-lg text-center text-sky-800 font-medium";
+
   return (
-    <div className="px-5 py-10">
+    <div className="px-5">
       <div className="relative w-full">
-        <div id="carousel" className={`overflow-x-auto overflow-hidden`}>
+        <div id="carousel" className={`hover:overflow-x-auto overflow-hidden`}>
           <div
             className={`flex ${translate[slide]} duration-300 md:justify-center`}
           >
-            {categories.map((category: ICategory, index: number) => (
+            {categoryData.map((category: ICategory, index: number) => (
               <div
                 key={index}
-                className="hover:bg-black/10 rounded-full cursor-pointer"
-                onClick={() => setSelectedCategory(category.name)}
+                className={
+                  selectedCategory == category.name
+                    ? `${selected} bg-green-800 text-white`
+                    : `${selected}`
+                }
+                onClick={() => {
+                  setSelectedCategory(category.name),
+                    localStorage.setItem("active", category.name);
+                }}
               >
-                <div className="lg:w-[150px] lg:h-[150px] w-[100px] h-[100px] bg-slate-200 m-1 rounded-full">
-                  <p className="text-center mx-auto pt-10 text-xs">
-                    {category.name}
-                  </p>
-                </div>
+                {category.name}
               </div>
             ))}
           </div>

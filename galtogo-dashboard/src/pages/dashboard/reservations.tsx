@@ -23,8 +23,7 @@ export default function Reservations(props: {
   const handleFilter = (filter: string) => {
     axios
       .get(
-        `http://localhost:5050/reservation?filter=${filter}&isAsc=${
-          toggleFilter ? "asc" : "desc"
+        `${process.env.PORT}/reservation?filter=${filter}&isAsc=${toggleFilter ? "asc" : "desc"
         }`
       )
       .then((res) => setReservations(res.data))
@@ -90,7 +89,7 @@ export const getServerSideProps: () => Promise<{
   };
 }> = async () => {
   const reservationData = await axios
-    .get("http://localhost:5050/reservation?filter=date&isAsc=desc")
+    .get(`${process.env.PORT}/reservation?filter=date&isAsc=desc`)
     .then((res) => res.data);
   const tablesData = await axios
     .get(`http://localhost:5050/table`)

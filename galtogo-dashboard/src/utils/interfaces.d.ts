@@ -27,6 +27,20 @@ interface ITable {
   };
 }
 
+interface ICategory {
+  name: string,
+  _id: mongoose.Schema.Types.ObjectId;
+}
+
+interface IProduct {
+  _id: string,
+  desc: string,
+  price: number,
+  category: mongoose.Schema.Types.ObjectId;
+  img: string,
+}
+
+
 interface IDisabledDay {
   _id: mongoose.Schema.Types.ObjectId;
   year: number;

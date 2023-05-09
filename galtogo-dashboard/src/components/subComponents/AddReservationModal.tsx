@@ -46,6 +46,7 @@ export default function AddReservationModal({
   return (
     <form
       className="absolute top-20 left-0 bg-slate-200 p-3 flex flex-col z-10 rounded-xl"
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onSubmit={handleSubmit}
     >
       <label>Date:</label>
