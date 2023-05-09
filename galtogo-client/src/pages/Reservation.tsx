@@ -55,7 +55,6 @@ export default function Reservation(props: {
 
   return (
     <Layout>
-<<<<<<< HEAD
       <Breadcrumbs
         items={[
           {
@@ -81,20 +80,6 @@ export default function Reservation(props: {
           temporibus illum incidunt eveniet a numquam corrupti suscipit placeat
           facere eligendi delectus aut exercitationem dignissimos obcaecati nisi
           inventore nulla quos perspiciatis.
-=======
-      <div className="lg:grid lg:grid-cols-3 h-[1700px] lg:h-[1200px] border mx-auto bg-slate-50 p-3 justify-center">
-        <div className="mx-auto">
-          <div className="m-8 font-bold text-center">Select a date</div>
-          <div className="flex justify-center">
-            <Calendar
-              value={date}
-              onChange={handleClickDay}
-              minimumDate={today}
-              disabledDays={disabledDaysData}
-              shouldHighlightWeekends
-            />
-          </div>
->>>>>>> 7c419fc (client table modified)
         </div>
         <div className="relative flex lg:col-span-2">
           <div className="bg-slate-100 p-2 w-[100%] h-[100%] text-center">
