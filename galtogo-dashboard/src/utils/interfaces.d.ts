@@ -17,9 +17,14 @@ interface IUser {
 }
 
 interface ITable {
+  _id: mongoose.Schema.Types.ObjectId;
   name: number;
   capacity: number;
   isActive: boolean;
+  coords: {
+    posX: number;
+    posY: number;
+  };
 }
 
 interface ICategory {

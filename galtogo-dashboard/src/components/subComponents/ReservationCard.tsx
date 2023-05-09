@@ -2,6 +2,7 @@ import { Dispatch, FC, SetStateAction, useState } from "react";
 import Button from "./Button";
 import axios from "axios";
 import { ReservationStatus } from "@/utils/constants";
+import { toast } from "react-toastify";
 
 interface CardProps {
   reservation: IReservation;
@@ -20,7 +21,7 @@ const ReservationCard: FC<CardProps> = ({ reservation, setReservations }) => {
       )
       .then((res) => {
         setReservations(res.data.result);
-        console.log(res.data.message);
+        toast.success(res.data.message);
       })
       .catch((err) => console.log("Current id is not found", err));
     setShowStatusBtns(false);
@@ -37,13 +38,22 @@ const ReservationCard: FC<CardProps> = ({ reservation, setReservations }) => {
           <p className="text-gray-400">{reservation.time}</p>
         </div>
       </div>
-      <div className="cardBody p-4 text-gray-400 text-md">
-        <p className="text-gray-800">
-          {`${reservation.user.firstName} ${reservation.user.lastName}`}
-        </p>
-        <p className="">{reservation.user.phone}</p>
-        <p className="text-sm">{reservation.user.email}</p>
-      </div>
+      {reservation.user.firstName ? (
+        <div className="cardBody p-4 text-gray-400 text-md">
+          <p className="text-gray-800">
+            {`${reservation.user.firstName} ${reservation.user.lastName}`}
+          </p>
+          <p className="">
+            {reservation.user.phone ? reservation.user.phone : "-"}
+          </p>
+          <p className="text-sm">
+            {reservation.user.email ? reservation.user.email : "-"}
+          </p>
+        </div>
+      ) : (
+        <div>Deleted user</div>
+      )}
+
       <div className="relative group/status">
         <Button
           id={reservation._id}

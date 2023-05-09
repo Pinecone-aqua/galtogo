@@ -5,6 +5,7 @@ import TableBar from "@/components/subComponents/TableBar";
 import axios from "axios";
 import moment from "moment";
 import { useState } from "react";
+import RoomArea from "@/components/subComponents/RoomArea";
 
 export default function Tables(props: {
   reservationData: IReservation[];
@@ -55,12 +56,16 @@ export default function Tables(props: {
               onChange={handleChange}
             />
           </div>
-          <div className="m-3">
+          <div className="m-3 lg:grid lg:grid-cols-2">
             {tablesData.map((table, index) => (
               <div key={index}>
                 <TableBar reservations={datas} table={table} />
               </div>
             ))}
+          </div>
+
+          <div className="m-3">
+            <RoomArea tablesData={tablesData} />
           </div>
         </div>
       </div>
@@ -68,7 +73,7 @@ export default function Tables(props: {
   );
 }
 
-export const getServerSideProps: () => Promise<{
+export const getStaticProps: () => Promise<{
   props: {
     reservationData: IReservation[] | null;
     tablesData: ITable[] | null;
