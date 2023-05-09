@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import BranchSection from "@/components/BranchSection";
 import CategoryMobile from "@/components/subcomponents/CategoryMobile";
+import Footer from "@/components/Footer";
+import Membership from "@/components/Membership";
 
 export default function Home(props: {
   products: IProduct[];
@@ -24,28 +26,36 @@ export default function Home(props: {
 
   return (
     <Layout>
-      <div className="">
+      <div className="lg:mx-[40px]">
         <SpecialOffer />
-        <div className="hidden md:block w-[80%] mx-auto bottom-[-24px] -translate-y-6">
+        <div className="hidden md:block w-[80%]  mx-auto bottom-[-24px] -translate-y-6">
           <Carousel
             setSelectedCategory={setSelectedCategory}
             selectedCategory={selectedCategory}
             categories={categories}
           />
         </div>
-        <div className="w-full overflow-x-auto snap-x snap-mandatory sm:hidden md:hidden lg:hidden">
-            <CategoryMobile setSelectedCategory={setSelectedCategory} selectedCategory={selectedCategory} categories={categories}/>
-          </div>
+        <div className="w-full overflow-x-auto no-scrollbar snap-x snap-mandatory sm:visible md:hidden lg:hidden">
+          <CategoryMobile
+            setSelectedCategory={setSelectedCategory}
+            selectedCategory={selectedCategory}
+            categories={categories}
+          />
+        </div>
       </div>
-      <div className="w-full overflow-x-auto snap-x snap-mandatory rounded-lg">
-        <MenuField
-          selectedCategory={selectedCategory}
-          products={products}
-        />
+    
+      <div className="w-full overflow-x-auto no-scrollbar sm:overflow-x-auto sm:no-scrollbar sm:snap-x snap-mandatory rounded-lg md:overflow-hidden">
+        <MenuField selectedCategory={selectedCategory} products={products} />
+      </div>
+      <div className="mx-[40px] hidden md:block">
+        <Membership />
+      </div>
+      <div className="md:mx-[4px]">
+        <BranchSection />
       </div>
 
-      <div className="p-3">
-        <BranchSection />
+      <div>
+        <Footer />
       </div>
     </Layout>
   );

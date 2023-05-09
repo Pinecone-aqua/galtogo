@@ -15,7 +15,7 @@ export default function CategoryMobile({
           <div
             key={index}
             className={
-              selectedCategory == category.name ? `${selected} bg-[#0D5C63] text-white` : `${selected}  text-[#505D6F]`
+              selectedCategory == category.name ? `${selected} bg-[#0D5C63] text-white` : `${selected}  text-[#505D6F] border`
             }
             onClick={() => {
               setSelectedCategory(category.name),

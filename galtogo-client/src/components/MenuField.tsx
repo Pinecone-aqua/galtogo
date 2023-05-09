@@ -9,7 +9,7 @@ export default function MenuField({
 })  { 
   
   return (
-    <div className="flex w-full gap-[12px] p-4">
+    <div className="flex w-full gap-[20px] p-4 sm:flex md:flex-wrap md:justify-center">
       {products.map(
         (product:IProduct, index) =>
           product.category.name === selectedCategory && (

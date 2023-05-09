@@ -1,5 +1,6 @@
 import { HiLocationMarker } from 'react-icons/hi'
 import { BsInstagram, BsFacebook, BsLinkedin, BsTwitter } from 'react-icons/Bs'
+import {HiOutlineUserGroup, HiOutlinePhone, HiOutlineLockClosed, HiOutlineClock} from 'react-icons/hi2'
 
 export const navMenuItems = [
   {
@@ -95,3 +96,22 @@ export const tableTimes = [
   { time: "20:00", isOccupied: false },
   { time: "21:00", isOccupied: false },
 ];
+
+export const footerMenuItems = [
+  {
+    name: "Хүний нөөц",
+    icon: <HiOutlineUserGroup/>
+  },
+  {
+    name: "Цагийн хуваарь",
+    icon: <HiOutlineClock/>
+  },
+  {
+    name: "Нууцлалын бодлого",
+    icon: <HiOutlineLockClosed/>
+  },
+  {
+    name: "Холбоо барих",
+    icon: <HiOutlinePhone/>
+  },
+]

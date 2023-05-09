@@ -13,22 +13,22 @@ export default function SpecialOffer() {
   }, [])
    
   return (
-    <div className="hidden sm:block md:block relative overflow-hidden rounded-[18px]">
+    <div className="hidden sm:block sm:rounded-lg md:block relative overflow-hidden rounded-lg">
       <img
-        className="h-[520px] md:h-[320px] w-full object-cover "
+        className="h-[520px] sm:h-[280px] md:h-[520px] w-full object-cover"
         src={images && images[0].imageURL}
         alt="pic"
       />
-      <div className="absolute w-full py-5 bottom-[23%] inset-x-0 text-white text-center z-10">
-        <div className="text-[72px] md:text-[40px] font-extrabold text-rose-600">
+      <div className="absolute w-full py-5 sm:bottom-[42px] md:bottom-[120px] inset-x-0 text-white text-center z-10">
+        <div className="text-[72px] sm:text-[32px] md:text-[64px] font-extrabold text-rose-600">
           유나에서 감각적인 식사의
         </div>
-        <div className="text-[56px] md:text-[28px]">즐거움을 누리세요</div>
+        <div className="sm:text-[24px] md:text-[48px]">즐거움을 누리세요</div>
         <div className="flex text-center justify-center gap-4 mt-6">
-          <div className="py-2 px-6 rounded-lg border md:text-[12px]  border-white  bg-white text-rose-600 font-bold">
+          <div className="border px-4 py-2 rounded-md sm:text-md">
             Details
           </div>
-          <div className="py-2 px-6 rounded-md border md:text-[12px] border-white ">
+          <div className="border px-4 py-2 rounded-md sm:text-md">
             Make order
           </div>
         </div>
