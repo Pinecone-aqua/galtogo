@@ -6,9 +6,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import BranchSection from "@/components/BranchSection";
 import CategoryMobile from "@/components/subcomponents/CategoryMobile";
-import Footer from "@/components/Footer";
+
 import Membership from "@/components/Membership";
 import GreetingBanner from "@/components/GreetingBanner";
+import Footer from "@/components/Footer";
 
 export default function Home(props: {
   products: IProduct[];

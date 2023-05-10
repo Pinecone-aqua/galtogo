@@ -36,13 +36,6 @@ export default function Layout({ children }: PropType) {
         </Button>
 
         <Navigation />
-        <ToastContainer
-          autoClose={3000}
-          position="top-right"
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-        />
         <div className="">{children}</div>
         <Footer />
       </main>
