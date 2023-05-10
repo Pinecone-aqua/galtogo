@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { today } from "@/utils/constants";
 import { Calendar } from "@amir04lm26/react-modern-calendar-date-picker";
 import "@amir04lm26/react-modern-calendar-date-picker/lib/DatePicker.css";
+import { useRouter } from "next/router";
 
 export default function Reservation(props: {
   disabledDaysData: IDisabledDay[];
@@ -16,7 +17,7 @@ export default function Reservation(props: {
   const [slide, setSlide] = useState(
     `translate-x-96 invisible w-[100%] text-transparent`
   );
-
+  const router = useRouter();
   const [date, setDate] = useState<IDate>(today);
   const [tablesData, setTablesData] = useState<ITable[]>([]);
   const [newReservation, setNewReservation] = useState({
@@ -28,7 +29,8 @@ export default function Reservation(props: {
   });
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleClickDay = async (d: any) => {
+  const handleClickDay = (d: any) => {
+    // d?
     setTablesData([]);
     setDate(d);
     console.log("Date: ", d);
@@ -39,8 +41,10 @@ export default function Reservation(props: {
         d.day < 10 ? "0" : ""
       }${d.day}`,
     }));
-    await axios
-      .get("http://localhost:5050/table")
+
+    // branchId/tables
+    axios
+      .get("http://localhost:5050/table") //env
       .then((res) => setTablesData(res.data));
   };
 
@@ -51,6 +55,7 @@ export default function Reservation(props: {
   const handleConfirm = () => {
     console.log("newReservation: ", newReservation);
     toast.success("Reservation successfully added!");
+    router.push("/LoginPage");
   };
 
   return (

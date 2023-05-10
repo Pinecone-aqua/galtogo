@@ -1,12 +1,11 @@
 import { useState } from "react";
 
-const translate = {
-  0: "-translate-x-0",
-  1: "-translate-x-[110px] lg:-translate-x-[240px]",
-  2: "-translate-x-[220px] lg:-translate-x-[480px]",
-  3: "-translate-x-[330px] lg:-translate-x-[720px]",
-};
-
+const translate = [
+  "-translate-x-0",
+  "-translate-x-[110px] lg:-translate-x-[240px]",
+  "-translate-x-[220px] lg:-translate-x-[480px]",
+  "-translate-x-[330px] lg:-translate-x-[720px]",
+];
 export default function Carousel({
   setSelectedCategory,
   categoryData,
@@ -17,7 +16,7 @@ export default function Carousel({
   categoryData: ICategory[];
   selectedCategory: string | null;
 }): JSX.Element {
-  const [slide, setSlide] = useState(0);
+  const [slide, setSlide] = useState<number>(0);
 
   function handleRight(): void {
     console.log(slide);

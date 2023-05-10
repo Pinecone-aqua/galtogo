@@ -13,17 +13,17 @@ export const menuItems = [
   },
   {
     name: "Tables",
-    path: "/dashboard/tables",
+    path: "/dashboard/Tables",
     image: <RxDashboard size={20} />,
   },
   {
     name: "Reservations",
-    path: "/dashboard/reservations",
+    path: "/dashboard/Reservations",
     image: <FaRegListAlt size={20} />,
   },
   {
     name: "Products",
-    path: "/dashboard/products",
+    path: "/dashboard/Products",
     image: <BiDish size={20} />,
   },
   {
@@ -33,12 +33,12 @@ export const menuItems = [
   },
   {
     name: "Orders",
-    path: "/dashboard/orders",
+    path: "/dashboard/Orders",
     image: <HiOutlineShoppingBag size={20} />,
   },
   {
     name: "Settings",
-    path: "/dashboard/settings",
+    path: "/dashboard/Settings",
     image: <FiSettings size={20} />,
   },
 ];
