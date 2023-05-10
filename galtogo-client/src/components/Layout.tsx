@@ -34,8 +34,7 @@ export default function Layout({ children }: PropType) {
         >
           + Reservation
         </Button>
-
-        <Navigation />
+        {/* <Navigation /> */}
         <div className="">{children}</div>
         <Footer />
       </main>
