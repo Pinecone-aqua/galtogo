@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { ReactNode } from "react";
-import Navigation from "./Navigation";
+// import Navigation from "./Navigation";
 // import Footer from "./Footer";
 import Button from "./subcomponents/Button";
 import { NextRouter, useRouter } from "next/router";
@@ -32,7 +32,7 @@ export default function Layout({ children }: PropType) {
         >
           + Reservation
         </Button>
-        <Navigation />
+        {/* <Navigation /> */}
         <div className="">{children}</div>
         <Footer />
       </main>

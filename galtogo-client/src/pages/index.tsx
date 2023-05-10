@@ -8,6 +8,7 @@ import BranchSection from "@/components/BranchSection";
 import CategoryMobile from "@/components/subcomponents/CategoryMobile";
 
 import Membership from "@/components/Membership";
+import GreetingBanner from "@/components/GreetingBanner";
 
 export default function Home(props: {
   products: IProduct[];
@@ -43,9 +44,12 @@ export default function Home(props: {
           />
         </div>
       </div>
-    
+
       <div className="w-full overflow-x-auto no-scrollbar sm:overflow-x-auto sm:no-scrollbar sm:snap-x snap-mandatory rounded-lg md:overflow-hidden">
         <MenuField selectedCategory={selectedCategory} products={products} />
+      </div>
+      <div className="my-[144px]">
+        <GreetingBanner />
       </div>
       <div className="mx-[40px] my-[72px] hidden md:block">
         <Membership />
@@ -54,7 +58,7 @@ export default function Home(props: {
         <BranchSection />
       </div>
 
-     
+
     </Layout>
   );
 }

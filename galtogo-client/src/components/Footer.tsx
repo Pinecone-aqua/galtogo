@@ -10,15 +10,17 @@ import {
 export default function Footer() {
   return (
     <div className="px-[40px]">
-      <div className="flex justify-between py-4">
+      <div className="flex flex-col sm:justify-between sm:items-center md:items-center md:justify-between sm:flex-row py-4">
+   
         <div>
           <picture>
-            <img className="w-[72px]" src="./logo.png" alt="logo" />
+            <img className="w-[72px] mb-4 sm:mb-0" src="./logo.png" alt="logo" />
           </picture>
         </div>
-        <div className="flex">
+        <div className="border sm:hidden md:hidden" />
+        <div className="flex flex-col sm:flex-row">
           {footerMenuItems.map((item, index) => (
-            <div className="flex items-center gap-2 p-2" key={index}>
+            <div className="flex items-center text-sm gap-1 justify-between  p-2 md:text-base lg:text-base" key={index}>
               <div>{item.icon}</div>
               <div className="w-full">{item.name}</div>
             </div>
@@ -26,9 +28,9 @@ export default function Footer() {
         </div>
       </div>
       <div className="border" />
-      <div className="flex items-center justify-between py-8">
-        <p>© 2023 Developed by Galtogo Team • Бүх эрх хуулиар хамгаалагдсан</p>
-        <div className="flex gap-2 text-slate-300">
+      <div className="flex flex-col sm:justify-between py-8 sm:items-center sm:flex-row ">
+        <p>© 2023 Developed by Galtogo Team</p>
+        <div className="flex gap-2 text-slate-300 mt-4 sm:mt-0 md:mt-0">
           <FaFacebook size={'24px'}/>
           <FaFacebookMessenger size={'24px'}/>
           <FaTwitter size={'24px'}/>
