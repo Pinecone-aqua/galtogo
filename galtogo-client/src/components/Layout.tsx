@@ -4,6 +4,7 @@ import Navigation from "./Navigation";
 // import Footer from "./Footer";
 import Button from "./subcomponents/Button";
 import { NextRouter, useRouter } from "next/router";
+import Footer from "./Footer";
 
 type PropType = {
   children: ReactNode;
@@ -33,7 +34,7 @@ export default function Layout({ children }: PropType) {
         </Button>
         <Navigation />
         <div className="">{children}</div>
-        {/* <Footer /> */}
+        <Footer />
       </main>
     </>
   );

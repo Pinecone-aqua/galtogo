@@ -7,7 +7,7 @@ export default function Navigation() {
 
   return (
     <div className="">
-      <div className="hidden sm:flex flex-lg justify-between items-center h-20">
+      <div className="hidden sm:flex flex-lg justify-between items-center h-20 px-[40px]">
         <picture>
           <img alt="logoPng" src="./logo.png" width={100} height={100} />
         </picture>

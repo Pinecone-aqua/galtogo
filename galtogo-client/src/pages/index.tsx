@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import BranchSection from "@/components/BranchSection";
 import CategoryMobile from "@/components/subcomponents/CategoryMobile";
-import Footer from "@/components/Footer";
+
 import Membership from "@/components/Membership";
 
 export default function Home(props: {
@@ -47,16 +47,14 @@ export default function Home(props: {
       <div className="w-full overflow-x-auto no-scrollbar sm:overflow-x-auto sm:no-scrollbar sm:snap-x snap-mandatory rounded-lg md:overflow-hidden">
         <MenuField selectedCategory={selectedCategory} products={products} />
       </div>
-      <div className="mx-[40px] hidden md:block">
+      <div className="mx-[40px] my-[72px] hidden md:block">
         <Membership />
       </div>
-      <div className="md:mx-[4px]">
+      <div className="md:mx-[40px] my-[72px]">
         <BranchSection />
       </div>
 
-      <div>
-        <Footer />
-      </div>
+     
     </Layout>
   );
 }
