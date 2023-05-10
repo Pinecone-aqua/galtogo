@@ -120,7 +120,7 @@ export const getStaticProps: () => Promise<{
   };
 }> = async () => {
   const disabledDaysData = await axios
-    .get("http://localhost:5050/days")
+    .get("http://localhost:5050/days") //unavailable-days
     .then((res) => res.data);
   return {
     props: {

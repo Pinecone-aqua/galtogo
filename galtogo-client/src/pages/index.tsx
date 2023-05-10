@@ -34,10 +34,7 @@ export default function Home(props: {
         />
       </div>
       <div className="p-3">
-        <MenuField
-          selectedCategory={selectedCategory}
-          products={products}
-        />
+        <MenuField selectedCategory={selectedCategory} products={products} />
       </div>
 
       <div className="p-3">
@@ -49,10 +46,10 @@ export default function Home(props: {
 
 export const getStaticProps = async () => {
   const products = await axios
-    .get(`${process.env.PORT}/product`)
+    .get(`${process.env.PORT}/product`) //s
     .then((res) => res.data);
   const categories = await axios
-    .get(`${process.env.PORT}/category`)
+    .get(`${process.env.PORT}/category`) //s
     .then((res) => res.data);
 
   return { props: { products, categories } };

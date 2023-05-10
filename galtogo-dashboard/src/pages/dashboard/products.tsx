@@ -22,7 +22,7 @@ export default function Products(props: {
           <EditCategory categoryList={categoryList} />
         </div>
         <CreateFood />
-        <AddBanner/>
+        <AddBanner />
       </div>
     </Layout>
   );
@@ -30,7 +30,11 @@ export default function Products(props: {
 
 export const getStaticProps = async () => {
   const categoryList = await axios
-    .get("http://localhost:5050/category")
+    .get("http://localhost:5050/category", {
+      // headers: {
+      //   Authorization: `Barear ${token}`
+      // }
+    })
     .then((res) => res.data);
 
   return { props: { categoryList } };

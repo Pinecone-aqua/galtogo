@@ -1,17 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-/* eslint-disable @next/next/no-img-element */
 export default function SpecialOffer() {
-  
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [images, setImages] = useState<any>()
-//Udahgui zuragnuud nemeg ymaa IMAGES :)))
-  useEffect (() => {
-    axios .get('http://localhost:5050/banner')
-    .then ((res) => setImages(res.data))
-  }, [])
-   
+  const [images, setImages] = useState<any>();
+  //Udahgui zuragnuud nemeg ymaa IMAGES :)))
+  useEffect(() => {
+    axios
+      .get("http://localhost:5050/banner")
+      .then((res) => setImages(res.data));
+  }, []);
+
   return (
     <div className="w-full relative overflow-hidden rounded-[18px]">
       <img

@@ -46,22 +46,27 @@ export default function Carousel({
           <div
             className={`flex ${translate[slide]} duration-300 md:justify-center`}
           >
-            {categoryData.map((category: ICategory, index: number) => (
-              <div
-                key={index}
-                className={
-                  selectedCategory == category.name
-                    ? `${selected} bg-green-800 text-white`
-                    : `${selected}`
-                }
-                onClick={() => {
-                  setSelectedCategory(category.name),
-                    localStorage.setItem("active", category.name);
-                }}
-              >
-                {category.name}
-              </div>
-            ))}
+            {categoryData.map(
+              (
+                category: ICategory,
+                index: number //categories
+              ) => (
+                <div
+                  key={index}
+                  className={
+                    selectedCategory == category.name
+                      ? `${selected} bg-green-800 text-white`
+                      : `${selected}`
+                  }
+                  onClick={() => {
+                    setSelectedCategory(category.name),
+                      localStorage.setItem("active", category.name);
+                  }}
+                >
+                  {category.name}
+                </div>
+              )
+            )}
           </div>
         </div>
         <button
