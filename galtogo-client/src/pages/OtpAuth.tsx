@@ -1,5 +1,5 @@
-import { FunctionComponent, useState } from "react";
-import { getAuth } from "firebase/auth";
+import { FC, useState } from "react";
+import { auth } from "../config/firebase-config";
 import { BsFillShieldLockFill, BsTelephoneFill } from "react-icons/bs";
 import { CgSpinner } from "react-icons/cg";
 import Button from "@/components/subcomponents/Button";
@@ -8,7 +8,7 @@ import { MuiOtpInput } from "mui-one-time-password-input";
 
 interface OtpAuthProps {}
 
-const OtpAuth: FunctionComponent<OtpAuthProps> = () => {
+const OtpAuth: FC<OtpAuthProps> = () => {
   const [otp, setOtp] = useState<string>();
   const [phone, setPhone] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -38,5 +38,3 @@ const OtpAuth: FunctionComponent<OtpAuthProps> = () => {
 };
 
 export default OtpAuth;
-
-const auth = getAuth();

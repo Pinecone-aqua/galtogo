@@ -22,25 +22,27 @@ export default function Home(props: {
   }, []);
 
   return (
-    <Layout>
-      <div className="hidden md:block p-3">
-        <SpecialOffer />
-      </div>
-      <div className="p-3 mt-5 mb-10">
-        <Carousel
-          setSelectedCategory={setSelectedCategory}
-          selectedCategory={selectedCategory}
-          categoryData={categories}
-        />
-      </div>
-      <div className="p-3">
-        <MenuField selectedCategory={selectedCategory} products={products} />
-      </div>
+    <>
+      <Layout>
+        <div className="hidden md:block p-3">
+          <SpecialOffer />
+        </div>
+        <div className="p-3 mt-5 mb-10">
+          <Carousel
+            setSelectedCategory={setSelectedCategory}
+            selectedCategory={selectedCategory}
+            categoryData={categories}
+          />
+        </div>
+        <div className="p-3">
+          <MenuField selectedCategory={selectedCategory} products={products} />
+        </div>
 
-      <div className="p-3">
-        <BranchSection />
-      </div>
-    </Layout>
+        <div className="p-3">
+          <BranchSection />
+        </div>
+      </Layout>
+    </>
   );
 }
 
