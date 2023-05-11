@@ -7,6 +7,7 @@ import axios from "axios";
 import BranchSection from "@/components/BranchSection";
 import CategoryMobile from "@/components/subcomponents/CategoryMobile";
 import GreetingBanner from "@/components/GreetingBanner";
+import Membership from "@/components/Membership";
 
 export default function Home(props: {
   products: IProduct[];
@@ -47,6 +48,9 @@ export default function Home(props: {
       </div>
       <div className="my-[144px]">
         <GreetingBanner />
+      </div>
+      <div className="mx-[40px] my-[72px] hidden md:block">
+        <Membership />
       </div>
 
       <div className="md:mx-[40px] my-[72px]">
