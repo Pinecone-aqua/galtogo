@@ -6,6 +6,7 @@ import axios from "axios";
 import moment from "moment";
 import { useState } from "react";
 import RoomArea from "@/components/subComponents/RoomArea";
+import AddTableModal from "@/components/subComponents/AddTableModal";
 
 export default function Tables(props: {
   reservationData: IReservation[];
@@ -14,10 +15,12 @@ export default function Tables(props: {
   const { reservationData } = props;
   const { tablesData } = props;
   const [datas, setDatas] = useState<IReservation[]>(reservationData);
+  const [tableData, setTableData] = useState<ITable[]>(tablesData);
   const [date, setDate] = useState(moment(new Date()).format("YYYY-MM-DD"));
+  const [showAddModal, setShowAddModal] = useState("");
 
   const handleAdd = () => {
-    console.log("Reservation add button");
+    setShowAddModal(!showAddModal);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -56,6 +59,7 @@ export default function Tables(props: {
               onChange={handleChange}
             />
           </div>
+          {showAddModal ? <AddTableModal /> : <></>}
           <div className="m-3 lg:grid lg:grid-cols-2">
             {tablesData.map((table, index) => (
               <div key={index}>
