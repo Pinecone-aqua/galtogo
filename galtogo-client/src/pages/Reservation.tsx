@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Calendar } from "@amir04lm26/react-modern-calendar-date-picker";
 import "@amir04lm26/react-modern-calendar-date-picker/lib/DatePicker.css";
 import axios from "axios";
+import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 
 export default function Reservation(props: {
   disabledDaysData: IDisabledDay[];
@@ -34,6 +35,23 @@ export default function Reservation(props: {
   };
   return (
     <Layout>
+      <Breadcrumbs
+        items={[
+          {
+            label: "Home",
+            path: "/",
+          },
+          {
+            label: "Reservation",
+            path: "/Reservation"
+          },
+          {
+            label: "Confirmation",
+            path: "/Confirmation"
+          }
+
+        ]}
+      />
       <div className="md:grid md:grid-cols-3 h-[500px] border mx-auto bg-slate-50 p-3  max-w-screen-lg justify-center">
         <div className="hidden md:block md:col-span-1 bg-slate-200 p-3 text-gray-500">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde ipsa
