@@ -26,11 +26,11 @@ export default function Home(props: {
       <div className="hidden md:block p-3">
         <SpecialOffer />
       </div>
-      <div className="p-3 mt-5 mb-10">
+      <div className="hidden md:block w-[80%] mx-auto bottom-[24px] translate-y-6">
         <Carousel
           setSelectedCategory={setSelectedCategory}
           selectedCategory={selectedCategory}
-          categoryData={categories}
+          categories={categories}
         />
       </div>
       <div className="p-3">
