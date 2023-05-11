@@ -37,7 +37,7 @@ export default function Home(props: {
         <MenuField selectedCategory={selectedCategory} products={products} />
       </div>
 
-      <div className="p-3">
+      <div className="md:mx-[40px] my-[72px]">
         <BranchSection />
       </div>
     </Layout>
