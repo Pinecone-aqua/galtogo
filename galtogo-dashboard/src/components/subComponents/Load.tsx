@@ -1,14 +1,9 @@
 import React from "react";
 import { useRouter } from "next/router";
 
-interface Props {
-  text?: string;
-}
-
 const LOADER_THRESHOLD = 250;
 
-export default function NavigationLoader(props: Props) {
-  const { text = "Loading..." } = props;
+export default function NavigationLoader() {
   const [isLoading, setLoading] = React.useState(false);
   const router = useRouter();
 
@@ -19,6 +14,7 @@ export default function NavigationLoader(props: Props) {
       (timer = setTimeout(() => setLoading(true), LOADER_THRESHOLD));
 
     const end = () => {
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (timer) {
         clearTimeout(timer);
       }
@@ -34,6 +30,7 @@ export default function NavigationLoader(props: Props) {
       router.events.off("routeChangeComplete", end);
       router.events.off("routeChangeError", end);
 
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
       if (timer) {
         clearTimeout(timer);
       }
