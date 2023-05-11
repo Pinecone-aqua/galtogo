@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import AddUserButton from "@/components/subComponents/AddUserButton";
+import Button from "@/components/subComponents/Button";
 import User from "@/components/subComponents/User";
 import React, { useEffect, useState } from "react";
 import { BsPersonAdd } from "react-icons/bs";
@@ -29,20 +30,25 @@ const Customers: React.FC = () => {
     <Layout>
       <div className="p-4">
         <div className="w-full m-auto p-4 bg-white border rounded-lg overflow-y-auto">
-          <input
-            placeholder="Search"
-            type="text"
-            className="border rounded-lg p-4 my-4"
-            value={searchValue}
-            onChange={handleSearchInputChange}
-          />
+          <div className="flex justify-between">
+            <Button
+              type="button"
+              variant="default"
+              size="lg"
+              className="sm:mx-6 m-3"
+              onClick={buttonShowHandler}
+            >
+              Add User <BsPersonAdd size={23} />
+            </Button>
+            <input
+              placeholder="Search"
+              type="text"
+              className="border rounded-lg p-4 my-4 h-11 px-8"
+              value={searchValue}
+              onChange={handleSearchInputChange}
+            />
+          </div>
 
-          <button
-            onClick={buttonShowHandler}
-            className="flex gap-3 bg-gray-100 p-4 rounded-lg inline-block hover:bg-gray-200 cursor-pointers my-4 bg-gray-100 hover:bg-gray-200 bg-sky-800 text-white"
-          >
-            Add User <BsPersonAdd size={23} />
-          </button>
           {showAddButton ? <AddUserButton setUsers={setUsers} /> : <></>}
           <table className="justify-around w-full">
             <thead>
