@@ -26,7 +26,7 @@ export default function Layout({ children }: PropType) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="relative bg-white min-h-screen sm:px-20">
+      <main className="bg-white w-full">
         <Button
           className="fixed top-3 sm:top-7 right-3 sm:right-20 z-40"
           size="lg"
