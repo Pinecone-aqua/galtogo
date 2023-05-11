@@ -33,11 +33,8 @@ export default function Home(props: {
           categories={categories}
         />
       </div>
-      <div className="p-3">
-        <MenuField
-          selectedCategory={selectedCategory}
-          products={products}
-        />
+      <div className="w-full overflow-x-auto no-scrollbar sm:overflow-x-auto sm:no-scrollbar sm:snap-x snap-mandatory rounded-lg md:overflow-hidden">
+        <MenuField selectedCategory={selectedCategory} products={products} />
       </div>
 
       <div className="p-3">
