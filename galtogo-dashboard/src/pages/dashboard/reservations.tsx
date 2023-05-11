@@ -15,6 +15,7 @@ export default function Reservations(props: {
   const [reservations, setReservations] = useState(reservationData);
   const [toggleFilter, setToggleFilter] = useState<boolean>(true);
   const [showAddModal, setShowAddModal] = useState<boolean>(false);
+  const [searchReservation, setSearchReservation] = useState("");
 
   const handleAdd = () => {
     setShowAddModal((prev) => !prev);
@@ -23,13 +24,18 @@ export default function Reservations(props: {
   const handleFilter = (filter: string) => {
     axios
       .get(
-        `${process.env.PORT}/reservation?filter=${filter}&isAsc=${toggleFilter ? "asc" : "desc"
+        `${process.env.NEXT_PUBLIC_PORT}/reservation?filter=${filter}&isAsc=${
+          toggleFilter ? "asc" : "desc"
         }`
       )
       .then((res) => setReservations(res.data))
       .catch((err) => console.log(err));
     setToggleFilter((prev) => !prev);
   };
+
+  function handleSearch(event: React.ChangeEvent<HTMLInputElement>) {
+    setSearchReservation(event.target.value);
+  }
 
   return (
     <Layout>
@@ -45,6 +51,13 @@ export default function Reservations(props: {
             >
               Add Reservation
             </Button>
+            <input
+              placeholder="Search"
+              type="text"
+              className="border rounded-lg p-4 my-4 h-11 px-8"
+              value={searchReservation}
+              onChange={handleSearch}
+            />
             {showAddModal && (
               <AddReservationModal
                 setShowAddModal={setShowAddModal}
@@ -68,13 +81,19 @@ export default function Reservations(props: {
             </div>
           </div>
           <div className="m-3 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 items-center justify-between">
-            {reservations.map((reservation, index) => (
-              <ReservationCard
-                reservation={reservation}
-                setReservations={setReservations}
-                key={index}
-              />
-            ))}
+            {reservations
+              .filter((reservation) =>
+                `${reservation.time} ${reservation.date} ${reservation.user.firstName} ${reservation.user.lastName} ${reservation.user.email} ${reservation.user.phone} ${reservation.table} ${reservation.status} ${reservation.table}`
+                  .toLocaleLowerCase()
+                  .includes(searchReservation.toLocaleLowerCase())
+              )
+              .map((reservation, index) => (
+                <ReservationCard
+                  reservation={reservation}
+                  setReservations={setReservations}
+                  key={index}
+                />
+              ))}
           </div>
         </div>
       </div>
@@ -89,7 +108,7 @@ export const getServerSideProps: () => Promise<{
   };
 }> = async () => {
   const reservationData = await axios
-    .get(`${process.env.PORT}/reservation?filter=date&isAsc=desc`)
+    .get(`${process.env.NEXT_PUBLIC_PORT}/reservation?filter=date&isAsc=desc`)
     .then((res) => res.data);
   const tablesData = await axios
     .get(`http://localhost:5050/table`)
