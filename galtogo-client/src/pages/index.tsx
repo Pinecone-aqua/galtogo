@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import BranchSection from "@/components/BranchSection";
 import CategoryMobile from "@/components/subcomponents/CategoryMobile";
+import GreetingBanner from "@/components/GreetingBanner";
 
 export default function Home(props: {
   products: IProduct[];
@@ -43,6 +44,9 @@ export default function Home(props: {
         </div>
       <div className="w-full overflow-x-auto no-scrollbar sm:overflow-x-auto sm:no-scrollbar sm:snap-x snap-mandatory rounded-lg md:overflow-hidden">
         <MenuField selectedCategory={selectedCategory} products={products} />
+      </div>
+      <div className="my-[144px]">
+        <GreetingBanner />
       </div>
 
       <div className="md:mx-[40px] my-[72px]">
