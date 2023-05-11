@@ -1,16 +1,29 @@
 import Button from "@/components/subcomponents/Button";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 const LoginPage = (): JSX.Element => {
+  // const router = useRouter();
   const [translate, setTranslate] = useState(
     "text-base text-slate-300 top-5 left-20 -z-20"
   );
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log("(+976)", e.target.phone.value);
+    console.log(phoneNumber);
+    const data = await axios
+      .post(`${process.env.NEXT_PUBLIC_PORT}/user/login`, { phoneNumber })
+      .then((res) => res.data);
+    // const { verificationId } = data;
+    // router.push(
+    //   `api/verify-otp?phoneNumber=${phoneNumber}&verificationId=${verificationId}`
+    // );
+    console.log(data);
+    console.log("(+976)", phoneNumber);
   };
 
   return (
@@ -24,8 +37,10 @@ const LoginPage = (): JSX.Element => {
             type="tel"
             id="phone"
             name="phone"
+            value={phoneNumber}
+            onChange={(event) => setPhoneNumber(event.target.value)}
             maxLength={8}
-            pattern="[5-9]{4}[0-9]{4}"
+            pattern="[5-9]{1}[0-9]{7}"
             autoComplete="off"
             required
             className={`ps-16 py-2 m-3 w-64 border rounded-lg bg-white/5 text-slate-500 invalid:text-red-600 focus:outline-none focus:border-sky-800`}

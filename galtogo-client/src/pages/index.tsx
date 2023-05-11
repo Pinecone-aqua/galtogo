@@ -48,10 +48,10 @@ export default function Home(props: {
 
 export const getStaticProps = async () => {
   const products = await axios
-    .get(`${process.env.PORT}/product`) //s
+    .get(`${process.env.NEXT_PUBLIC_PORT}/product`) //s
     .then((res) => res.data);
   const categories = await axios
-    .get(`${process.env.PORT}/category`) //s
+    .get(`${process.env.NEXT_PUBLIC_PORT}/category`) //s
     .then((res) => res.data);
 
   return { props: { products, categories } };

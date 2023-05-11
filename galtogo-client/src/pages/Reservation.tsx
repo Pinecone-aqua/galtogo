@@ -10,11 +10,11 @@ import "@amir04lm26/react-modern-calendar-date-picker/lib/DatePicker.css";
 import { useRouter } from "next/router";
 
 export default function Reservation(props: {
-  disabledDaysData: IDisabledDay[];
+  disabledDays: IDisabledDay[];
 }): JSX.Element {
-  const { disabledDaysData } = props;
+  const { disabledDays } = props;
 
-  const [slide, setSlide] = useState(
+  const [translate, setTranslate] = useState(
     `translate-x-96 invisible w-[100%] text-transparent`
   );
   const router = useRouter();
@@ -29,31 +29,32 @@ export default function Reservation(props: {
   });
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleClickDay = (d: any) => {
-    // d?
+  const handleClickDay = (date: any) => {
     setTablesData([]);
-    setDate(d);
-    console.log("Date: ", d);
-    setSlide(`z-30 w-[100%]`);
+    setDate(date);
+    console.log("ClickDay: ", date);
+    setTranslate(`z-30 w-[100%]`);
     setNewReservation((prev) => ({
       ...prev,
-      date: `${d.year}-${d.month < 10 ? "0" : ""}${d.month}-${
-        d.day < 10 ? "0" : ""
-      }${d.day}`,
+      date: `${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${
+        date.day < 10 ? "0" : ""
+      }${date.day}`,
     }));
 
     // branchId/tables
     axios
-      .get("http://localhost:5050/table") //env
-      .then((res) => setTablesData(res.data));
+      .get(`${process.env.NEXT_PUBLIC_PORT}/table`)
+      .then((res) => setTablesData(res.data))
+      .catch((err) => toast.error(err));
   };
 
   const handleBack = () => {
-    setSlide(`w-1 opacity-0 text-transparent`);
+    setTranslate(`w-1 opacity-0 text-transparent`);
   };
 
   const handleConfirm = () => {
     console.log("newReservation: ", newReservation);
+    localStorage.setItem("newReservation: ", JSON.stringify(newReservation));
     toast.success("Reservation successfully added!");
     router.push("/LoginPage");
   };
@@ -68,7 +69,7 @@ export default function Reservation(props: {
               value={date}
               onChange={handleClickDay}
               minimumDate={today}
-              disabledDays={disabledDaysData}
+              disabledDays={disabledDays}
               shouldHighlightWeekends
             />
           </div>
@@ -79,7 +80,7 @@ export default function Reservation(props: {
           </div>
           {tablesData.length > 0 && (
             <div
-              className={`absolute top-0 left-0 duration-500 bg-slate-100 p-2 h-[100%] text-center transition-all ${slide}`}
+              className={`absolute top-0 left-0 duration-500 bg-slate-100 p-2 h-[100%] text-center transition-all ${translate}`}
             >
               <div className="mb-2 font-bold">Select a table</div>
               <div className="text-gray-300 font-bold p-3 bg-slate-500 rounded-xl">
@@ -116,15 +117,15 @@ export default function Reservation(props: {
 
 export const getStaticProps: () => Promise<{
   props: {
-    disabledDaysData: IDisabledDay[] | null;
+    disabledDays: IDisabledDay[] | null;
   };
 }> = async () => {
-  const disabledDaysData = await axios
-    .get("http://localhost:5050/days") //unavailable-days
+  const disabledDays = await axios
+    .get(`${process.env.NEXT_PUBLIC_PORT}/days`)
     .then((res) => res.data);
   return {
     props: {
-      disabledDaysData,
+      disabledDays,
     },
   };
 };
