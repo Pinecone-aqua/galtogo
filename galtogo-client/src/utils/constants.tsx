@@ -1,4 +1,5 @@
-import { HiLocationMarker } from 'react-icons/hi'
+import React from 'react';
+import { HiLocationMarker, HiOutlineClock, HiOutlineLockClosed, HiOutlinePhone, HiOutlineUserGroup } from 'react-icons/hi'
 import { BsInstagram, BsFacebook, BsLinkedin, BsTwitter } from 'react-icons/Bs'
 
 export const navMenuItems = [
@@ -78,5 +79,24 @@ export const socialIcons = [
   },
   {
     icon: <BsLinkedin size={20} />
+  },
+]
+
+export const footerMenuItems = [
+  {
+    name: "Хүний нөөц",
+    icon: <HiOutlineUserGroup />
+  },
+  {
+    name: "Цагийн хуваарь",
+    icon: <HiOutlineClock />
+  },
+  {
+    name: "Нууцлалын бодлого",
+    icon: <HiOutlineLockClosed />
+  },
+  {
+    name: "Холбоо барих",
+    icon: <HiOutlinePhone />
   },
 ]
