@@ -1,7 +1,9 @@
 import React from "react";
 import { Rating } from "primereact/rating";
 import Button from "./Button";
+
 import Image from "next/image";
+
 
 export default function MenuCard({
   product,
@@ -9,6 +11,7 @@ export default function MenuCard({
   product: IProduct;
 }): JSX.Element {
   return (
+
     <div className="min-w-[156px] md:w-full">
       <Image
         className="w-full max-h-[186px] md:max-h-[180px] object-cover rounded-lg"
@@ -30,6 +33,7 @@ export default function MenuCard({
           className="w-full mt-4 hidden lg:block border border-slate-100 bg-white text-black"
           size={"lg"}
         >
+
           {product.price}₮
         </Button>
       </div>

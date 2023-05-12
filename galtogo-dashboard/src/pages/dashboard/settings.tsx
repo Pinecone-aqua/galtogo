@@ -19,14 +19,14 @@ export default function Settings(props: {
   });
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSubmit = async (e: any): Promise<void> => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     const newDisabledDay = {
       ...pickerDate,
       description: e.target.description.value,
     };
 
-    await axios
+    axios
       .post(`http://localhost:5050/days`, newDisabledDay)
       .then((res) => setDisabledDays([...disabledDays, res.data]))
       .catch((err) => console.log("postDayError: ", err));
@@ -39,8 +39,8 @@ export default function Settings(props: {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleDeleteDay = async (e: any): Promise<void> => {
-    await axios
+  const handleDeleteDay = (e: any): void => {
+    axios
       .delete(`http://localhost:5050/days/${e.target.id}`)
       .then((res) => setDisabledDays(res.data))
       .catch((err) => console.log("deleteDayError: ", err));

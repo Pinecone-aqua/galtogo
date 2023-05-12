@@ -14,10 +14,11 @@ export default function Layout({ children }: PropType) {
   const router: NextRouter = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleClick = (e: any) => {
-    e.preventDefault();
+    e.preventDefault(); // ?
     router.push("Reservation");
   };
 
+  // challange title n product iin name baih
   return (
     <>
       <Head>

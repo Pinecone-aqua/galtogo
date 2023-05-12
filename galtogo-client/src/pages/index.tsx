@@ -25,6 +25,8 @@ export default function Home(props: {
   }, []);
 
   return (
+
+
     <Layout>
       <div className="hidden md:block p-3">
         <SpecialOffer />
@@ -57,15 +59,16 @@ export default function Home(props: {
         <BranchSection />
       </div>
     </Layout>
+
   );
 }
 
 export const getStaticProps = async () => {
   const products = await axios
-    .get(`${process.env.PORT}/product`)
+    .get(`${process.env.NEXT_PUBLIC_PORT}/product`) //s
     .then((res) => res.data);
   const categories = await axios
-    .get(`${process.env.PORT}/category`)
+    .get(`${process.env.NEXT_PUBLIC_PORT}/category`) //s
     .then((res) => res.data);
 
   return { props: { products, categories } };

@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-/* eslint-disable @next/next/no-img-element */
 export default function SpecialOffer() {
+
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [images, setImages] = useState<any>()
@@ -11,6 +11,7 @@ export default function SpecialOffer() {
     axios.get('http://localhost:5050/banner')
       .then((res) => setImages(res.data))
   }, [])
+
 
   return (
     <div className="hidden sm:block sm:rounded-lg md:block relative overflow-hidden rounded-lg">

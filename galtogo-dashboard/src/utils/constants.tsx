@@ -28,7 +28,7 @@ export const menuItems = [
   },
   {
     name: "Users",
-    path: "/dashboard/Users",
+    path: "/dashboard/users",
     image: <RxPerson size={20} />,
   },
   {

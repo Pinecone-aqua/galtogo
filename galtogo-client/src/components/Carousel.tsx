@@ -1,3 +1,4 @@
+
 export default function Carousel({
   setSelectedCategory,
   categories,
@@ -8,7 +9,9 @@ export default function Carousel({
   categories: ICategory[];
   selectedCategory: string | null;
 }): JSX.Element {
+
   const selected = 'py-[12px] lg:py-[20px] lg:text-base rounded-lg text-center font-medium text-sm w-full'
+
 
   return (
     <div className="mx-auto rounded-lg bg-white shadow-[0_05px_20px_rgb(0,0,0,0.10)]">
@@ -26,7 +29,9 @@ export default function Carousel({
                 localStorage.setItem("active", category.name);
             }}
           >
+
             {category.name}
+
           </div>
         ))}
       </div>
