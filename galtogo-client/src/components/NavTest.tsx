@@ -8,7 +8,7 @@ import { Fade as Hamburger } from 'hamburger-react'
 const defaultStyle = "hidden px-[8px] py-[16px] md:block md:px-[20px] md:py-[16px] text-sm md:text-base hover:text-[#0D5C63] last:bg-[#0D5C63] last:text-white last:rounded-lg last:hover:text-white"
 
 
-export default function Navigation(): JSX.Element {
+export default function NavTest(): JSX.Element {
   const [prevScrollPos, SetPrevScrollPos] = useState<number>(0);
   const [visible, setVisible] = useState<boolean>(true)
 
@@ -36,9 +36,7 @@ export default function Navigation(): JSX.Element {
 
           ))}
         </div>
-        <div className="block md:hidden">
-          <Hamburger size={24} />
-        </div>
+        <Hamburger size={24} />
       </div>
     </div>
   );
