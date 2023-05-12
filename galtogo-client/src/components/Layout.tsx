@@ -1,11 +1,14 @@
 import Head from "next/head";
 import { ReactNode } from "react";
-import Navigation from "./Navigation";
-import Footer from "./Footer";
+// import Navigation from "./Navigation";
+
 import Button from "./subcomponents/Button";
 import { NextRouter, useRouter } from "next/router";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NavTest from "./NavTest";
+import Footer from "./Footer";
+
 
 type PropType = {
   children: ReactNode;
@@ -35,7 +38,8 @@ export default function Layout({ children }: PropType) {
           + Reservation
         </Button>
 
-        <Navigation />
+        {/* <Navigation /> */}
+        <NavTest/>
         <ToastContainer
           autoClose={3000}
           position="top-right"
