@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { useRouter } from "next/router";
@@ -8,10 +6,17 @@ import { auth } from "../config/firebase-config";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import { toast } from "react-toastify";
 import Button from "@/components/subcomponents/Button";
-
-const LoginPage = (): JSX.Element => {
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    recaptchaVerifier: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    confirmationResult: any;
+  }
+}
+const LoginPage: React.FC = () => {
   const router = useRouter();
-  const [otp, setOtp] = React.useState("");
+  const [otp, setOtp] = React.useState<string>();
   const [timer, setTimer] = React.useState(false);
   const [seconds, setSeconds] = React.useState(59);
   const [success, setSuccess] = React.useState(false);
@@ -38,40 +43,44 @@ const LoginPage = (): JSX.Element => {
     }
   }, [phoneNumber]);
 
-  const onCaptcha = async () => {
-    if (!window?.recaptchaVerifier) {
+  const onCaptcha = () => {
+    if (!window.recaptchaVerifier) {
       window.recaptchaVerifier = new RecaptchaVerifier(
         "recaptcha-container",
         {
           size: "invisible",
-          callback: (response) => {},
+          // callback: (response: string) => {
+          //   console.log("Recaptcha response:", response);
+          // },
         },
         auth
       );
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = (e: any) =>
     isFinite(e.target.value) && setPhoneNumber(e.target.value);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSubmit = async (e: any) => {
+  const handleSubmit: (e: any) => void = (e) => {
     e.preventDefault();
     console.log("(+976)", phoneNumber);
 
     setTimer(true);
     if (phoneNumber.length === 8) {
       setSuccess(true);
-      await onCaptcha();
-      const appVerifier = window.recaptchaVerifier;
-      const confirmationResult = await signInWithPhoneNumber(
+      onCaptcha();
+      signInWithPhoneNumber(
         auth,
         "+976" + phoneNumber,
-        appVerifier
-      );
-      toast.success("Phone number verified! Success!");
-      window.confirmationResult = confirmationResult;
-      return confirmationResult;
+        window.recaptchaVerifier
+      )
+        .then((confirmationResult) => {
+          window.confirmationResult = confirmationResult;
+          toast.success("Sent!");
+        })
+        .catch((error) => toast.error("Error! SMS not sent", error));
     }
   };
 
@@ -87,20 +96,22 @@ const LoginPage = (): JSX.Element => {
     return (isNumber || (isString && value !== "")) && !isNaN(Number(value));
   };
 
-  const handleSend = async () => {
+  const handleSend: () => void = () => {
     setTimer(true);
     if (phoneNumber.length === 8) {
       setSuccess(true);
-      await onCaptcha();
-      const appVerifier = window.recaptchaVerifier;
-      const confirmationResult = await signInWithPhoneNumber(
+      onCaptcha();
+
+      signInWithPhoneNumber(
         auth,
         "+976" + phoneNumber,
-        appVerifier
-      );
-      toast.success("Sent!");
-      window.confirmationResult = confirmationResult;
-      return confirmationResult;
+        window.recaptchaVerifier
+      )
+        .then((confirmationResult) => {
+          window.confirmationResult = confirmationResult;
+          toast.success("Sent!");
+        })
+        .catch((error) => toast.error("Error! SMS not sent", error));
     }
   };
 
@@ -108,13 +119,19 @@ const LoginPage = (): JSX.Element => {
     if (otp) {
       window.confirmationResult
         .confirm(otp)
-        .then(async (res) => {
-          console.log(res.user.phoneNumber);
-          // requestAppointment();
+        .then(
+          (res: {
+            user: { phoneNumber: string };
+            _tokenResponse: { idToken: string };
+          }) => {
+            console.log("Verify: ", res.user.phoneNumber);
+            console.log("Verified user token: ", res._tokenResponse.idToken);
+            // requestAppointment();
 
-          router.push("/account");
-        })
-        .catch((err) => {
+            router.push("/account");
+          }
+        )
+        .catch((err: object) => {
           console.log(err);
         });
     }
@@ -123,8 +140,7 @@ const LoginPage = (): JSX.Element => {
     <div className="w-screen h-screen flex justify-center">
       <div id="recaptcha-container" />
       {success ? (
-        <div className="max-w-lg flex flex-col justify-center items-center">
-          {/* otp code input */}
+        <section className="max-w-lg flex flex-col justify-center items-center">
           <div className="text-center p-3 m-10 mx-auto text-lg font-bold">
             {`Please input 6-digit code sent to your ******${phoneNumber.slice(
               6,
@@ -153,22 +169,20 @@ const LoginPage = (): JSX.Element => {
               </button>
             </div>
             <Button
-              disabled={!otp}
               type="button"
               onClick={handleVerify}
-              disabled={otp.length < 6}
+              disabled={!otp || otp.length < 6}
             >
               Verify
             </Button>
           </div>
-        </div>
+        </section>
       ) : (
-        <div className="max-w-lg flex flex-col justify-center items-center">
+        <section className="phone-input max-w-lg flex flex-col justify-center items-center">
           <div className="text-center p-3 m-10 mx-auto text-lg font-bold">
             Please confirm your phone number to create the Reservation.
           </div>
 
-          {/* phone input  */}
           <form id="login" onSubmit={handleSubmit} className="mx-auto relative">
             <input
               type="tel"
@@ -202,7 +216,7 @@ const LoginPage = (): JSX.Element => {
               Phone format: 99112233
             </p>
           </form>
-        </div>
+        </section>
       )}
     </div>
   );
