@@ -15,6 +15,7 @@ type PropType = {
 };
 export default function Layout({ children }: PropType) {
   const router: NextRouter = useRouter();
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleClick = (e: any) => {
     e.preventDefault();
@@ -29,17 +30,18 @@ export default function Layout({ children }: PropType) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="relative bg-white min-h-screen sm:px-20">
-        <Button
-          className="fixed top-3 sm:top-7 right-3 sm:right-20 z-40"
-          size="lg"
+      <main className="">
+        <div
+          className="fixed bottom-10 right-8 z-40 text-sm w-[125px] h-[125px] rounded-full bg-[#0D5C63] text-center border text-white px-1 align-middle"
           onClick={handleClick}
         >
-          + Reservation
-        </Button>
+          Reservation
+        </div>
 
         {/* <Navigation /> */}
-        <NavTest/>
+
+        <NavTest />
+
         <ToastContainer
           autoClose={3000}
           position="top-right"
@@ -49,7 +51,7 @@ export default function Layout({ children }: PropType) {
         />
         <div className="">{children}</div>
         <Footer />
-      </main>
+      </main >
     </>
   );
 }

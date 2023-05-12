@@ -19,6 +19,10 @@ export const navMenuItems = [
     name: "Contact Us",
     path: "/Contact",
   },
+  {
+    name: "Reservation",
+    path: "/Reservation",
+  },
 ];
 
 export interface ILocation {
