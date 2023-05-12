@@ -1,6 +1,8 @@
-import moment from "moment";
-import { HiLocationMarker } from "react-icons/hi";
-import { BsInstagram, BsFacebook, BsLinkedin, BsTwitter } from "react-icons/Bs";
+
+import React from 'react';
+import { HiLocationMarker, HiOutlineClock, HiOutlineLockClosed, HiOutlinePhone, HiOutlineUserGroup } from 'react-icons/hi'
+import { BsInstagram, BsFacebook, BsLinkedin, BsTwitter } from 'react-icons/Bs'
+
 
 export const navMenuItems = [
   {
@@ -78,25 +80,25 @@ export const socialIcons = [
   {
     icon: <BsLinkedin size={20} />,
   },
-];
 
-export const tableTimes = [
-  { time: "10:00", isOccupied: false },
-  { time: "11:00", isOccupied: false },
-  { time: "12:00", isOccupied: false },
-  { time: "13:00", isOccupied: false },
-  { time: "14:00", isOccupied: false },
-  { time: "15:00", isOccupied: false },
-  { time: "16:00", isOccupied: false },
-  { time: "17:00", isOccupied: false },
-  { time: "18:00", isOccupied: false },
-  { time: "19:00", isOccupied: false },
-  { time: "20:00", isOccupied: false },
-  { time: "21:00", isOccupied: false },
-];
+]
 
-export const today = {
-  year: Number(moment().format("YYYY")),
-  month: Number(moment().format("M")),
-  day: Number(moment().format("D")),
-};
+export const footerMenuItems = [
+  {
+    name: "Хүний нөөц",
+    icon: <HiOutlineUserGroup />
+  },
+  {
+    name: "Цагийн хуваарь",
+    icon: <HiOutlineClock />
+  },
+  {
+    name: "Нууцлалын бодлого",
+    icon: <HiOutlineLockClosed />
+  },
+  {
+    name: "Холбоо барих",
+    icon: <HiOutlinePhone />
+  },
+]
+
