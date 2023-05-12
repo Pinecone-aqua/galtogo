@@ -8,6 +8,7 @@ import BranchSection from "@/components/BranchSection";
 import CategoryMobile from "@/components/subcomponents/CategoryMobile";
 import GreetingBanner from "@/components/GreetingBanner";
 import MemberShip from "@/components/Membership";
+import TestimonialSection from "@/components/TestimonialSection";
 
 
 export default function Home(props: {
@@ -57,6 +58,9 @@ export default function Home(props: {
       </div>
       <div className="md:mx-[40px] my-[72px]">
         <BranchSection />
+      </div>
+      <div className="md:mx-[40px] my-[72px]">
+        <TestimonialSection />
       </div>
     </Layout>
 
