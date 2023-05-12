@@ -30,26 +30,14 @@ export const OtpInput = (): JSX.Element => {
     isFinite(inputValue) && setOtp(inputValue);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const validateChar = (value: any) => {
     const isNumber = typeof value === "number";
     const isString = typeof value === "string";
     return (isNumber || (isString && value !== "")) && !isNaN(Number(value));
   };
 
-  const onCaptcha = async () => {
-    if (!window?.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier(
-        "recaptcha-container",
-        {
-          size: "invisible",
-          callback: (response) => {},
-        },
-        auth
-      );
-    }
-  };
-
-  const onSignUp = async () => {
+  const handleSend = async () => {
     setTimer(true);
     if (phoneNumber.length === 8) {
       setSuccess(true);
@@ -84,10 +72,9 @@ export const OtpInput = (): JSX.Element => {
 
   return (
     <>
-      <div id="recaptcha-container" />
       <div className="flex flex-col items-center gap-4">
         <MuiOtpInput
-          value={otp}
+          value={otp && otp}
           length={6}
           onChange={handleChange}
           validateChar={validateChar}
@@ -99,7 +86,7 @@ export const OtpInput = (): JSX.Element => {
           </div>
 
           <button
-            onClick={onSignUp}
+            onClick={handleSend}
             disabled={timer}
             className={`${timer ? "text-gray-400" : "text-green-500"}`}
           >

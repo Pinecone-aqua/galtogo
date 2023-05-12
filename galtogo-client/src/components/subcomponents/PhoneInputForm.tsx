@@ -23,6 +23,21 @@ export const PhoneInputForm = (props: {
     //   .then((res) => res.data);
     // console.log(data);
     console.log("(+976)", phoneNumber);
+    setTimer(true);
+    if (phoneNumber.length === 8) {
+      setSuccess(true);
+      await onCaptcha();
+      const appVerifier = window.recaptchaVerifier;
+
+      const confirmationResult = await signInWithPhoneNumber(
+        auth,
+        "+976" + phoneNumber,
+        appVerifier
+      );
+      Sent();
+      window.confirmationResult = confirmationResult;
+      return confirmationResult;
+    }
   };
 
   return (
