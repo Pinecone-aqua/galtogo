@@ -1,18 +1,18 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import { toast } from "react-toastify";
 
 export default function AddTable({
-  setTableData,
+  setTablesDatas,
 }: {
-  setTableData: React.Dispatch<React.SetStateAction<ITable[]>>;
+  setTablesDatas: Dispatch<SetStateAction<ITable[]>>;
 }): JSX.Element {
   const [newTable, setNewTable] = useState<ITable>({
     name: "",
     capacity: "",
     coords: { posX: 0, posY: 0 },
   });
-
+  // const [tableData, setTableData] = useState<ITable[]>([]);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     fetch("http://localhost:5050/table/add", {
@@ -22,8 +22,8 @@ export default function AddTable({
     })
       .then((response) => response.json())
       .then((data) => {
+        setTablesDatas((prevTablesData) => [...prevTablesData, data]);
         setNewTable({ name: "", capacity: "", coords: { posX: 0, posY: 0 } });
-        setTableData((prevTableData) => [...prevTableData, data]); // update state here
         toast.success("Table added successfully");
       })
       .catch((error) => {
@@ -34,9 +34,9 @@ export default function AddTable({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setNewTable((prevUser) => ({
-      ...prevUser,
-      [name]: name === "name" ? value : Number(value),
+    setNewTable((prevTable) => ({
+      ...prevTable,
+      [name]: value,
     }));
   };
 
