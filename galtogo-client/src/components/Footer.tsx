@@ -7,7 +7,7 @@ import {
   FaGithub,
 } from "react-icons/fa";
 
-export default function Footer():JSX.Element {
+export default function Footer(): JSX.Element {
   return (
     <div className="px-[40px]">
       <div className="flex flex-col sm:justify-between sm:items-center md:items-center md:justify-between sm:flex-row py-4">
