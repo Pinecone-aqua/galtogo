@@ -1,0 +1,18 @@
+.parallax {
+  line-height: 1.5;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  width: 100%;
+}
+
+.parallax .scroller {
+  display: flex;
+}
+
+.testimonial_container {
+  display: flex;
+  margin-left: 16px;
+  gap: 16px;
+}

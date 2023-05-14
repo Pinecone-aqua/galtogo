@@ -12,8 +12,8 @@ export default function Tables(props: {
   reservationData: IReservation[];
   tablesData: ITable[];
 }): JSX.Element {
-  const { reservationData } = props;
-  const { tablesData } = props;
+  const { reservationData, tablesData } = props;
+
   const [datas, setDatas] = useState<IReservation[]>(reservationData);
   const [tableData, setTableData] = useState<ITable[]>(tablesData);
   const [date, setDate] = useState(moment(new Date()).format("YYYY-MM-DD"));

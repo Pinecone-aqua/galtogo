@@ -31,6 +31,13 @@ export class UsersController {
     return this.userService.addUser(user);
   }
 
+  @Post('login')
+  loginUser(@Body() phoneNumber) {
+    console.log('controller: ', phoneNumber);
+    return 'test';
+    // return this.userService.loginUser(phoneNumber);
+  }
+
   @Patch(':id')
   updateUser(@Param('id') id: string, @Body() user: UpdateUserDto) {
     return this.userService.updateUser(id, user);

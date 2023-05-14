@@ -111,7 +111,7 @@ export const getServerSideProps: () => Promise<{
     .get(`${process.env.NEXT_PUBLIC_PORT}/reservation?filter=date&isAsc=desc`)
     .then((res) => res.data);
   const tablesData = await axios
-    .get(`http://localhost:5050/table`)
+    .get(`${process.env.NEXT_PUBLIC_PORT}/table`)
     .then((res) => res.data);
   return {
     props: {

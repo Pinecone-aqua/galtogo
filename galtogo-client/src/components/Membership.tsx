@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-export default function Membership() {
+export default function MemberShip() {
     return (
       <div className="relative">
         <div className=" w-full rounded-lg overflow-hidden">

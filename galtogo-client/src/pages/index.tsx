@@ -7,7 +7,8 @@ import axios from "axios";
 import BranchSection from "@/components/BranchSection";
 import CategoryMobile from "@/components/subcomponents/CategoryMobile";
 import GreetingBanner from "@/components/GreetingBanner";
-import Membership from "@/components/Membership";
+import MemberShip from "@/components/Membership";
+import TestimonialSection from "@/components/TestimonialSection";
 
 export default function Home(props: {
   products: IProduct[];
@@ -37,12 +38,12 @@ export default function Home(props: {
         />
       </div>
       <div className="w-full overflow-x-auto no-scrollbar snap-x snap-mandatory sm:visible md:hidden lg:hidden">
-          <CategoryMobile
-            setSelectedCategory={setSelectedCategory}
-            selectedCategory={selectedCategory}
-            categories={categories}
-          />
-        </div>
+        <CategoryMobile
+          setSelectedCategory={setSelectedCategory}
+          selectedCategory={selectedCategory}
+          categories={categories}
+        />
+      </div>
       <div className="w-full overflow-x-auto no-scrollbar sm:overflow-x-auto sm:no-scrollbar sm:snap-x snap-mandatory rounded-lg md:overflow-hidden">
         <MenuField selectedCategory={selectedCategory} products={products} />
       </div>
@@ -50,11 +51,13 @@ export default function Home(props: {
         <GreetingBanner />
       </div>
       <div className="mx-[40px] my-[72px] hidden md:block">
-        <Membership />
+        <MemberShip />
       </div>
-
       <div className="md:mx-[40px] my-[72px]">
         <BranchSection />
+      </div>
+      <div className=" my-[72px]">
+        <TestimonialSection />
       </div>
     </Layout>
   );
@@ -62,10 +65,10 @@ export default function Home(props: {
 
 export const getStaticProps = async () => {
   const products = await axios
-    .get(`${process.env.PORT}/product`)
+    .get(`${process.env.NEXT_PUBLIC_PORT}/product`) //s
     .then((res) => res.data);
   const categories = await axios
-    .get(`${process.env.PORT}/category`)
+    .get(`${process.env.NEXT_PUBLIC_PORT}/category`) //s
     .then((res) => res.data);
 
   return { props: { products, categories } };

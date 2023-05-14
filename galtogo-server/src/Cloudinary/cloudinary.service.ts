@@ -15,4 +15,8 @@ export class CloudinaryService {
       toStream(file.buffer).pipe(upload);
     });
   }
+
+  // async getBannerImages() {
+  //   return cloudinary.findImages({name:regix = 'name starts with banner_'});
+  // }
 }

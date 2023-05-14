@@ -23,6 +23,11 @@ export class UserService {
     const result = await this.userModel.create(user);
     return result;
   }
+  async loginUser(phoneNumber: string) {
+    console.log('login user phone: ', phoneNumber);
+    // const result = await this.userModel.create(user);
+    // return result;
+  }
 
   async updateUser(id: string, user: UpdateUserDto) {
     await this.userModel.findByIdAndUpdate(id, user).exec();

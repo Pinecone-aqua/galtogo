@@ -9,6 +9,7 @@ const RoomArea = ({
   tablesData: ITable[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setNewReservation: any;
+  newReservation: IReservation;
 }) => {
   const [current, setCurrent] = useState("");
 
