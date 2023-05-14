@@ -8,7 +8,7 @@ import BranchSection from "@/components/BranchSection";
 import CategoryMobile from "@/components/subcomponents/CategoryMobile";
 import GreetingBanner from "@/components/GreetingBanner";
 import MemberShip from "@/components/Membership";
-
+import TestimonialSection from "@/components/TestimonialSection";
 
 export default function Home(props: {
   products: IProduct[];
@@ -26,8 +26,6 @@ export default function Home(props: {
   }, []);
 
   return (
-
-
     <Layout>
       <div className="hidden md:block p-3">
         <SpecialOffer />
@@ -58,8 +56,10 @@ export default function Home(props: {
       <div className="md:mx-[40px] my-[72px]">
         <BranchSection />
       </div>
+      <div className=" my-[72px]">
+        <TestimonialSection />
+      </div>
     </Layout>
-
   );
 }
 
