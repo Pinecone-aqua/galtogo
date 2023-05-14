@@ -1,101 +1,18 @@
-h1,
-h2,
-h3 {
-  font-family: sofia-pro, sans-serif;
-  font-weight: 600;
-  font-style: normal;
-}
-
-h1 {
-  font-size: 36px;
-  font-weight: 600;
-  letter-spacing: -1px;
-  line-height: 1.2;
-  text-align: center;
-  margin: 100px 0 40px;
-}
-
-h2 {
-  font-weight: 400;
-  margin: 50px 0 10px;
-}
-
-p {
-  margin: 0 0 30px 0;
-  font-size: 18px;
-}
-
-code {
-  font-family: input-mono, monospace;
-  font-weight: 400;
-  font-style: normal;
-}
-
-::-webkit-scrollbar {
-  height: 5px;
-  width: 5px;
-  background: var(--background);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  -webkit-border-radius: 1ex;
-}
-
-::-webkit-scrollbar-corner {
-  background: var(--background);
-}
-
-html {
-  scroll-snap-type: y mandatory;
-}
-
-h1 {
-  font-size: 56px;
-  font-weight: 600;
-  letter-spacing: -3px;
-  line-height: 1.2;
-  text-align: center;
-  margin: 100px 0;
-}
-
-section {
-  padding-top: 85vh;
-  padding-bottom: 85vh;
-  position: relative;
-}
-
-.progress {
-  position: fixed;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background: var(--accent);
-  bottom: 100px;
-}
-
 .parallax {
-  overflow: hidden;
-  letter-spacing: -2px;
-  line-height: 0.8;
+  line-height: 1.5;
   margin: 0;
-  white-space: nowrap;
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  overflow: hidden;
   width: 100%;
 }
 
 .parallax .scroller {
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 64px;
   display: flex;
-  white-space: nowrap;
-  display: flex;
-  flex-wrap: nowrap;
 }
 
-.parallax span {
-  display: block;
-  margin-right: 30px;
+.testimonial_container {
+  display: flex;
+  margin-left: 16px;
+  gap: 16px;
 }

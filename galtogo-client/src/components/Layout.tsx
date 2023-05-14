@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { ReactNode } from "react";
-import { MdOutlineTableRestaurant } from 'react-icons/md'
-import { RiShoppingBasket2Fill } from 'react-icons/ri'
+import { MdOutlineTableRestaurant } from "react-icons/md";
+import { RiShoppingBasket2Fill } from "react-icons/ri";
 // import Navigation from "./Navigation";
 
 // import Button from "./subcomponents/Button";
@@ -10,7 +10,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./Footer";
 import Navigation from "./Navigation";
-
 
 type PropType = {
   children: ReactNode;
@@ -55,8 +54,6 @@ export default function Layout({ children }: PropType) {
         </div>
         <Navigation />
 
-
-
         <ToastContainer
           autoClose={3000}
           position="top-right"
@@ -66,7 +63,7 @@ export default function Layout({ children }: PropType) {
         />
         <div className="">{children}</div>
         <Footer />
-      </main >
+      </main>
     </>
   );
 }

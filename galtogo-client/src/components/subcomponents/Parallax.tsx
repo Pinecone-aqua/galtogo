@@ -6,25 +6,28 @@ import {
   useTransform,
   useMotionValue,
   useVelocity,
-  useAnimationFrame
+  useAnimationFrame,
 } from "framer-motion";
 import { wrap } from "@motionone/utils";
 
 interface ParallaxProps {
-  children: string;
+  children: React.ReactNode;
   baseVelocity: number;
 }
 
-export default function ParallaxText({ children, baseVelocity = 100 }: ParallaxProps) {
+export default function ParallaxText({
+  children,
+  baseVelocity = 100,
+}: ParallaxProps) {
   const baseX = useMotionValue(0);
-  const { scrollY } = useScroll();
-  const scrollVelocity = useVelocity(scrollY);
+  const { scrollX } = useScroll();
+  const scrollVelocity = useVelocity(scrollX);
   const smoothVelocity = useSpring(scrollVelocity, {
     damping: 50,
-    stiffness: 400
+    stiffness: 200,
   });
   const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
-    clamp: false
+    clamp: false,
   });
 
   /**
@@ -36,7 +39,7 @@ export default function ParallaxText({ children, baseVelocity = 100 }: ParallaxP
 
   const directionFactor = useRef<number>(1);
   useAnimationFrame((t, delta) => {
-    let moveBy = directionFactor.current * baseVelocity * (delta / 3000);
+    let moveBy = directionFactor.current * baseVelocity * (delta / 10000);
 
     /**
      * This is what changes the direction of the scroll once we
@@ -52,7 +55,6 @@ export default function ParallaxText({ children, baseVelocity = 100 }: ParallaxP
 
     baseX.set(baseX.get() + moveBy);
   });
-
   /**
    * The number of times to repeat the child text should be dynamically calculated
    * based on the size of the text and viewport. Likewise, the x motion value is
@@ -62,11 +64,12 @@ export default function ParallaxText({ children, baseVelocity = 100 }: ParallaxP
    */
   return (
     <div className="parallax">
-      <motion.div className="scroller" style={{ x }}>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
+      <motion.div className="scroller flex" style={{ x }}>
+        <div className="testimonial_container">{children}</div>
+        <div className="testimonial_container">{children}</div>
+        <div className="testimonial_container">{children}</div>
+        <div className="testimonial_container">{children}</div>
+        <div className="testimonial_container">{children}</div>
       </motion.div>
     </div>
   );
