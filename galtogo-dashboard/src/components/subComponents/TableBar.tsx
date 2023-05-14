@@ -7,11 +7,15 @@ import { toast } from "react-toastify";
 interface TableBarProps {
   reservations: IReservation[];
   table: ITable;
+  tablesData: ITable[];
+  onDeleteTable: (tableId: string) => void;
 }
 
 export default function TableBar({
   reservations,
   table: initialTable,
+  tablesData,
+  onDeleteTable,
 }: TableBarProps) {
   const [table, setTable] = useState(initialTable);
   const [loading, setLoading] = useState(false);
@@ -47,14 +51,15 @@ export default function TableBar({
       }).then((res) => {
         console.log("res: ", res);
         if (res.ok) {
-          setTable((prevTable) => ({ ...prevTable, _id: "" }));
           setLoading(false);
           toast.success("Table deleted successfully!");
           setDeleted(true);
+          onDeleteTable(table._id);
         }
       });
     }
   }
+
   if (deleted) {
     return null;
   }

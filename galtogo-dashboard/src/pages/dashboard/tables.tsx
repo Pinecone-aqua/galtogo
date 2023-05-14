@@ -37,6 +37,13 @@ export default function Tables(props: {
     }
   };
 
+  function handleDeleteTable(id: string) {
+    const updatedTablesData = tablesData.filter((table) => table._id !== id);
+    setTablesDatas((prevTablesData) =>
+      prevTablesData.filter((table) => table._id !== id)
+    );
+  }
+
   return (
     <Layout>
       <div className="p-4 ">
@@ -64,15 +71,20 @@ export default function Tables(props: {
             <></>
           )}
           <div className="m-3 lg:grid lg:grid-cols-2">
-            {tablesDatas.map((table, index) => (
-              <div key={index}>
-                <TableBar reservations={datas} table={table} />
+            {tablesDatas.map((table) => (
+              <div>
+                <TableBar
+                  key={table._id}
+                  reservations={datas}
+                  table={table}
+                  onDeleteTable={handleDeleteTable}
+                />
               </div>
             ))}
           </div>
 
           <div className="m-3">
-            <RoomArea tablesData={tablesData} />
+            <RoomArea tablesDatas={tablesDatas} />
           </div>
         </div>
       </div>
