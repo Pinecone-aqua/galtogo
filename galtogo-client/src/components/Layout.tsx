@@ -2,9 +2,6 @@ import Head from "next/head";
 import { ReactNode } from "react";
 import { MdOutlineTableRestaurant } from "react-icons/md";
 import { RiShoppingBasket2Fill } from "react-icons/ri";
-// import Navigation from "./Navigation";
-
-// import Button from "./subcomponents/Button";
 import { NextRouter, useRouter } from "next/router";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

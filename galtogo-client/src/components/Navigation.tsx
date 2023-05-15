@@ -46,12 +46,14 @@ export default function Navigation(): JSX.Element {
             <Link
               href={menuItem.path}
               className={`${menuItem.path === pathname
-                  ? `${defaultStyle} text-[#0D5C63]`
-                  : `${defaultStyle}`
+                ? `${defaultStyle} text-[#0D5C63]`
+                : `${defaultStyle}`
                 }`}
               key={index}
             >
+
               {menuItem.name}
+
             </Link>
           ))}
         </div>
