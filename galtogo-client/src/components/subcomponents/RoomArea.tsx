@@ -31,7 +31,7 @@ const RoomArea = ({
     console.log("newReservation: ", newReservation);
     localStorage.setItem("newReservation: ", JSON.stringify(newReservation));
     toast.success("Reservation successfully added!");
-    router.push("/loginPages");
+    router.push("/loginPage");
   };
 
   return (
