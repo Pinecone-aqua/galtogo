@@ -9,7 +9,7 @@ export default function Carousel({
   selectedCategory: string | null;
 }): JSX.Element {
   const selected =
-    "py-[12px] lg:py-[20px] lg:text-base rounded-lg text-center font-medium text-sm w-full cursor-pointer";
+    "py-[12px] lg:py-[20px] text-sm lg:text-base rounded-lg text-center font-medium  w-full cursor-pointer";
 
   return (
     <div className="mx-auto rounded-lg bg-white shadow-[0_05px_20px_rgb(0,0,0,0.10)] mb-0">
