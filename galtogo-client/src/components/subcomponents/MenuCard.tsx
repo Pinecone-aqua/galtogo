@@ -3,6 +3,7 @@ import { Rating } from "primereact/rating";
 import Button from "./Button";
 import Image from "next/image";
 
+
 export default function MenuCard({
   product,
 }: {
@@ -11,11 +12,11 @@ export default function MenuCard({
   return (
     <div className="md:w-full">
       <Image
-        className=" object-cover rounded-lg md:min-h-[164px] md:max-h-[232px] lg:min-h-[164px] lg:max-h-[356px]"
+        className=" object-cover rounded-lg md:min-h-[164px] md:max-h-[232px] lg:min-h-[164px] lg:max-h-[352px]"
         src={product.img}
-        alt="pic"
-        width={500}
-        height={500}
+        alt={"test"}
+        width={1000}
+        height={1000}
       />
 
       <div className="bg-white mt-2">

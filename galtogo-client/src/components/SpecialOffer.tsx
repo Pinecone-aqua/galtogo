@@ -1,5 +1,6 @@
 import axios from "axios";
 import Image from "next/image";
+
 import { useEffect, useState } from "react";
 
 export default function SpecialOffer() {
@@ -11,16 +12,17 @@ export default function SpecialOffer() {
       .get("http://localhost:5050/banner")
       .then((res) => setImages(res.data));
   }, []);
-
   return (
     <div className="hidden sm:block sm:rounded-lg md:block relative overflow-hidden rounded-[32px] mt-[120px]">
-      <Image
+      {images && <Image
         className="h-[520px] sm:h-[280px] md:h-[720px] w-full object-cover"
-        src={images && images[0].imageURL}
-        alt="pic"
+        src={images[0].imageURL}
+        alt={"sda1"}
         width={1000}
         height={1000}
-      />
+        priority={true}
+      />}
+
       <div className="absolute w-full py-5 sm:bottom-[42px] md:bottom-[200px] inset-x-0 text-white text-center z-10">
         <div className="text-[72px] sm:text-[32px] md:text-[96px] font-extrabold text-rose-600">
           유나에서 감각적인 식사의

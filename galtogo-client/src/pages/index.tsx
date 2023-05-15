@@ -9,6 +9,9 @@ import CategoryMobile from "@/components/subcomponents/CategoryMobile";
 import GreetingBanner from "@/components/GreetingBanner";
 import MemberShip from "@/components/Membership";
 import TestimonialSection from "@/components/TestimonialSection";
+import MobileMenuField from "@/components/MobileMenuField";
+
+
 
 export default function Home(props: {
   products: IProduct[];
@@ -45,10 +48,13 @@ export default function Home(props: {
           categories={categories}
         />
       </div>
-      <div className="w-full overflow-x-auto no-scrollbar sm:overflow-x-auto sm:no-scrollbar sm:snap-x snap-mandatory rounded-lg md:overflow-hidden">
+      <div className="hidden sm:block md:block w-full overflow-x-auto no-scrollbar sm:overflow-x-auto sm:no-scrollbar sm:snap-x snap-mandatory rounded-lg md:overflow-hidden">
         <MenuField selectedCategory={selectedCategory} products={products} />
       </div>
-      <div className="my-[56px] lg:my-[96px]">
+      <div className="block md:hidden">
+        <MobileMenuField products={products} deviceType={undefined} />
+      </div>
+      <div className="my-[24px] lg:my-[96px]">
         <GreetingBanner />
       </div>
       <div className="mx-[40px] my-[72px] hidden md:block">
@@ -60,7 +66,7 @@ export default function Home(props: {
       <div className=" my-[72px]">
         <TestimonialSection />
       </div>
-    </Layout>
+    </Layout >
   );
 }
 
@@ -73,4 +79,7 @@ export const getStaticProps = async () => {
     .then((res) => res.data);
 
   return { props: { products, categories } };
+
 };
+
+
