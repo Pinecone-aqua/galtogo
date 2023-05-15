@@ -25,7 +25,7 @@ export default function Navigation(): JSX.Element {
 
   const { pathname } = useRouter();
   return (
-    <div className={`fixed z-50 w-[100%] border bg-white px-[16px] md:px-[40px] shadow-[0_8px_30px_rgb(0,0,0,0.12)] ${visible ? "transition opacity-100 duration-200" : "transition opacity-0 duration-200"}`}>
+    <div className={`fixed z-50 w-[100%] border bg-white px-[16px] md:px-[40px] shadow-[0_8px_30px_rgb(0,0,0,0.12)] ${visible ? "transition opacity-100 duration-800" : "transition opacity-0 duration-800"}`}>
 
       <div className="flex justify-between items-center">
         <Image className="w-[64px] md:w-[95px]" src="/logo.png" alt="logopng" width={96} height={96} />
