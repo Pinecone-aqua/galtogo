@@ -1,21 +1,20 @@
 import useDragger from "@/hooks/useDragger";
 import Table from "../subComponents/Table";
-import { TableShape, TableSize } from "@/utils/constants";
+import { TableSize } from "@/utils/constants";
+import Button from "./Button";
+import { FC } from "react";
+
 interface RoomTableProps {
   table: ITable;
-  shape: string;
   size: string;
-  newTable: ITable;
+  shape: string;
 }
-const RoomTable = ({
-  table,
-  shape,
-  size,
-  newTable,
-}: RoomTableProps): JSX.Element => {
+
+const RoomTable: FC<RoomTableProps> = ({ table }: RoomTableProps) => {
   useDragger(table);
-  const tableSize = Object.values(TableSize);
-  const tableShape = Object.values(TableShape);
+
+  const size = table.size;
+  const shape = table.shape;
 
   return (
     <div
@@ -28,22 +27,9 @@ const RoomTable = ({
     >
       <Table
         variant="default"
-        shape="round"
-        size="medium"
-        // size={
-        //   size === TableSize.SMALL
-        //     ? "small"
-        //     : size === TableSize.MEDIUM
-        //     ? "medium"
-        //     : "large"
-        // }
-        // shape={
-        //   shape === TableShape.ROUND
-        //     ? "round"
-        //     : size === TableShape.SQUARE
-        //     ? "square"
-        //     : "rectangle"
-        // }
+        shape={shape}
+        size={size}
+        className="table-button"
       >
         Table {table.name}
       </Table>

@@ -38,7 +38,7 @@ const RoomArea = ({ tablesDatas }: { tablesDatas: ITable[] }) => {
           </div>
         )}
         {tablesDatas.map((table, index) => (
-          <RoomTable table={table} key={index} />
+          <RoomTable table={table} key={index} size={""} shape={""} />
         ))}
       </div>
     </div>

@@ -12,9 +12,9 @@ const buttonVariants = cva(
         yellow: "bg-yellow-200 text-black hover:bg-yellow-400",
       },
       size: {
-        small: "h-20 px-4",
-        medium: "h-40 px-5",
-        large: "h-60 px-5",
+        small: "h-10 px-4",
+        medium: "h-20 px-5",
+        large: "h-40 px-6",
       },
       shape: {
         round: "rounded-full",
@@ -34,6 +34,7 @@ interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   isLoading?: boolean;
+  shape?: "square" | "round" | "rectangle" | null; // Update shape property
 }
 
 const Button: FC<ButtonProps> = ({
