@@ -9,9 +9,9 @@ export default function MenuCard({
   product: IProduct;
 }): JSX.Element {
   return (
-    <div className="min-w-[156px] md:w-full">
+    <div className="md:w-full">
       <Image
-        className="w-full max-h-[186px] md:max-h-[180px] object-cover rounded-lg"
+        className=" object-cover rounded-lg md:min-h-[164px] md:max-h-[232px] lg:min-h-[164px] lg:max-h-[356px]"
         src={product.img}
         alt="pic"
         width={500}

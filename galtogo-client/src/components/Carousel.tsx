@@ -1,4 +1,3 @@
-
 export default function Carousel({
   setSelectedCategory,
   categories,
@@ -9,29 +8,26 @@ export default function Carousel({
   categories: ICategory[];
   selectedCategory: string | null;
 }): JSX.Element {
-
-  const selected = 'py-[12px] lg:py-[20px] lg:text-base rounded-lg text-center font-medium text-sm w-full'
-
+  const selected =
+    "py-[12px] lg:py-[20px] lg:text-base rounded-lg text-center font-medium text-sm w-full cursor-pointer";
 
   return (
-    <div className="mx-auto rounded-lg bg-white shadow-[0_05px_20px_rgb(0,0,0,0.10)]">
-      <div
-        className="flex justify-between w-full center px-[8px] py-[8px] gap-[4px]"
-      >
+    <div className="mx-auto rounded-lg bg-white shadow-[0_05px_20px_rgb(0,0,0,0.10)] mb-0">
+      <div className="flex justify-between w-full center px-[8px] py-[8px] gap-[4px]">
         {categories.map((category: ICategory, index: number) => (
           <div
             key={index}
             className={
-              selectedCategory == category.name ? `${selected} bg-[#0D5C63] text-white` : `${selected} text-[#505D6F]`
+              selectedCategory == category.name
+                ? `${selected} bg-[#0D5C63] text-white`
+                : `${selected} text-[#505D6F]`
             }
             onClick={() => {
               setSelectedCategory(category.name),
                 localStorage.setItem("active", category.name);
             }}
           >
-
             {category.name}
-
           </div>
         ))}
       </div>

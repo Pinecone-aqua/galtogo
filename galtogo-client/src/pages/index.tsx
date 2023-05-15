@@ -29,13 +29,14 @@ export default function Home(props: {
     <Layout>
       <div className="hidden md:block p-3">
         <SpecialOffer />
-      </div>
-      <div className="hidden md:block w-[80%] mx-auto bottom-[24px] translate-y-6">
-        <Carousel
-          setSelectedCategory={setSelectedCategory}
-          selectedCategory={selectedCategory}
-          categories={categories}
-        />
+
+        <div className="hidden md:block w-[90%] mx-auto bottom-[24px] -translate-y-8">
+          <Carousel
+            setSelectedCategory={setSelectedCategory}
+            selectedCategory={selectedCategory}
+            categories={categories}
+          />
+        </div>
       </div>
       <div className="w-full overflow-x-auto no-scrollbar snap-x snap-mandatory sm:visible md:hidden lg:hidden">
         <CategoryMobile
@@ -47,7 +48,7 @@ export default function Home(props: {
       <div className="w-full overflow-x-auto no-scrollbar sm:overflow-x-auto sm:no-scrollbar sm:snap-x snap-mandatory rounded-lg md:overflow-hidden">
         <MenuField selectedCategory={selectedCategory} products={products} />
       </div>
-      <div className="my-[144px]">
+      <div className="my-[56px] lg:my-[96px]">
         <GreetingBanner />
       </div>
       <div className="mx-[40px] my-[72px] hidden md:block">
