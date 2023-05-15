@@ -63,7 +63,7 @@ const LoginPage: React.FC = () => {
     isFinite(e.target.value) && setPhoneNumber(e.target.value);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSubmit: (e: any) => void = (e) => {
+  const handleSend: (e: any) => void = (e) => {
     e.preventDefault();
     console.log("(+976)", phoneNumber);
 
@@ -89,32 +89,6 @@ const LoginPage: React.FC = () => {
     isFinite(inputValue) && setOtp(inputValue);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const validateChar = (value: any) => {
-    const isNumber = typeof value === "number";
-    const isString = typeof value === "string";
-    return (isNumber || (isString && value !== "")) && !isNaN(Number(value));
-  };
-
-  const handleSend: () => void = () => {
-    setTimer(true);
-    if (phoneNumber.length === 8) {
-      setSuccess(true);
-      onCaptcha();
-
-      signInWithPhoneNumber(
-        auth,
-        "+976" + phoneNumber,
-        window.recaptchaVerifier
-      )
-        .then((confirmationResult) => {
-          window.confirmationResult = confirmationResult;
-          toast.success("Sent!");
-        })
-        .catch((error) => toast.error("Error! SMS not sent", error));
-    }
-  };
-
   const handleVerify = () => {
     if (otp) {
       window.confirmationResult
@@ -126,7 +100,6 @@ const LoginPage: React.FC = () => {
           }) => {
             console.log("Verify: ", res.user.phoneNumber);
             console.log("Verified user token: ", res._tokenResponse.idToken);
-            // requestAppointment();
 
             router.push("/account");
           }
@@ -149,10 +122,9 @@ const LoginPage: React.FC = () => {
           </div>
           <div className="flex flex-col items-center gap-4">
             <MuiOtpInput
-              value={otp && otp}
+              value={otp}
               length={6}
               onChange={handleChangeOtp}
-              validateChar={validateChar}
               TextFieldsProps={{ placeholder: "-" }}
             />
             <div className="flex flex-col items-center">
@@ -183,7 +155,7 @@ const LoginPage: React.FC = () => {
             Please confirm your phone number to create the Reservation.
           </div>
 
-          <form id="login" onSubmit={handleSubmit} className="mx-auto relative">
+          <form id="login" onSubmit={handleSend} className="mx-auto relative">
             <input
               type="tel"
               id="phone"

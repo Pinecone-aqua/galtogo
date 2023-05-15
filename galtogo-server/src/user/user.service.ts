@@ -19,10 +19,11 @@ export class UserService {
     return result;
   }
 
-  async addUser(user: CreateUserDto): Promise<IUser> {
+  async addUser(user: CreateUserDto): Promise<User> {
     const result = await this.userModel.create(user);
     return result;
   }
+
   async loginUser(phoneNumber: string) {
     console.log('login user phone: ', phoneNumber);
     // const result = await this.userModel.create(user);
