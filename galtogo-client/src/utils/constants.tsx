@@ -16,19 +16,19 @@ export const navMenuItems = [
   },
   {
     name: "My Account",
-    path: "/account",
+    path: "/accounts",
   },
   {
     name: "Special Offer",
-    path: "/special",
+    path: "/specials",
   },
   {
     name: "Contact Us",
-    path: "/contact",
+    path: "/contacts",
   },
   {
     name: "Reservation",
-    path: "/reservation",
+    path: "/reservations",
   },
 ];
 

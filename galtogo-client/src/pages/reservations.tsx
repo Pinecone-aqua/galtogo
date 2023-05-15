@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import { today } from "@/utils/constants";
 import { Calendar } from "@amir04lm26/react-modern-calendar-date-picker";
 import "@amir04lm26/react-modern-calendar-date-picker/lib/DatePicker.css";
-import { useRouter } from "next/router";
 
 export default function Reservation(props: {
   disabledDays: IDisabledDay[];
@@ -17,7 +16,7 @@ export default function Reservation(props: {
   const [translate, setTranslate] = useState(
     `translate-x-96 invisible w-[100%] text-transparent`
   );
-  const router = useRouter();
+
   const [date, setDate] = useState<IDate>(today);
   const [tablesData, setTablesData] = useState<ITable[]>([]);
   const [newReservation, setNewReservation] = useState({
@@ -50,13 +49,6 @@ export default function Reservation(props: {
 
   const handleBack = () => {
     setTranslate(`w-1 opacity-0 text-transparent`);
-  };
-
-  const handleConfirm = () => {
-    console.log("newReservation: ", newReservation);
-    localStorage.setItem("newReservation: ", JSON.stringify(newReservation));
-    toast.success("Reservation successfully added!");
-    router.push("/loginPage");
   };
 
   return (
@@ -95,12 +87,6 @@ export default function Reservation(props: {
                 setNewReservation={setNewReservation}
                 newReservation={newReservation}
               />
-
-              <div className="flex justify-center">
-                <Button variant="default" size="sm" onClick={handleConfirm}>
-                  Confirm Reservation
-                </Button>
-              </div>
 
               <div className="my-6">
                 <Button variant="ghost" size="sm" onClick={handleBack}>

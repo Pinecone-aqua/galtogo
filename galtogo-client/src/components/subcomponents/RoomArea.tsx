@@ -1,6 +1,9 @@
 import { useState } from "react";
 import TimeTable from "./TimeTable";
 import ReactLoading from "react-loading";
+import Button from "./Button";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const RoomArea = ({
   tablesData,
@@ -13,7 +16,7 @@ const RoomArea = ({
   newReservation: IReservation;
 }) => {
   const [current, setCurrent] = useState("");
-
+  const router = useRouter();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleClickTable = (e: any): void => {
     console.log(e.target.id);
@@ -22,6 +25,13 @@ const RoomArea = ({
       ...prev,
       table: e.target.id,
     }));
+  };
+
+  const handleConfirm = () => {
+    console.log("newReservation: ", newReservation);
+    localStorage.setItem("newReservation: ", JSON.stringify(newReservation));
+    toast.success("Reservation successfully added!");
+    router.push("/loginPages");
   };
 
   return (
@@ -57,6 +67,13 @@ const RoomArea = ({
           setNewReservation={setNewReservation}
           newReservation={newReservation}
         />
+      )}
+      {newReservation.time.length > 0 && (
+        <div className="flex justify-center">
+          <Button variant="default" size="sm" onClick={handleConfirm}>
+            Confirm Reservation
+          </Button>
+        </div>
       )}
     </div>
   );
