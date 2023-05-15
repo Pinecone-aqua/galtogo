@@ -12,7 +12,7 @@ export class ProductService {
     @InjectModel(category.name) private categoryModel: Model<category>,
   ) {}
 
-  async create(createFood: CreateProductDto): Promise<any> {
+  async create(createFood: CreateProductDto): Promise<product> {
     const result = await this.productModel.create(createFood);
 
     return result.save();

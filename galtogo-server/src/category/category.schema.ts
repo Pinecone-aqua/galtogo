@@ -9,6 +9,4 @@ export class category {
   name: string;
 }
 
-const categorySchema = SchemaFactory.createForClass(category);
-
-export default categorySchema;
+export const categorySchema = SchemaFactory.createForClass(category);
