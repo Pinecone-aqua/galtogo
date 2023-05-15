@@ -11,8 +11,6 @@ import MemberShip from "@/components/Membership";
 import TestimonialSection from "@/components/TestimonialSection";
 import MobileMenuField from "@/components/MobileMenuField";
 
-
-
 export default function Home(props: {
   products: IProduct[];
   categories: ICategory[];
@@ -66,20 +64,17 @@ export default function Home(props: {
       <div className=" my-[72px]">
         <TestimonialSection />
       </div>
-    </Layout >
+    </Layout>
   );
 }
 
 export const getStaticProps = async () => {
   const products = await axios
-    .get(`${process.env.NEXT_PUBLIC_PORT}/product`) //s
+    .get(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/product`) //s
     .then((res) => res.data);
   const categories = await axios
-    .get(`${process.env.NEXT_PUBLIC_PORT}/category`) //s
+    .get(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/category`) //s
     .then((res) => res.data);
 
   return { props: { products, categories } };
-
 };
-
-
