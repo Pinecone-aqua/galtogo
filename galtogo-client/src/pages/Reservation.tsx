@@ -36,9 +36,8 @@ export default function Reservation(props: {
     setTranslate(`z-30 w-[100%]`);
     setNewReservation((prev) => ({
       ...prev,
-      date: `${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${
-        date.day < 10 ? "0" : ""
-      }${date.day}`,
+      date: `${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${date.day < 10 ? "0" : ""
+        }${date.day}`,
     }));
 
     // branchId/tables
@@ -85,9 +84,8 @@ export default function Reservation(props: {
               <div className="mb-2 font-bold">Select a table</div>
               <div className="text-gray-300 font-bold p-3 bg-slate-500 rounded-xl">
                 Date selected:{" "}
-                {`${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${
-                  date.day < 10 ? "0" : ""
-                }${date.day}`}
+                {`${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${date.day < 10 ? "0" : ""
+                  }${date.day}`}
               </div>
 
               <RoomArea
