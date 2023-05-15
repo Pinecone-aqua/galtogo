@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { banner } from './bannerSchema';
+import { banner } from './banner.schema';
 import createBannerDto from './bannerDto/createBanner.dto';
 
 @Injectable()

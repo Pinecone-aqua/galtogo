@@ -6,7 +6,7 @@ import categorySchema, { category } from 'src/category/category.schema';
 import { CloudinaryModule } from '../cloudinary/cloudinary.module';
 import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
-import { product, productScehama } from './productSchema';
+import { product, productScehama } from './product.schema';
 
 @Module({
   imports: [
