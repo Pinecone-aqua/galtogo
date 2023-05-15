@@ -12,7 +12,7 @@ export default function AddTable({
     capacity: "",
     coords: { posX: 0, posY: 0 },
   });
-  // const [tableData, setTableData] = useState<ITable[]>([]);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     fetch("http://localhost:5050/table/add", {

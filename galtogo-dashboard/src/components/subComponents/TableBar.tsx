@@ -14,7 +14,6 @@ interface TableBarProps {
 export default function TableBar({
   reservations,
   table: initialTable,
-  tablesData,
   onDeleteTable,
 }: TableBarProps) {
   const [table, setTable] = useState(initialTable);
@@ -32,11 +31,6 @@ export default function TableBar({
       }
     });
   });
-
-  function handleAdd(e: any) {
-    e.preventDefault();
-    console.log(table._id);
-  }
 
   function deleteHandler(id: string): void {
     const confirmDelete = window.confirm(

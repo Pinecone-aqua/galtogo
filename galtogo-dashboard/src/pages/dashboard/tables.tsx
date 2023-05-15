@@ -38,7 +38,6 @@ export default function Tables(props: {
   };
 
   function handleDeleteTable(id: string) {
-    const updatedTablesData = tablesData.filter((table) => table._id !== id);
     setTablesDatas((prevTablesData) =>
       prevTablesData.filter((table) => table._id !== id)
     );
