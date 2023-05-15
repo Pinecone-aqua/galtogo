@@ -3,19 +3,20 @@ import { Rating } from "primereact/rating";
 import Button from "./Button";
 import Image from "next/image";
 
+
 export default function MenuCard({
   product,
 }: {
   product: IProduct;
 }): JSX.Element {
   return (
-    <div className="min-w-[156px] md:w-full">
+    <div className="md:w-full">
       <Image
-        className="w-full max-h-[186px] md:max-h-[180px] object-cover rounded-lg"
+        className=" object-cover rounded-lg md:min-h-[164px] md:max-h-[232px] lg:min-h-[164px] lg:max-h-[352px]"
         src={product.img}
-        alt="pic"
-        width={500}
-        height={500}
+        alt={"test"}
+        width={1000}
+        height={1000}
       />
 
       <div className="bg-white mt-2">

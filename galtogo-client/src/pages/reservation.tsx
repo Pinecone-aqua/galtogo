@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import { today } from "@/utils/constants";
 import { Calendar } from "@amir04lm26/react-modern-calendar-date-picker";
 import "@amir04lm26/react-modern-calendar-date-picker/lib/DatePicker.css";
-import { useRouter } from "next/router";
 
 export default function Reservation(props: {
   disabledDays: IDisabledDay[];
@@ -17,7 +16,7 @@ export default function Reservation(props: {
   const [translate, setTranslate] = useState(
     `translate-x-96 invisible w-[100%] text-transparent`
   );
-  const router = useRouter();
+
   const [date, setDate] = useState<IDate>(today);
   const [tablesData, setTablesData] = useState<ITable[]>([]);
   const [newReservation, setNewReservation] = useState({
@@ -52,16 +51,9 @@ export default function Reservation(props: {
     setTranslate(`w-1 opacity-0 text-transparent`);
   };
 
-  const handleConfirm = () => {
-    console.log("newReservation: ", newReservation);
-    localStorage.setItem("newReservation: ", JSON.stringify(newReservation));
-    toast.success("Reservation successfully added!");
-    router.push("/LoginPage");
-  };
-
   return (
     <Layout>
-      <div className="lg:grid lg:grid-cols-3 h-[1700px] lg:h-[1200px] border mx-auto bg-slate-50 p-3 justify-center">
+      <div className="lg:grid lg:grid-cols-3 h-[1700px] lg:h-[1200px] border mx-auto bg-slate-50 p-3 pt-28 justify-center">
         <div className="mx-auto">
           <div className="m-8 font-bold text-center">Select a date</div>
           <div className="flex justify-center">
@@ -78,7 +70,7 @@ export default function Reservation(props: {
           <div className="bg-slate-100 p-2 w-[100%] h-[100%] text-center">
             Please choose a date from the calendar
           </div>
-          {tablesData.length > 0 && (
+          {translate == "z-30 w-[100%]" && (
             <div
               className={`absolute top-0 left-0 duration-500 bg-slate-100 p-2 h-[100%] text-center transition-all ${translate}`}
             >
@@ -95,12 +87,6 @@ export default function Reservation(props: {
                 setNewReservation={setNewReservation}
                 newReservation={newReservation}
               />
-
-              <div className="flex justify-center">
-                <Button variant="default" size="sm" onClick={handleConfirm}>
-                  Confirm Reservation
-                </Button>
-              </div>
 
               <div className="my-6">
                 <Button variant="ghost" size="sm" onClick={handleBack}>

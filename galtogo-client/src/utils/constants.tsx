@@ -6,7 +6,8 @@ import {
   HiOutlinePhone,
   HiOutlineUserGroup,
 } from "react-icons/hi";
-import { BsInstagram, BsFacebook, BsLinkedin, BsTwitter } from "react-icons/Bs";
+import { BsInstagram, BsFacebook, BsLinkedin, BsTwitter } from "react-icons/bs";
+import moment from "moment";
 
 export const navMenuItems = [
   {
@@ -15,26 +16,42 @@ export const navMenuItems = [
   },
   {
     name: "My Account",
-    path: "/Account",
+    path: "/accounts",
   },
   {
     name: "Special Offer",
-    path: "/Special",
+    path: "/specials",
   },
   {
     name: "Contact Us",
-    path: "/Contact",
+    path: "/contacts",
   },
   {
     name: "Reservation",
-    path: "/Reservation",
+    path: "/reservations",
   },
 ];
 
-export interface ILocation {
-  lat: number;
-  lng: number;
-}
+export const tableTimes = [
+  { time: "10:00", isOccupied: false },
+  { time: "11:00", isOccupied: false },
+  { time: "12:00", isOccupied: false },
+  { time: "13:00", isOccupied: false },
+  { time: "14:00", isOccupied: false },
+  { time: "15:00", isOccupied: false },
+  { time: "16:00", isOccupied: false },
+  { time: "17:00", isOccupied: false },
+  { time: "18:00", isOccupied: false },
+  { time: "19:00", isOccupied: false },
+  { time: "20:00", isOccupied: false },
+  { time: "21:00", isOccupied: false },
+];
+
+export const today = {
+  year: Number(moment().format("YYYY")),
+  month: Number(moment().format("MM")),
+  day: Number(moment().format("DD")),
+};
 
 export const BranchItems = [
   {
