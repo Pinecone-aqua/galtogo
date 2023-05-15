@@ -18,7 +18,7 @@ export default function Navigation(): JSX.Element {
       setVisible(
         (prevScrollPos < currentScrollPos &&
           prevScrollPos - currentScrollPos > 70) ||
-          currentScrollPos < prevScrollPos
+        currentScrollPos < prevScrollPos
       );
       SetPrevScrollPos(currentScrollPos);
     }
@@ -45,11 +45,10 @@ export default function Navigation(): JSX.Element {
           {navMenuItems.map((menuItem, index) => (
             <Link
               href={menuItem.path}
-              className={`${
-                menuItem.path === pathname
-                  ? `${defaultStyle}`
+              className={`${menuItem.path === pathname
+                  ? `${defaultStyle} text-[#0D5C63]`
                   : `${defaultStyle}`
-              }`}
+                }`}
               key={index}
             >
               {menuItem.name}

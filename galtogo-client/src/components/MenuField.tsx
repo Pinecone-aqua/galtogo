@@ -8,7 +8,7 @@ export default function MenuField({
   products: IProduct[];
 }) {
   return (
-    <div className="flex -translate-x-[1920px] flex-row ml-[16px] md:grid md:grid-cols-4 lg:grid lg:grid-cols-5 lg:w-[90%] mx-auto gap-[20px] md:mx-[40px] lg:mx-auto">
+    <div className="flex flex-row ml-[16px] sm:grid sm:grid-cols-4 sm:mx-[20px] md:grid md:grid-cols-5 md:mx-[40px] lg:w-[90%] lg:grid lg:grid-cols-7 gap-[20px] lg:mx-auto">
       {products.map(
         (product: IProduct, index) =>
           product.category.name === selectedCategory && (
