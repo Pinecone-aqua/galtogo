@@ -6,7 +6,7 @@ import {
   HiOutlinePhone,
   HiOutlineUserGroup,
 } from "react-icons/hi";
-import { BsInstagram, BsFacebook, BsLinkedin, BsTwitter } from "react-icons/Bs";
+import { BsInstagram, BsFacebook, BsLinkedin, BsTwitter } from "react-icons/bs";
 import moment from "moment";
 
 export const navMenuItems = [
