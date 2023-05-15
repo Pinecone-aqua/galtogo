@@ -69,27 +69,3 @@ export const tableTimes = [
   { time: "20:00", isOccupied: false },
   { time: "21:00", isOccupied: false },
 ];
-
-export interface ICard {
-  img: string;
-  foodname: string;
-  price: number;
-  desc: string;
-  category: {
-    name: string;
-  };
-}
-
-export interface Inputs {
-  category: string;
-  exampleRequired: string;
-  foodname: string;
-  price: string;
-  desc: string;
-  file: string;
-}
-
-export interface ICategory {
-  name: string;
-  _id: string;
-}

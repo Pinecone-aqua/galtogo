@@ -1,4 +1,4 @@
-import { BranchItems, ILocation } from "@/utils/constants";
+import { BranchItems } from "@/utils/constants";
 import { useState } from "react";
 import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
 // import Image from "next/image";
