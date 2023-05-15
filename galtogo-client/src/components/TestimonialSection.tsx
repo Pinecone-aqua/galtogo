@@ -5,7 +5,7 @@ import ParallaxText from "./subcomponents/Parallax";
 export default function TestimonialSection(): JSX.Element {
   return (
     <div className="w-full">
-      <div className="mx-auto w-full text-center text-[64px] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#0D5C63] to-[#13BCCB] mb-[54px]">
+      <div className="mx-auto w-full text-center text-[32px] sm:text-[48px] mb-[16px] sm:mb-[32px] md:mb-[48px] md:text-[64px] font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#0D5C63] to-[#13BCCB]">
         Сэтгэл ханамж
       </div>
       <div className="flex flex-col w-[100%]">
