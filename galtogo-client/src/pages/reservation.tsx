@@ -42,7 +42,7 @@ export default function Reservation(props: {
 
     // branchId/tables
     axios
-      .get(`${process.env.NEXT_PUBLIC_PORT}/table`)
+      .get(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/table`)
       .then((res) => setTablesData(res.data))
       .catch((err) => toast.error(err));
   };
@@ -107,7 +107,7 @@ export const getStaticProps: () => Promise<{
   };
 }> = async () => {
   const disabledDays = await axios
-    .get(`${process.env.NEXT_PUBLIC_PORT}/days`)
+    .get(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/days`)
     .then((res) => res.data);
   return {
     props: {
