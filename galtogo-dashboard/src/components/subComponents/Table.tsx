@@ -11,19 +11,20 @@ const buttonVariants = cva(
         default: "bg-gray-500 text-white hover:bg-sky-600",
         yellow: "bg-yellow-200 text-black hover:bg-yellow-400",
       },
-      seats: {
-        sm: "h-20 px-4",
-        m: "h-40 px-5",
-        l: "h-60 px-5",
+      size: {
+        small: "h-20 px-4",
+        medium: "h-40 px-5",
+        large: "h-60 px-5",
       },
       shape: {
         round: "rounded-full",
         square: "rounded",
+        rectangle: "rounded",
       },
     },
     defaultVariants: {
       variant: "default",
-      seats: "sm",
+      size: "small",
       shape: "round",
     },
   }
@@ -41,11 +42,11 @@ const Button: FC<ButtonProps> = ({
   variant,
   shape,
   isLoading,
-  seats,
+  size,
   ...props
 }) => (
   <button
-    className={twMerge(buttonVariants({ variant, seats, shape, className }))}
+    className={twMerge(buttonVariants({ variant, size, shape, className }))}
     disabled={isLoading}
     {...props}
   >

@@ -1,3 +1,5 @@
+import { TableShape, TableSize } from "@/utils/constants";
+import { Table } from "lucide-react";
 import { Dispatch, SetStateAction, useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import { toast } from "react-toastify";
@@ -10,8 +12,12 @@ export default function AddTable({
   const [newTable, setNewTable] = useState<ITable>({
     name: "",
     capacity: "",
+    size: TableSize.MEDIUM,
+    shape: TableShape.ROUND,
     coords: { posX: 0, posY: 0 },
   });
+  const tableShapes = Object.values(TableShape);
+  const tableSizes = Object.values(TableSize);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,7 +29,13 @@ export default function AddTable({
       .then((response) => response.json())
       .then((data) => {
         setTablesDatas((prevTablesData) => [...prevTablesData, data]);
-        setNewTable({ name: "", capacity: "", coords: { posX: 0, posY: 0 } });
+        setNewTable({
+          name: "",
+          capacity: "",
+          size: "",
+          shape: "",
+          coords: { posX: 0, posY: 0 },
+        });
         toast.success("Table added successfully");
       })
       .catch((error) => {
@@ -33,6 +45,14 @@ export default function AddTable({
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setNewTable((prevTable) => ({
+      ...prevTable,
+      [name]: value,
+    }));
+  };
+
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setNewTable((prevTable) => ({
       ...prevTable,
@@ -62,6 +82,35 @@ export default function AddTable({
           onChange={handleInputChange}
         />
       </div>
+      <div className="input-type">
+        <select
+          name="size"
+          value={newTable.size}
+          className="border w-full px-5 py-3 focus:outline-none rounded-md"
+          onChange={handleSelectChange}
+        >
+          {tableSizes.map((size) => (
+            <option key={size} value={size}>
+              {size}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="input-type">
+        <select
+          name="shape"
+          value={newTable.shape}
+          className={`border w-full px-5 py-3 focus:outline-none rounded-md`}
+          onChange={handleSelectChange}
+        >
+          {tableShapes.map((shape) => (
+            <option key={shape} value={shape}>
+              {shape}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <button
         type="submit"
         className="flex justify-center text-md w-2/8 bg-green-500 text-white px-4 py-2 border rounded-md hover:bg-gray-50 border-green-500 hover:text-green-500"
