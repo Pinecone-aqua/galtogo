@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { CloudinaryModule } from 'src/cloudinary/cloudinary.module';
+import { CloudinaryModule } from '../cloudinary/cloudinary.module';
 import { BannerController } from './banner.controller';
 import bannerSchema, { banner } from './bannerSchema';
 import { BannerService } from './banner.service';
