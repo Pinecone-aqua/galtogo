@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CategoryModule } from '../category/category.module';
-import categorySchema, { category } from 'src/category/category.schema';
+import { categorySchema, category } from 'src/category/category.schema';
 
-import { CloudinaryModule } from '../cloudinary/cloudinary.module';
+import { CloudinaryModule } from '../cloudinaryconf/cloudinary.module';
 import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
 import { product, productScehama } from './product.schema';
