@@ -32,8 +32,8 @@ export class UsersController {
   }
 
   @Post('login')
-  loginUser(@Body() phoneNumber) {
-    console.log('controller: ', phoneNumber);
+  loginUser(@Body() phone: string) {
+    console.log('controller: ', phone);
     return 'test';
     // return this.userService.loginUser(phoneNumber);
   }

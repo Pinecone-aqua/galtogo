@@ -16,7 +16,9 @@ const TimeTable = ({
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5050/reservation/time/${newReservation.date}`)
+      .get(
+        `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation/time/${newReservation.date}`
+      )
       .then((res) => {
         setOccupiedData(res.data);
       });

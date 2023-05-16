@@ -53,7 +53,13 @@ interface IDisabledDay {
   day: number;
   description: string;
 }
+
 interface IOccupied {
   time: string;
   isOccupied: boolean;
+}
+
+interface ILocation {
+  lat: number;
+  lng: number;
 }

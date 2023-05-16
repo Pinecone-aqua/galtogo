@@ -49,3 +49,22 @@ interface IDisabledDay {
   day: number;
   description: string;
 }
+
+interface ICard {
+  img: string;
+  foodname: string;
+  price: number;
+  desc: string;
+  category: {
+    name: string;
+  };
+}
+
+interface Inputs {
+  category: string;
+  exampleRequired: string;
+  foodname: string;
+  price: string;
+  desc: string;
+  file: string;
+}

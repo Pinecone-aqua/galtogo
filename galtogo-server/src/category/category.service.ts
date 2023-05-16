@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { category } from './category.Schema';
+import { category } from './category.schema';
 import createCategoryDto from './categoryDto/createCategory.dto';
 
 @Injectable()

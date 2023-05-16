@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { CategoryModule } from 'src/category/category.module';
-import categorySchema, { category } from 'src/category/category.Schema';
+import { CategoryModule } from '../category/category.module';
+import { categorySchema, category } from 'src/category/category.schema';
 
-import { CloudinaryModule } from 'src/cloudinary/cloudinary.module';
+import { CloudinaryModule } from '../cloudinaryconf/cloudinary.module';
 import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
-import { product, productScehama } from './productSchema';
+import { product, productScehama } from './product.schema';
 
 @Module({
   imports: [
