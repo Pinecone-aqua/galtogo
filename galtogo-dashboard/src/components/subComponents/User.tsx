@@ -40,7 +40,7 @@ const User: React.FC<UserProps> = ({ user, setUsers }) => {
   }
 
   return (
-    <tr className="text-center text-left my-3 p-2 items-center cursor-pointer hover:bg-gray-200 ">
+    <tr className="text-center my-3 p-2 items-center cursor-pointer hover:bg-gray-200">
       <td>{user.firstName}</td>
       <td>{user.lastName}</td>
       <td>{user.phone}</td>

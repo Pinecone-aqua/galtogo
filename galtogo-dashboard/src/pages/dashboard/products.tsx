@@ -3,7 +3,6 @@ import AddBanner from "@/components/subComponents/AddBanner";
 import CreateCategory from "@/components/subComponents/CreateCategory";
 import CreateFood from "@/components/subComponents/CreateFood";
 import EditCategory from "@/components/subComponents/EditCategories";
-
 import axios from "axios";
 
 export default function Products(props: {

@@ -15,8 +15,20 @@ export class UserService {
   }
 
   async getUserByPhone(phone: number): Promise<IUser> {
+    let currentUser = {
+      lastName: '',
+      firstName: '',
+      userEmail: '',
+      phone: phone,
+      role: 'GUEST',
+    };
     const result = await this.userModel.findOne({ phone }).exec();
-    return result;
+    if (result) {
+      currentUser = result;
+    } else {
+      currentUser = await this.userModel.create({ phone });
+    }
+    return currentUser;
   }
 
   async addUser(user: CreateUserDto): Promise<User> {

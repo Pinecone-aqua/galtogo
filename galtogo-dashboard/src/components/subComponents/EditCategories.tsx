@@ -22,8 +22,7 @@ export default function EditCategory({
   function handleForm(e: any) {
     e.preventDefault();
     const formData = new FormData();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const foodlist: any = {
+    const foodlist = {
       category: e.target.category.value,
     };
     formData.append("foodlist", JSON.stringify(foodlist));

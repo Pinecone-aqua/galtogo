@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -15,10 +14,12 @@ export default function CreateFood() {
       .then((res) => setCategories(res.data));
   }, []);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function onSubmit(e: any) {
     e.preventDefault();
     const formData = new FormData();
-    const foodlist: any = {
+
+    const foodlist = {
       title: e.target.title.value,
       desc: e.target.desc.value,
       category: e.target.category.value,
@@ -59,7 +60,7 @@ export default function CreateFood() {
             placeholder="Categories"
             name="category"
           >
-            {categories.map((item: any, index: number) => (
+            {categories.map((item, index: number) => (
               <option key={index} value={item._id}>
                 {item.name}
               </option>

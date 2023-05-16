@@ -13,7 +13,7 @@ interface IUser {
   firstName: string;
   lastName: string;
   email: string;
-  phone: number;
+  phone: string;
 }
 
 interface ITable {
