@@ -16,7 +16,7 @@ export default function TableBar({
   table: initialTable,
   onDeleteTable,
 }: TableBarProps) {
-  const [table, setTable] = useState(initialTable);
+  const [table] = useState(initialTable);
   const [loading, setLoading] = useState(false);
   const [deleted, setDeleted] = useState(false);
   const tableCells = [...tableTimes];
@@ -39,7 +39,7 @@ export default function TableBar({
 
     if (confirmDelete) {
       setLoading(true);
-      fetch(`http://localhost:5050/table/${id}`, {
+      fetch(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/table/${id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       }).then((res) => {

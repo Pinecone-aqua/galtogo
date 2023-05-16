@@ -1,7 +1,5 @@
 import useDragger from "@/hooks/useDragger";
 import Table from "../subComponents/Table";
-import { TableSize } from "@/utils/constants";
-import Button from "./Button";
 import { FC } from "react";
 
 interface RoomTableProps {
@@ -31,7 +29,7 @@ const RoomTable: FC<RoomTableProps> = ({ table }: RoomTableProps) => {
         size={size}
         className="table-button"
       >
-        Table {table.name}
+        # {table.name}
       </Table>
     </div>
   );

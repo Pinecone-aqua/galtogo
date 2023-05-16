@@ -34,7 +34,7 @@ interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   isLoading?: boolean;
-  shape?: "square" | "round" | "rectangle" | null; // Update shape property
+  shape?: "square" | "round" | "rectangle" | null | undefined;
 }
 
 const Button: FC<ButtonProps> = ({

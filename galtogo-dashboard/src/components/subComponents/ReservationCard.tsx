@@ -17,7 +17,7 @@ const ReservationCard: FC<CardProps> = ({ reservation, setReservations }) => {
   const handleChangeStatus = (e: any) => {
     axios
       .patch(
-        `http://localhost:5050/reservation/${e.target.id}/confirm?status=${e.target.name}`
+        `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation/${e.target.id}/confirm?status=${e.target.name}`
       )
       .then((res) => {
         setReservations(res.data.result);

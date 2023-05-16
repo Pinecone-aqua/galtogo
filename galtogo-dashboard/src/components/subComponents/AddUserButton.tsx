@@ -10,12 +10,12 @@ export default function AddUser({
     firstName: "",
     lastName: "",
     email: "",
-    phone: "",
+    phone: 0,
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetch("http://localhost:5050/user/add", {
+    fetch(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user/add`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
       body: JSON.stringify(newUser),
@@ -23,7 +23,7 @@ export default function AddUser({
       .then((response) => response.json())
       .then((data) => {
         setUsers((prevUsers) => [...prevUsers, data]);
-        setNewUser({ firstName: "", lastName: "", email: "", phone: "" });
+        setNewUser({ firstName: "", lastName: "", email: "", phone: 0 });
       })
       .catch((error) => console.log(error));
   };

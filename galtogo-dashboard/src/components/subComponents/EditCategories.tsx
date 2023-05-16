@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { ICategory } from "@/utils/constants";
 import { useState } from "react";
 import Button from "./Button";
 
@@ -11,6 +9,7 @@ export default function EditCategory({
   const [selectedId, setSelectedId] = useState<string>();
   const [showSave, setShowSave] = useState<boolean>(false);
   const [activeList, setActiveList] = useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = (e: any) => {
     if (e.target.value.length > 2) {
       setShowSave(true);
@@ -19,9 +18,11 @@ export default function EditCategory({
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function handleForm(e: any) {
     e.preventDefault();
     const formData = new FormData();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const foodlist: any = {
       category: e.target.category.value,
     };

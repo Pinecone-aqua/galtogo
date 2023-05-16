@@ -13,14 +13,13 @@ export default function Tables(props: {
   tablesData: ITable[];
 }): JSX.Element {
   const { reservationData, tablesData } = props;
-
   const [datas, setDatas] = useState<IReservation[]>(reservationData);
   const [date, setDate] = useState(moment(new Date()).format("YYYY-MM-DD"));
-  const [showAddModal, setShowAddModal] = useState("");
+  const [showAddModal, setShowAddModal] = useState(false);
   const [tablesDatas, setTablesDatas] = useState<ITable[]>(tablesData);
 
   const handleAdd = () => {
-    setShowAddModal(!showAddModal);
+    setShowAddModal(true);
   };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange: (e: any) => Promise<void> = async (e) => {
@@ -28,7 +27,9 @@ export default function Tables(props: {
       setDate(e.target.value);
       console.log(e.target.value);
       const newData: Promise<IReservation[]> = await axios
-        .get(`http://localhost:5050/reservation/date/${e.target.value}`)
+        .get(
+          `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation/date/${e.target.value}`
+        )
         .then((res) => res.data)
         .catch((err) => console.log("axios: ", err));
       setDatas(await newData);
@@ -70,13 +71,14 @@ export default function Tables(props: {
             <></>
           )}
           <div className="m-3 lg:grid lg:grid-cols-2">
-            {tablesDatas.map((table) => (
-              <div>
+            {tablesDatas.map((table, i) => (
+              <div key={i}>
                 <TableBar
                   key={table._id}
                   reservations={datas}
                   table={table}
                   onDeleteTable={handleDeleteTable}
+                  tablesData={[]}
                 />
               </div>
             ))}
@@ -99,10 +101,12 @@ export const getStaticProps: () => Promise<{
 }> = async () => {
   const date = moment(new Date()).format("YYYY-MM-DD");
   const reservationData = await axios
-    .get(`http://localhost:5050/reservation/date/${date}`)
+    .get(
+      `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation/date/${date}`
+    )
     .then((res) => res.data);
   const tablesData = await axios
-    .get(`http://localhost:5050/table`)
+    .get(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/table`)
     .then((res) => res.data);
   return {
     props: {

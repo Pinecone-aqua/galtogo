@@ -1,5 +1,4 @@
 import { TableShape, TableSize } from "@/utils/constants";
-import { Table } from "lucide-react";
 import { Dispatch, SetStateAction, useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import { toast } from "react-toastify";
@@ -10,8 +9,8 @@ export default function AddTable({
   setTablesDatas: Dispatch<SetStateAction<ITable[]>>;
 }): JSX.Element {
   const [newTable, setNewTable] = useState<ITable>({
-    name: "",
-    capacity: "",
+    name: 0,
+    capacity: 0,
     size: TableSize.MEDIUM,
     shape: TableShape.ROUND,
     coords: { posX: 0, posY: 0 },
@@ -21,7 +20,8 @@ export default function AddTable({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetch("http://localhost:5050/table/add", {
+    console.log("newTable", newTable);
+    fetch(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/table/add`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
       body: JSON.stringify(newTable),
@@ -30,10 +30,10 @@ export default function AddTable({
       .then((data) => {
         setTablesDatas((prevTablesData) => [...prevTablesData, data]);
         setNewTable({
-          name: "",
-          capacity: "",
-          size: "",
-          shape: "",
+          name: 0,
+          capacity: 0,
+          size: TableSize.MEDIUM,
+          shape: TableShape.ROUND,
           coords: { posX: 0, posY: 0 },
         });
         toast.success("Table added successfully");

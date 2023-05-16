@@ -30,7 +30,7 @@ const useDragger = (table: ITable): void => {
       coords.current.lastY = roomTable.offsetTop;
       axios
         .patch(
-          `http://localhost:5050/table/${table._id}/coords?posX=${coords.current.lastX}&posY=${coords.current.lastY}`
+          `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/table/${table._id}/coords?posX=${coords.current.lastX}&posY=${coords.current.lastY}`
         )
         .then((res) => console.log(res.data.message))
         .catch((err) => console.log(err));

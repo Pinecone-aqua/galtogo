@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { useState } from "react";
 
 interface EditUserProps {
@@ -14,11 +15,14 @@ const EditUser: React.FC<EditUserProps> = ({ user, setUsers, setShowEdit }) => {
 
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await fetch(`http://localhost:5050/user/${user._id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ firstName, lastName, phone, email }),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user/${user._id}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ firstName, lastName, phone, email }),
+      }
+    );
 
     if (response.ok) {
       setUsers((prevUsers) =>
@@ -48,6 +52,7 @@ const EditUser: React.FC<EditUserProps> = ({ user, setUsers, setShowEdit }) => {
               <span className="sr-only">Close</span>
             </button>
           </div>
+
           <form onSubmit={submitHandler}>
             <div className="mb-4">
               <label

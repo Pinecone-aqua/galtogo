@@ -27,7 +27,10 @@ export default function Settings(props: {
     };
 
     axios
-      .post(`http://localhost:5050/days`, newDisabledDay)
+      .post(
+        `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/days`,
+        newDisabledDay
+      )
       .then((res) => setDisabledDays([...disabledDays, res.data]))
       .catch((err) => console.log("postDayError: ", err));
     e.target.description.value = "";
@@ -41,7 +44,9 @@ export default function Settings(props: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleDeleteDay = (e: any): void => {
     axios
-      .delete(`http://localhost:5050/days/${e.target.id}`)
+      .delete(
+        `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/days/${e.target.id}`
+      )
       .then((res) => setDisabledDays(res.data))
       .catch((err) => console.log("deleteDayError: ", err));
   };
@@ -149,7 +154,7 @@ export const getStaticProps: () => Promise<{
   props: { disabledDaysData: IDisabledDay[] | null };
 }> = async () => {
   const disabledDaysData = await axios
-    .get("http://localhost:5050/days")
+    .get(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/days`)
     .then((res) => res.data);
   return {
     props: {

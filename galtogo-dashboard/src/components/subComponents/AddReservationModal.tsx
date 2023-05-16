@@ -7,6 +7,7 @@ export default function AddReservationModal({
   setShowAddModal,
   tablesData,
 }: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setShowAddModal: any;
   tablesData: ITable[];
 }): JSX.Element {
@@ -14,7 +15,9 @@ export default function AddReservationModal({
   async function handleSubmit(e: any) {
     e.preventDefault();
     const userId = await axios
-      .get(`http://localhost:5050/user/${e.target.phone.value}`)
+      .get(
+        `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user/${e.target.phone.value}`
+      )
       .then((res) => res.data)
       .catch((err) => console.log("user: ", err));
 
@@ -29,7 +32,10 @@ export default function AddReservationModal({
     setShowAddModal((prev: boolean) => !prev);
     try {
       await axios
-        .post("http://localhost:5050/reservation/add", newReservation)
+        .post(
+          `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation/add`,
+          newReservation
+        )
         .then((res) => {
           console.log(res);
           toast.success("Reservation successfully added!");

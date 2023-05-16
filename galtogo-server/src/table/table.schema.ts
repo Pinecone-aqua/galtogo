@@ -45,6 +45,8 @@ export interface ITable {
   name: number;
   capacity: number;
   isActive: boolean;
+  size: string;
+  shape: string;
   coords: {
     posX: number;
     posY: number;
