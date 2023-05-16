@@ -1,0 +1,26 @@
+import { Dispatch, SetStateAction, useState } from "react";
+import { HiOutlineUsers, HiPlusCircle, HiMinusCircle } from "react-icons/hi2";
+
+export default function GuestInput(
+  { setGuest, setNewReservation }
+    :
+    { setGuest: Dispatch<SetStateAction<number | undefined>>, setNewReservation: Dispatch<SetStateAction<IReservation>> }) {
+  const [countGuest, setCountGuest] = useState(0);
+  setGuest(countGuest);
+  setNewReservation((prev) => ({
+    ...prev, persons: countGuest
+  }))
+  return (
+    <div className="flex items-center justify-between px-[16px] py-[20px] bg-white border mt-[8px]  select-none">
+      <div className="flex gap-2 items-center">
+        <HiOutlineUsers />
+        <div>Guests</div>
+      </div>
+      <div className="flex items-center cursor-pointer">
+        <HiMinusCircle className={countGuest === 0 ? "text-slate-200" : "text-[#0D5C63]"} size={24} onClick={() => setCountGuest((prev) => (prev > 0 ? prev - 1 : 0))} />
+        <p className="p-2">{countGuest}</p>
+        <HiPlusCircle className={countGuest < 6 ? "text-[#0D5C63]" : "text-slate-200"} size={24} onClick={() => setCountGuest((prev) => prev < 6 ? prev + 1 : prev)} />
+      </div>
+    </div>
+  )
+}

@@ -1,5 +1,3 @@
-import Layout from "@/components/Layout";
-import Button from "@/components/subcomponents/Button";
 import RoomArea from "@/components/subcomponents/RoomArea";
 import axios from "axios";
 import { useState } from "react";
@@ -7,19 +5,20 @@ import { toast } from "react-toastify";
 import { today } from "@/utils/constants";
 import { Calendar } from "@amir04lm26/react-modern-calendar-date-picker";
 import "@amir04lm26/react-modern-calendar-date-picker/lib/DatePicker.css";
+import { HiOutlineCalendarDays, HiOutlineClock } from 'react-icons/hi2'
+import GuestInput from "@/components/subcomponents/GuestInput";
+import AvailableTime from "@/components/subcomponents/AvailableTime";
 
 export default function Reservation(props: {
   disabledDays: IDisabledDay[];
 }): JSX.Element {
   const { disabledDays } = props;
 
-  const [translate, setTranslate] = useState(
-    `translate-x-96 invisible w-[100%] text-transparent`
-  );
+
 
   const [date, setDate] = useState<IDate>(today);
   const [tablesData, setTablesData] = useState<ITable[]>([]);
-  const [newReservation, setNewReservation] = useState({
+  const [newReservation, setNewReservation] = useState<IReservation>({
     time: "",
     date: "",
     persons: 0,
@@ -27,77 +26,105 @@ export default function Reservation(props: {
     table: "",
   });
 
+  const [guest, setGuest] = useState<number>()
+  const [time, setTime] = useState<string>()
+  const [tableNumber, setTableNumber] = useState<number>()
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleClickDay = (date: any) => {
     setTablesData([]);
     setDate(date);
+
     console.log("ClickDay: ", date);
-    setTranslate(`z-30 w-[100%]`);
+
     setNewReservation((prev) => ({
       ...prev,
-      date: `${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${
-        date.day < 10 ? "0" : ""
-      }${date.day}`,
+      date: `${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${date.day < 10 ? "0" : ""
+        }${date.day}`,
     }));
 
+
+
     // branchId/tables
-    axios
-      .get(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/table`)
-      .then((res) => setTablesData(res.data))
-      .catch((err) => toast.error(err));
+    //   axios
+    //     .get(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/table`)
+    //     .then((res) => setTablesData(res.data))
+    //     .catch((err) => toast.error(err));
   };
 
-  const handleBack = () => {
-    setTranslate(`w-1 opacity-0 text-transparent`);
-  };
+
+
+
+  // const handleBack = () => {
+  //   setTranslate(`w-1 opacity-0 text-transparent`);
+  // };
 
   return (
-    <Layout>
-      <div className="lg:grid lg:grid-cols-3 h-[1700px] lg:h-[1200px] border mx-auto bg-slate-50 p-3 pt-28 justify-center">
-        <div className="mx-auto">
-          <div className="m-8 font-bold text-center">Select a date</div>
-          <div className="flex justify-center">
-            <Calendar
-              value={date}
-              onChange={handleClickDay}
-              minimumDate={today}
-              disabledDays={disabledDays}
-              shouldHighlightWeekends
-            />
-          </div>
+    <div className="flex">
+      <div className="h-screen w-[400px]">
+        <div className="flex items-center justify-center gap-2 border rounded-lg px-[16px] py-[20px]">
+          <HiOutlineCalendarDays />
+          <div>Pick your date</div>
         </div>
-        <div className="relative flex lg:col-span-2">
-          <div className="bg-slate-100 p-2 w-[100%] h-[100%] text-center">
-            Please choose a date from the calendar
-          </div>
-          {translate == "z-30 w-[100%]" && (
-            <div
-              className={`absolute top-0 left-0 duration-500 bg-slate-100 p-2 h-[100%] text-center transition-all ${translate}`}
-            >
-              <div className="mb-2 font-bold">Select a table</div>
-              <div className="text-gray-300 font-bold p-3 bg-slate-500 rounded-xl">
-                Date selected:{" "}
-                {`${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${
-                  date.day < 10 ? "0" : ""
-                }${date.day}`}
-              </div>
+        <div className="mt-[8px]">
+          <Calendar
+            value={date}
+            onChange={handleClickDay}
+            minimumDate={today}
+            disabledDays={disabledDays}
+            shouldHighlightWeekends
+          />
+        </div>
+        <GuestInput setGuest={setGuest} setNewReservation={setNewReservation} />
+        <AvailableTime setTime={setTime} />
+      </div>
+      <div className="w-[100%] border">
+        <div>
+          <RoomArea
+            setTableNumber={setTableNumber}
+            tablesData={tablesData}
+            setNewReservation={setNewReservation}
+            newReservation={newReservation}
+          />
+        </div>
+        <div>
+          <h1 className="text-[24px]">Your order</h1>
+          <div className="flex gap-2">
 
-              <RoomArea
-                tablesData={tablesData}
-                setNewReservation={setNewReservation}
-                newReservation={newReservation}
-              />
-
-              <div className="my-6">
-                <Button variant="ghost" size="sm" onClick={handleBack}>
-                  {"< Back"}
-                </Button>
+            <div className="px-[24px] py-[20px] border w-max rounded-lg">
+              <h1>Picked Date</h1>
+              <div className="flex items-center gap-2">
+                <HiOutlineCalendarDays />
+                <p>{date.year} / {date.day} / {date.month < 9 ? "0" + date.month : date.month}</p>
               </div>
             </div>
-          )}
+
+            <div className="px-[24px] py-[20px] border w-max rounded-lg">
+              <h1>Table Number</h1>
+              <p>{tableNumber}</p>
+            </div>
+
+
+
+            <div className="px-[24px] py-[20px] border w-max rounded-lg">
+              <h1>Time</h1>
+              <div className="flex items-center gap-2">
+                <HiOutlineClock />
+                <p>{time}</p>
+              </div>
+            </div>
+
+            <div className="px-[24px] py-[20px] border w-max rounded-lg">
+              <h1>Guests</h1>
+              <div className="flex items-center gap-2">
+                <HiOutlineClock />
+                <p>{guest}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 }
 
