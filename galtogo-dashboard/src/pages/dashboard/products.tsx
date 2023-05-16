@@ -1,10 +1,8 @@
 import Layout from "@/components/Layout";
 import AddBanner from "@/components/subComponents/AddBanner";
 import CreateCategory from "@/components/subComponents/CreateCategory";
-
 import CreateFood from "@/components/subComponents/CreateFood";
 import EditCategory from "@/components/subComponents/EditCategories";
-import { ICategory } from "@/utils/constants";
 import axios from "axios";
 
 export default function Products(props: {
@@ -30,7 +28,7 @@ export default function Products(props: {
 
 export const getStaticProps = async () => {
   const categoryList = await axios
-    .get("http://localhost:5050/category", {
+    .get(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}`, {
       // headers: {
       //   Authorization: `Barear ${token}`
       // }

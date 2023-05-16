@@ -7,18 +7,19 @@ import Button from "./Button";
 export default function CreateCategory(): JSX.Element {
   function onSubmit(e: any) {
     e.preventDefault();
-    
+
     const categorylist: any = {
       name: e.target.category.value,
     };
 
-
     axios
-      .post("http://localhost:5050/category/add", categorylist)
+      .post(
+        `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/category/add`,
+        categorylist
+      )
       .then((res) => console.log(res));
-      console.log(categorylist);
+    console.log(categorylist);
   }
-  
 
   return (
     <div className="w-[50%] mt-2 p-4 bg-white rounded-lg border">

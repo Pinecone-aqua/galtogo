@@ -26,7 +26,9 @@ export default function Tables(props: {
       setDate(e.target.value);
       console.log(e.target.value);
       const newData: Promise<IReservation[]> = await axios
-        .get(`http://localhost:5050/reservation/date/${e.target.value}`)
+        .get(
+          `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation/date/${e.target.value}`
+        )
         .then((res) => res.data)
         .catch((err) => console.log("axios: ", err));
       setDatas(await newData);
@@ -81,10 +83,12 @@ export const getStaticProps: () => Promise<{
 }> = async () => {
   const date = moment(new Date()).format("YYYY-MM-DD");
   const reservationData = await axios
-    .get(`http://localhost:5050/reservation/date/${date}`)
+    .get(
+      `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation/date/${date}`
+    )
     .then((res) => res.data);
   const tablesData = await axios
-    .get(`http://localhost:5050/table`)
+    .get(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/table`)
     .then((res) => res.data);
   return {
     props: {

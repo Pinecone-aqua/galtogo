@@ -13,7 +13,7 @@ const User: React.FC<UserProps> = ({ user, setUsers }) => {
   const [reservations, setReservations] = useState<IReservation[]>([]);
 
   function deleteHandler(id: string): void {
-    fetch(`http://localhost:5050/user/${id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     }).then((res) => {
@@ -25,7 +25,9 @@ const User: React.FC<UserProps> = ({ user, setUsers }) => {
   }
 
   function showReservationHandler(id: string): void {
-    fetch(`http://localhost:5050/reservation?user=${id}`)
+    fetch(
+      `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation?user=${id}`
+    )
       .then((res) => res.json())
       .then((data) => {
         const userReservations = data.filter(
@@ -38,7 +40,7 @@ const User: React.FC<UserProps> = ({ user, setUsers }) => {
   }
 
   return (
-    <tr className="text-center text-left my-3 p-2 items-center cursor-pointer hover:bg-gray-200 ">
+    <tr className="text-center my-3 p-2 items-center cursor-pointer hover:bg-gray-200">
       <td>{user.firstName}</td>
       <td>{user.lastName}</td>
       <td>{user.phone}</td>
