@@ -12,13 +12,17 @@ const EditUser: React.FC<EditUserProps> = ({ user, setUsers, setShowEdit }) => {
   const [phone, setPhone] = useState(user.phone);
   const [email, setEmail] = useState(user.email);
 
-  const submitHandler = async (e: React.FormEvent) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const submitHandler = async (e: any): Promise<void> => {
     e.preventDefault();
-    const response = await fetch(`http://localhost:5050/user/${user._id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ firstName, lastName, phone, email }),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user/${user._id}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ firstName, lastName, phone, email }),
+      }
+    );
 
     if (response.ok) {
       setUsers((prevUsers) =>

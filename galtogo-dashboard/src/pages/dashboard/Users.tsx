@@ -19,7 +19,9 @@ const Customers: React.FC = () => {
 
   useEffect(() => {
     async function fetchUsers() {
-      const response = await fetch("http://localhost:5050/user");
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user`
+      );
       const data = await response.json();
       setUsers(data);
     }

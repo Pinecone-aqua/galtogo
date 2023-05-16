@@ -15,7 +15,7 @@ export default function AddUser({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetch("http://localhost:5050/user/add", {
+    fetch(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user/add`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
       body: JSON.stringify(newUser),

@@ -41,7 +41,7 @@ export default function NavigationLoader() {
 
   return (
     <div className="loading">
-      <div className="loading-spinner"></div>
+      <div className="loading-spinner" />
     </div>
   );
 }
