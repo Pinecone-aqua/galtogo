@@ -10,7 +10,7 @@ export default function AddUser({
     firstName: "",
     lastName: "",
     email: "",
-    phone: "",
+    phone: 0,
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,7 +23,7 @@ export default function AddUser({
       .then((response) => response.json())
       .then((data) => {
         setUsers((prevUsers) => [...prevUsers, data]);
-        setNewUser({ firstName: "", lastName: "", email: "", phone: "" });
+        setNewUser({ firstName: "", lastName: "", email: "", phone: 0 });
       })
       .catch((error) => console.log(error));
   };

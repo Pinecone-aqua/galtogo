@@ -1,5 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-
+export enum TableSize {
+  SMALL = 'small',
+  MEDIUM = 'medium',
+  LARGE = 'large',
+}
+export enum TableShape {
+  ROUND = 'round',
+  SQUARE = 'square',
+  RECTANGLE = 'rectangle',
+}
 @Schema({ timestamps: true })
 export class Table {
   @Prop({ required: true, max: 20 })
@@ -10,6 +19,12 @@ export class Table {
 
   @Prop({ default: true })
   isActive: boolean;
+
+  @Prop({ enum: Object.values(TableShape), default: TableShape.ROUND })
+  shape: string;
+
+  @Prop({ enum: Object.values(TableSize), default: TableSize.MEDIUM })
+  size: string;
 
   @Prop({
     required: true,
@@ -30,6 +45,8 @@ export interface ITable {
   name: number;
   capacity: number;
   isActive: boolean;
+  size: string;
+  shape: string;
   coords: {
     posX: number;
     posY: number;

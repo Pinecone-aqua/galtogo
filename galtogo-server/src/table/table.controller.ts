@@ -23,6 +23,7 @@ export class TableController {
 
   @Post('add')
   addTable(@Body() table: CreateTableDto): Promise<ITable> {
+    console.log('table', table);
     return this.tableService.addTable(table);
   }
 

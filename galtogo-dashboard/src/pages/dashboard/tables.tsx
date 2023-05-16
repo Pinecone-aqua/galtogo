@@ -6,20 +6,21 @@ import axios from "axios";
 import moment from "moment";
 import { useState } from "react";
 import RoomArea from "@/components/subComponents/RoomArea";
+import AddTableModal from "@/components/subComponents/AddTableModal";
 
 export default function Tables(props: {
   reservationData: IReservation[];
   tablesData: ITable[];
 }): JSX.Element {
   const { reservationData, tablesData } = props;
-
   const [datas, setDatas] = useState<IReservation[]>(reservationData);
   const [date, setDate] = useState(moment(new Date()).format("YYYY-MM-DD"));
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [tablesDatas, setTablesDatas] = useState<ITable[]>(tablesData);
 
   const handleAdd = () => {
-    console.log("Reservation add button");
+    setShowAddModal(true);
   };
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange: (e: any) => Promise<void> = async (e) => {
     try {
@@ -36,6 +37,12 @@ export default function Tables(props: {
       console.log("axios error: ", error);
     }
   };
+
+  function handleDeleteTable(id: string) {
+    setTablesDatas((prevTablesData) =>
+      prevTablesData.filter((table) => table._id !== id)
+    );
+  }
 
   return (
     <Layout>
@@ -58,16 +65,27 @@ export default function Tables(props: {
               onChange={handleChange}
             />
           </div>
+          {showAddModal ? (
+            <AddTableModal setTablesDatas={setTablesDatas} />
+          ) : (
+            <></>
+          )}
           <div className="m-3 lg:grid lg:grid-cols-2">
-            {tablesData.map((table, index) => (
-              <div key={index}>
-                <TableBar reservations={datas} table={table} />
+            {tablesDatas.map((table, i) => (
+              <div key={i}>
+                <TableBar
+                  key={table._id}
+                  reservations={datas}
+                  table={table}
+                  onDeleteTable={handleDeleteTable}
+                  tablesData={[]}
+                />
               </div>
             ))}
           </div>
 
           <div className="m-3">
-            <RoomArea tablesData={tablesData} />
+            <RoomArea tablesDatas={tablesDatas} />
           </div>
         </div>
       </div>

@@ -28,7 +28,7 @@ export default function Products(props: {
 
 export const getStaticProps = async () => {
   const categoryList = await axios
-    .get(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}`, {
+    .get(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/category`, {
       // headers: {
       //   Authorization: `Barear ${token}`
       // }

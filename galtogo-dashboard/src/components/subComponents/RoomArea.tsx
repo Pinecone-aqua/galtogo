@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "./Button";
 import RoomTable from "./RoomTable";
 
-const RoomArea = ({ tablesData }: { tablesData: ITable[] }) => {
+const RoomArea = ({ tablesDatas }: { tablesDatas: ITable[] }) => {
   const [isEdit, setIsEdit] = useState<boolean>(true);
 
   return (
@@ -37,8 +37,8 @@ const RoomArea = ({ tablesData }: { tablesData: ITable[] }) => {
             {""}
           </div>
         )}
-        {tablesData.map((table, index) => (
-          <RoomTable table={table} key={index} />
+        {tablesDatas.map((table, index) => (
+          <RoomTable table={table} key={index} size={""} shape={""} />
         ))}
       </div>
     </div>

@@ -49,6 +49,17 @@ export enum ReservationStatus {
   CANCELLED = "cancelled",
 }
 
+export enum TableShape {
+  ROUND = "round",
+  SQUARE = "square",
+  RECTANGLE = "rectangle",
+}
+
+export enum TableSize {
+  SMALL = "small",
+  MEDIUM = "medium",
+  LARGE = "large",
+}
 export const filterBtns = [
   { name: "table" },
   { name: "date" },

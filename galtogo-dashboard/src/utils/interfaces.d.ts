@@ -20,7 +20,8 @@ interface ITable {
   _id?: mongoose.Schema.Types.ObjectId;
   name: number;
   capacity: number;
-  isActive: boolean;
+  size: enum;
+  shape: enum;
   coords: {
     posX: number;
     posY: number;

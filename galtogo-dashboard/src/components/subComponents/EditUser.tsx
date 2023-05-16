@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { useState } from "react";
 
 interface EditUserProps {
@@ -52,6 +53,7 @@ const EditUser: React.FC<EditUserProps> = ({ user, setUsers, setShowEdit }) => {
               <span className="sr-only">Close</span>
             </button>
           </div>
+
           <form onSubmit={submitHandler}>
             <div className="mb-4">
               <label

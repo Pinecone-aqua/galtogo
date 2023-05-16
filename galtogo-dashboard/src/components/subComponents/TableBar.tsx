@@ -1,13 +1,24 @@
 import { MdTableRestaurant } from "react-icons/md";
 import { tableTimes } from "@/utils/constants";
 import Button from "./Button";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 interface TableBarProps {
   reservations: IReservation[];
   table: ITable;
+  tablesData: ITable[];
+  onDeleteTable: (tableId: string) => void;
 }
 
-export default function TableBar({ reservations, table }: TableBarProps) {
+export default function TableBar({
+  reservations,
+  table: initialTable,
+  onDeleteTable,
+}: TableBarProps) {
+  const [table] = useState(initialTable);
+  const [loading, setLoading] = useState(false);
+  const [deleted, setDeleted] = useState(false);
   const tableCells = [...tableTimes];
 
   tableTimes.forEach((el, i) => {
@@ -21,11 +32,32 @@ export default function TableBar({ reservations, table }: TableBarProps) {
     });
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function handleAdd(e: any) {
-    e.preventDefault();
-    console.log(table._id);
+  function deleteHandler(id: string): void {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this table?"
+    );
+
+    if (confirmDelete) {
+      setLoading(true);
+      fetch(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/table/${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => {
+        console.log("res: ", res);
+        if (res.ok) {
+          setLoading(false);
+          toast.success("Table deleted successfully!");
+          setDeleted(true);
+          onDeleteTable(table._id);
+        }
+      });
+    }
   }
+
+  if (deleted) {
+    return null;
+  }
+
   return (
     <div className="bg-gray-50 hover:bg-gray-100 p-2 rounded-lg m-3">
       <div className="flex items-center ">
@@ -38,9 +70,10 @@ export default function TableBar({ reservations, table }: TableBarProps) {
           variant="red"
           size="sm"
           className="sm:mx-6 m-3"
-          onClick={handleAdd}
+          onClick={() => deleteHandler(table._id)}
+          disabled={loading}
         >
-          Delete Table
+          {loading ? "Deleting..." : "Delete Table"}
         </Button>
       </div>
       <div className="bg-gray-50 hover:bg-gray-100 rounded-lg my-3 p-2 grid  sm:grid-cols-6 grid-cols-3 gap-1 items-center justify-between cursor-pointer">
