@@ -11,7 +11,7 @@ import Order from "@/components/subcomponents/Order";
 import BreadCrumb from "@/components/subcomponents/BreadCrumb";
 import { useRouter } from "next/router";
 
-export default function Reservation1(props: {
+export default function Reservation(props: {
   disabledDays: IDisabledDay[];
 }): JSX.Element {
   const { disabledDays } = props;
@@ -32,9 +32,8 @@ export default function Reservation1(props: {
     console.log("ClickDay: ", date);
     setNewReservation((prev) => ({
       ...prev,
-      date: `${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${
-        date.day < 10 ? "0" : ""
-      }${date.day}`,
+      date: `${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${date.day < 10 ? "0" : ""
+        }${date.day}`,
     }));
 
     axios
