@@ -1,9 +1,11 @@
 import { navMenuItems } from "@/utils/constants";
+import Hamburger from "hamburger-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Fade as Hamburger } from "hamburger-react";
+import MobilePopover from "./subcomponents/MobilePopover";
+
 
 const defaultStyle =
   "hidden px-[8px] py-[16px] md:block md:px-[20px] md:py-[16px] text-sm md:text-base hover:text-[#0D5C63] last:bg-[#0D5C63] last:text-white last:rounded-lg last:hover:text-white";
@@ -11,7 +13,7 @@ const defaultStyle =
 export default function Navigation(): JSX.Element {
   const [prevScrollPos, SetPrevScrollPos] = useState<number>(0);
   const [visible, setVisible] = useState<boolean>(true);
-
+  const [toggle, setToggleMenu] = useState<boolean>(false);
   useEffect(() => {
     function handleScroll() {
       const currentScrollPos = window.pageYOffset;
@@ -30,7 +32,7 @@ export default function Navigation(): JSX.Element {
   const { pathname } = useRouter();
   return (
     <div
-      className={`fixed z-50 w-[100%] border bg-white px-[16px] md:px-[40px] shadow-[0_8px_30px_rgb(0,0,0,0.12)]`}
+      className={`fixed z-50 w-[100%] bg-white px-[16px] md:px-[40px] shadow-[0_8px_30px_rgb(0,0,0,0.12)]`}
     >
       <div className="flex justify-between items-center">
         <Image
@@ -57,10 +59,15 @@ export default function Navigation(): JSX.Element {
             </Link>
           ))}
         </div>
-        <div className="block md:hidden">
+
+        <div className="block md:hidden lg:hidden" onClick={() => setToggleMenu((prev) => !prev)}>
           <Hamburger size={24} />
         </div>
+
+      </div >
+      <div className="block md:hidden">
+        <MobilePopover toggle={toggle} />
       </div>
-    </div>
+    </div >
   );
 }
