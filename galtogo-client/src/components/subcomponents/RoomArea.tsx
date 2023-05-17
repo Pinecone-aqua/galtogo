@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import ReactLoading from "react-loading";
+import Table from "./Table";
 
 const RoomArea = ({
   tablesData,
@@ -22,6 +23,11 @@ const RoomArea = ({
       table: e.target.id,
     }));
   };
+  const size = tablesData.size;
+  const shape = tablesData.shape;
+  console.log("size", size);
+  console.log("shpae", shape);
+  console.log("tables", tablesData);
 
   return (
     <div className="fit-content rounded-lg">
@@ -40,10 +46,19 @@ const RoomArea = ({
                 top: table.coords.posY,
                 left: table.coords.posX,
               }}
-              className={`${current === table._id ? "bg-green-500" : ""
-                } room-table absolute p-3 m-3 bg-gray-200 active:bg-blue-400 active:scale-95 rounded-md w-fit cursor-pointer`}
+              className={`${
+                current === table._id ? "bg-green-500" : ""
+              } room-table absolute p-3 m-3 bg-gray-200 active:bg-blue-400 active:scale-95 rounded-md w-fit cursor-pointer`}
             >
-              Table {table.name}
+              <Table
+                variant="default"
+                size={size}
+                shape={shape}
+                className="table-button text-center"
+              >
+                # {table.name}
+                {table.shape}
+              </Table>
             </div>
           ))
         )}

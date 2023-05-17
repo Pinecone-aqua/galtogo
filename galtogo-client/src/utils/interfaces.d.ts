@@ -34,6 +34,8 @@ interface ITable {
   name: number;
   capacity: number;
   isActive: boolean;
+  shape: string;
+  size: string;
   coords: {
     posX: number;
     posY: number;
