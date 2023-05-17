@@ -8,18 +8,18 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-gray-500 text-white hover:bg-sky-600",
+        default: "bg-gray-200 text-black hover:bg-gray-500",
         yellow: "bg-yellow-200 text-black hover:bg-yellow-400",
       },
       size: {
-        small: "h-10 px-4",
-        medium: "h-20 px-5",
-        large: "h-40 px-6",
+        small: "h-20 w-20 p-5",
+        medium: "h-27 w-27 p-8",
+        large: "h-30 w-30 p-10",
       },
       shape: {
         round: "rounded-full",
         square: "rounded",
-        rectangle: "rounded",
+        rectangle: "rounded pr-20",
       },
     },
     defaultVariants: {
