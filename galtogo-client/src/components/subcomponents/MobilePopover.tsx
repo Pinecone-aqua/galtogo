@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Popover } from '@headlessui/react'
+import Link from 'next/link'
 
 const solutions = [
   {
@@ -30,7 +31,7 @@ export default function MobilePopover({ toggle }: { toggle: boolean }) {
         <div className="overflow-hidden rounded-lg shadow-lg fit-content my-4 ring-1 ring-black ring-opacity-5">
           <div className="relative grid w-full gap-8 bg-white p-7">
             {solutions.map((item) => (
-              <a
+              <Link
                 key={item.name}
                 href={item.href}
                 className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
@@ -43,7 +44,7 @@ export default function MobilePopover({ toggle }: { toggle: boolean }) {
                     {item.description}
                   </p>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
           <div className="bg-gray-50 p-4">
