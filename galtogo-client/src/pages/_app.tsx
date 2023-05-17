@@ -12,13 +12,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Loader>
-<<<<<<< Updated upstream
-        <Component {...pageProps} className={inter.className} />
-=======
         <UserProvider>
-          <Component {...pageProps} />
+          <Component {...pageProps} className={inter.className} />
         </UserProvider>
->>>>>>> Stashed changes
       </Loader>
     </>
   );
