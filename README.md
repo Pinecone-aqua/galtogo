@@ -8,7 +8,7 @@ Team "Galtogoo" 2023
 
 # Developers:
 
-M.Munkhtulga /developer, team head/ { tugarik@gmail.com }
+M.Munkhtulga /developer, team lead/ { tugarik@gmail.com }
 Nomin /developer/ { nominest3@gmail.com }
 Munkhbat /developer, designer/ { muugiiyep0722@gmail.com }
 
@@ -44,7 +44,6 @@ GALTOGO WebApp is a system for online booking reservations in a restaurant. GALT
 | user_id (ObjectID ref: “User”)
 | isCompleted (Boolean)
 
-
 | Table
 |-----------------------------------|
 | id (ObjectId)
@@ -52,7 +51,6 @@ GALTOGO WebApp is a system for online booking reservations in a restaurant. GALT
 | capacity (Number)
 | isActive (boolean)
 | isCompleted (Boolean)
-
 
 | Users
 |-----------------------------------|
@@ -62,12 +60,10 @@ GALTOGO WebApp is a system for online booking reservations in a restaurant. GALT
 | email (String)
 | phone (String)
 
-
 | Category
 |-----------------------------------|
 | id (ObjectId)
 | name (String)
-
 
 | Product
 |-----------------------------------|
@@ -76,7 +72,6 @@ GALTOGO WebApp is a system for online booking reservations in a restaurant. GALT
 | price (Number)
 | description (String)
 | category (ObjectId, ref=”Category”)
-
 
 ---
 
