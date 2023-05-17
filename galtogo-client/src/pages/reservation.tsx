@@ -54,6 +54,7 @@ export default function Reservation(props: {
   };
 
   const handleContinue = () => {
+    localStorage.setItem("newRes", JSON.stringify(newReservation));
     router.push("/loginPage");
   };
   const handleCancel = () => {
@@ -90,8 +91,13 @@ export default function Reservation(props: {
             tableNumber={tableNumber}
           />
 
-          <div>
-            <Button size={"lg"} variant={"ghost"} onClick={handleCancel}>
+          <div className="flex justify-center">
+            <Button
+              size={"lg"}
+              variant={"ghost"}
+              onClick={handleCancel}
+              className="m-4"
+            >
               Cancel
             </Button>
             <Button
@@ -103,7 +109,7 @@ export default function Reservation(props: {
                 newReservation.time !== "--:--"
                   ? "bg-[#0D5C63]"
                   : "bg-slate-400"
-              }`}
+              } m-4`}
               size={"lg"}
               disabled={
                 newReservation._id == "" ||
