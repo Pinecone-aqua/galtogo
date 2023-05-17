@@ -1,4 +1,6 @@
 import { footerMenuItems } from "@/utils/constants";
+import Link from "next/link";
+
 import {
   FaFacebook,
   FaFacebookMessenger,
@@ -23,14 +25,16 @@ export default function Footer(): JSX.Element {
         <div className="border sm:hidden md:hidden" />
         <div className="flex flex-col sm:flex-row">
           {footerMenuItems.map(
-            (item: { name: string; icon: JSX.Element }, index: number) => (
-              <div
-                className="flex items-center text-sm gap-1 justify-between  p-2 md:text-base lg:text-base cursor-pointer hover:text-[#0D5C63]"
-                key={index}
-              >
-                <div>{item.icon}</div>
-                <div className="w-full">{item.name}</div>
-              </div>
+            (
+              item: { name: string; icon: JSX.Element; path: string },
+              index: number
+            ) => (
+              <Link key={index} href={item.path}>
+                <div className="flex items-center text-sm gap-1 justify-between  p-2 md:text-base lg:text-base cursor-pointer hover:text-[#0D5C63]">
+                  <div>{item.icon}</div>
+                  <div className="w-full">{item.name}</div>
+                </div>
+              </Link>
             )
           )}
         </div>
