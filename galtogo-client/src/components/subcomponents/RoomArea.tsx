@@ -40,8 +40,9 @@ const RoomArea = ({
                 top: table.coords.posY,
                 left: table.coords.posX,
               }}
-              className={`${current === table._id ? "bg-green-500" : ""
-                } room-table absolute p-3 m-3 bg-gray-200 active:bg-blue-400 active:scale-95 rounded-md w-fit cursor-pointer`}
+              className={`${
+                current === table._id ? "bg-green-500" : ""
+              } room-table absolute p-3 m-3 bg-gray-200 active:bg-green-300 active:scale-95 rounded-md w-fit cursor-pointer`}
             >
               Table {table.name}
             </div>

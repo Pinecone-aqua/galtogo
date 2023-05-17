@@ -1,6 +1,6 @@
 import RoomArea from "@/components/subcomponents/RoomArea";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { today } from "@/utils/constants";
 import { Calendar } from "@amir04lm26/react-modern-calendar-date-picker";
 import "@amir04lm26/react-modern-calendar-date-picker/lib/DatePicker.css";
@@ -22,36 +22,46 @@ export default function Reservation(props: {
   const [tableNumber, setTableNumber] = useState<number>(0);
   const [newReservation, setNewReservation] = useState<IReservation>({
     time: "",
-    date: "",
+    date: `${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${
+      date.day < 10 ? "0" : ""
+    }${date.day}`,
     persons: 0,
-    user: "",
-    table: "",
   });
 
-  // console.log(tableNumber);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleClickDay = (date: any) => {
-    setTablesData([]);
-    setDate(date);
+  useEffect(() => {
+    getTables();
+  }, []);
 
-    // console.log("ClickDay: ", date);
-    console.log("reservation", newReservation);
-    setNewReservation((prev) => ({
-      ...prev,
-      date: `${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${date.day < 10 ? "0" : ""
-        }${date.day}`,
-    }));
-
-    // branchId/tables
+  const getTables = () => {
     axios
       .get(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/table`)
       .then((res) => setTablesData(res.data))
       .catch((err) => toast.error(err));
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleClickDay = (date: any) => {
+    setTablesData([]);
+    setDate(date);
+
+    setNewReservation((prev) => ({
+      ...prev,
+      date: `${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${
+        date.day < 10 ? "0" : ""
+      }${date.day}`,
+    }));
+    getTables();
+  };
+
+  const handleContinue = () => {
+    router.push("/loginPage");
+  };
+  const handleCancel = () => {
+    router.push("/reservation");
+  };
   return (
-    <div className="flex gap-[16px] m-[40px]">
-      <div className="">
+    <div className="flex md:flex-nowrap flex-wrap gap-[16px] m-[40px]">
+      <div className="mx-auto">
         <Calendar
           value={date}
           onChange={handleClickDay}
@@ -60,7 +70,10 @@ export default function Reservation(props: {
           shouldHighlightWeekends
         />
         <GuestInput setNewReservation={setNewReservation} />
-        <AvailableTime setNewReservation={setNewReservation} />
+        <AvailableTime
+          newReservation={newReservation}
+          setNewReservation={setNewReservation}
+        />
       </div>
       <div className="w-full flex flex-col gap-4">
         <div className="border">
@@ -71,30 +84,40 @@ export default function Reservation(props: {
             newReservation={newReservation}
           />
         </div>
-        <OrderDetails
-          newReservation={newReservation}
-          tableNumber={tableNumber}
-        />
-        <div>
-          <Button size={"lg"} variant={"ghost"}>
-            Cancel
-          </Button>
-          <Button
-            className={`${newReservation._id !== "" &&
-              newReservation.date !== "" &&
-              newReservation.persons !== 0 &&
-              newReservation.table !== "" &&
-              newReservation.time !== "--:--"
-              ? "bg-[#0D5C63]"
-              : "bg-slate-400"
+        <div className="">
+          <OrderDetails
+            newReservation={newReservation}
+            tableNumber={tableNumber}
+          />
+
+          <div>
+            <Button size={"lg"} variant={"ghost"} onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button
+              className={`${
+                newReservation._id !== "" &&
+                newReservation.date !== "" &&
+                newReservation.persons !== 0 &&
+                newReservation.table &&
+                newReservation.time !== "--:--"
+                  ? "bg-[#0D5C63]"
+                  : "bg-slate-400"
               }`}
-            size={"lg"}
-            variant={"brand"}
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
-            onClick={() => router.push("/loginPage")}
-          >
-            Continue
-          </Button>
+              size={"lg"}
+              disabled={
+                newReservation._id == "" ||
+                newReservation.date == "" ||
+                newReservation.persons == 0 ||
+                newReservation.table == undefined ||
+                newReservation.time == "--:--"
+              }
+              variant={"brand"}
+              onClick={handleContinue}
+            >
+              Continue
+            </Button>
+          </div>
         </div>
       </div>
     </div>
