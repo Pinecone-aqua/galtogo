@@ -111,18 +111,22 @@ export const footerMenuItems = [
   {
     name: "Хүний нөөц",
     icon: <HiOutlineUserGroup />,
+    path: "/hr",
   },
   {
     name: "Цагийн хуваарь",
     icon: <HiOutlineClock />,
+    path: "/",
   },
   {
     name: "Нууцлалын бодлого",
     icon: <HiOutlineLockClosed />,
+    path: "/",
   },
   {
     name: "Холбоо барих",
     icon: <HiOutlinePhone />,
+    path: "/",
   },
 ];
 
@@ -177,4 +181,3 @@ export const TestimonialItems = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam vel quo nobis at non repellat illum repellendus dignissimos incidunt architecto.",
   },
 ];
-
