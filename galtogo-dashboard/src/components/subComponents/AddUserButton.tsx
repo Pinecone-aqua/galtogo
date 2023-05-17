@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { BiPlus } from "react-icons/bi";
-
+const initUser = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  phone: 0,
+};
 export default function AddUser({
   setUsers,
 }: {
   setUsers: React.Dispatch<React.SetStateAction<IUser[]>>;
 }): JSX.Element {
-  const [newUser, setNewUser] = useState<IUser>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: 0,
-  });
+  const [newUser, setNewUser] = useState<IUser>(initUser);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,7 +23,7 @@ export default function AddUser({
       .then((response) => response.json())
       .then((data) => {
         setUsers((prevUsers) => [...prevUsers, data]);
-        setNewUser({ firstName: "", lastName: "", email: "", phone: 0 });
+        setNewUser(initUser);
       })
       .catch((error) => console.log(error));
   };
@@ -72,9 +72,10 @@ export default function AddUser({
         <input
           type="text"
           name="phone"
+          required
           className="border w-full px-5 py-3 focus:outline-none rounded-md"
           placeholder="Утасны дугаар"
-          value={newUser.phone}
+          value={newUser.phone == 0 ? "" : newUser.phone}
           onChange={handleInputChange}
         />
       </div>
