@@ -34,8 +34,8 @@ interface ITable {
   name: number;
   capacity: number;
   isActive: boolean;
-  shape: string;
-  size: string;
+  shape: enum;
+  size: enum;
   coords: {
     posX: number;
     posY: number;

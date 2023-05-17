@@ -23,16 +23,11 @@ const RoomArea = ({
       table: e.target.id,
     }));
   };
-  const size = tablesData.size;
-  const shape = tablesData.shape;
-  console.log("size", size);
-  console.log("shpae", shape);
-  console.log("tables", tablesData);
 
   return (
     <div className="fit-content rounded-lg">
-      <div className="relative room-area bg-white  max-w-[800px] h-[600px] mx-auto overflow-x-auto overflow-hidden">
-        {tablesData.length == 0 ? (
+      <div className="relative room-area bg-white max-w-[800px] h-[600px] mx-auto overflow-x-auto overflow-hidden">
+        {tablesData.length === 0 ? (
           <div className="loader-container w-full h-full flex justify-center items-center">
             <ReactLoading color="blue" height={50} width={50} type="spin" />
           </div>
@@ -48,16 +43,15 @@ const RoomArea = ({
               }}
               className={`${
                 current === table._id ? "bg-green-500" : ""
-              } room-table absolute p-3 m-3 bg-gray-200 active:bg-blue-400 active:scale-95 rounded-md w-fit cursor-pointer`}
+              } room-table absolute p-3 m-3 active:bg-blue-400 active:scale-95 rounded-md w-fit cursor-pointer`}
             >
               <Table
                 variant="default"
-                size={size}
-                shape={shape}
+                size={table.size}
+                shape={table.shape}
                 className="table-button text-center"
               >
-                # {table.name}
-                {table.shape}
+                #{table.name}
               </Table>
             </div>
           ))
@@ -66,5 +60,4 @@ const RoomArea = ({
     </div>
   );
 };
-
 export default RoomArea;
