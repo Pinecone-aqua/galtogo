@@ -15,8 +15,6 @@ const RoomArea = ({
   const [current, setCurrent] = useState("");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleClickTable = ({ e, name }: { e: any; name: number }): void => {
-    console.log(e.target.id);
-    console.log("testtt", name);
     setCurrent(e.target.id);
     setTableNumber(name);
     setNewReservation((prev: IReservation) => ({
@@ -42,9 +40,8 @@ const RoomArea = ({
                 top: table.coords.posY,
                 left: table.coords.posX,
               }}
-              className={`${
-                current === table._id ? "bg-green-500" : ""
-              } room-table absolute p-3 m-3 bg-gray-200 active:bg-blue-400 active:scale-95 rounded-md w-fit cursor-pointer`}
+              className={`${current === table._id ? "bg-green-500" : ""
+                } room-table absolute p-3 m-3 bg-gray-200 active:bg-blue-400 active:scale-95 rounded-md w-fit cursor-pointer`}
             >
               Table {table.name}
             </div>

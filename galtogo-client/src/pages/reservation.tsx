@@ -4,20 +4,21 @@ import { useState } from "react";
 import { today } from "@/utils/constants";
 import { Calendar } from "@amir04lm26/react-modern-calendar-date-picker";
 import "@amir04lm26/react-modern-calendar-date-picker/lib/DatePicker.css";
-import { HiOutlineCalendarDays, HiOutlineClock } from "react-icons/hi2";
 import GuestInput from "@/components/subcomponents/GuestInput";
 import AvailableTime from "@/components/subcomponents/AvailableTime";
 import { toast } from "react-toastify";
+import OrderDetails from "@/components/subcomponents/OrderDetails";
+import Button from "@/components/subcomponents/Button";
+import { useRouter } from "next/router";
 
 export default function Reservation(props: {
   disabledDays: IDisabledDay[];
 }): JSX.Element {
   const { disabledDays } = props;
-
+  const router = useRouter();
   const [date, setDate] = useState<IDate>(today);
   const [tablesData, setTablesData] = useState<ITable[]>([]);
-  const [guest, setGuest] = useState<number>();
-  const [time, setTime] = useState<string>();
+
   const [tableNumber, setTableNumber] = useState<number>(0);
   const [newReservation, setNewReservation] = useState<IReservation>({
     time: "",
@@ -27,19 +28,18 @@ export default function Reservation(props: {
     table: "",
   });
 
-  console.log(tableNumber);
+  // console.log(tableNumber);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleClickDay = (date: any) => {
     setTablesData([]);
     setDate(date);
 
-    console.log("ClickDay: ", date);
-
+    // console.log("ClickDay: ", date);
+    console.log("reservation", newReservation);
     setNewReservation((prev) => ({
       ...prev,
-      date: `${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${
-        date.day < 10 ? "0" : ""
-      }${date.day}`,
+      date: `${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${date.day < 10 ? "0" : ""
+        }${date.day}`,
     }));
 
     // branchId/tables
@@ -48,10 +48,6 @@ export default function Reservation(props: {
       .then((res) => setTablesData(res.data))
       .catch((err) => toast.error(err));
   };
-
-  // const handleBack = () => {
-  //   setTranslate(`w-1 opacity-0 text-transparent`);
-  // };
 
   return (
     <div className="flex gap-[16px] m-[40px]">
@@ -63,8 +59,8 @@ export default function Reservation(props: {
           disabledDays={disabledDays}
           shouldHighlightWeekends
         />
-        <GuestInput setGuest={setGuest} />
-        <AvailableTime setTime={setTime} />
+        <GuestInput setNewReservation={setNewReservation} />
+        <AvailableTime setNewReservation={setNewReservation} />
       </div>
       <div className="w-full flex flex-col gap-4">
         <div className="border">
@@ -75,41 +71,30 @@ export default function Reservation(props: {
             newReservation={newReservation}
           />
         </div>
-        <div className="border ">
-          <h1 className="text-[24px]">Your order</h1>
-          <div className="flex gap-2">
-            <div className="px-[24px] py-[20px] border w-max rounded-lg">
-              <h1>Picked Date</h1>
-              <div className="flex items-center gap-2">
-                <HiOutlineCalendarDays />
-                <p>
-                  {date.year} / {date.day} /{" "}
-                  {date.month < 9 ? "0" + date.month : date.month}
-                </p>
-              </div>
-            </div>
-
-            <div className="px-[24px] py-[20px] border w-max rounded-lg">
-              <h1>Table Number</h1>
-              <p>{tableNumber}</p>
-            </div>
-
-            <div className="px-[24px] py-[20px] border w-max rounded-lg">
-              <h1>Time</h1>
-              <div className="flex items-center gap-2">
-                <HiOutlineClock />
-                <p>{time && time}</p>
-              </div>
-            </div>
-
-            <div className="px-[24px] py-[20px] border w-max rounded-lg">
-              <h1>Guests</h1>
-              <div className="flex items-center gap-2">
-                <HiOutlineClock />
-                <p>{guest}</p>
-              </div>
-            </div>
-          </div>
+        <OrderDetails
+          newReservation={newReservation}
+          tableNumber={tableNumber}
+        />
+        <div>
+          <Button size={"lg"} variant={"ghost"}>
+            Cancel
+          </Button>
+          <Button
+            className={`${newReservation._id !== "" &&
+              newReservation.date !== "" &&
+              newReservation.persons !== 0 &&
+              newReservation.table !== "" &&
+              newReservation.time !== "--:--"
+              ? "bg-[#0D5C63]"
+              : "bg-slate-400"
+              }`}
+            size={"lg"}
+            variant={"brand"}
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            onClick={() => router.push("/loginPage")}
+          >
+            Continue
+          </Button>
         </div>
       </div>
     </div>

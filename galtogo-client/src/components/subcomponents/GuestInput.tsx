@@ -1,16 +1,23 @@
-import { Dispatch, SetStateAction, useState } from "react";
+
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { HiOutlineUsers, HiPlusCircle, HiMinusCircle } from "react-icons/hi2";
 
 export default function GuestInput({
-  setGuest,
+  setNewReservation,
 }: {
-  setGuest: Dispatch<SetStateAction<number | undefined>>;
+  setNewReservation: Dispatch<SetStateAction<IReservation>>;
 }) {
   const [countGuest, setCountGuest] = useState(0);
-  setGuest(countGuest);
-  // setNewReservation((prev) => ({
-  //   ...prev, persons: countGuest
-  // }))
+
+
+  useEffect(() => {
+    setNewReservation((prev) => ({
+      ...prev, persons: countGuest
+
+    }))
+  }, [countGuest, setNewReservation])
+
+
   return (
     <div className="flex items-center justify-between px-[16px] py-[20px] bg-white mt-[8px] rounded-lg  select-none shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
       <div className="flex gap-2 items-center">
