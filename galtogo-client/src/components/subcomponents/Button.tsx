@@ -14,6 +14,7 @@ const buttonVariants = cva(
         red: "bg-red-200 text-black hover:bg-red-400",
         dark: "bg-slate-900 text-white hover:bg-slate-800",
         ghost: "bg-transparent hover:text-slate-900 hover:bg-slate-200",
+        brand: "bg-[#0D5C63] hover:bg-[#0E6A72] text-white"
       },
       size: {
         default: "h-10 py-2 px-4",
@@ -30,7 +31,7 @@ const buttonVariants = cva(
 
 interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   isLoading?: boolean;
 }
 

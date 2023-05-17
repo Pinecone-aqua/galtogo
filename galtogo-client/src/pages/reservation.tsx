@@ -1,25 +1,26 @@
-import Layout from "@/components/Layout";
-import Button from "@/components/subcomponents/Button";
 import RoomArea from "@/components/subcomponents/RoomArea";
 import axios from "axios";
 import { useState } from "react";
-import { toast } from "react-toastify";
 import { today } from "@/utils/constants";
 import { Calendar } from "@amir04lm26/react-modern-calendar-date-picker";
 import "@amir04lm26/react-modern-calendar-date-picker/lib/DatePicker.css";
+import GuestInput from "@/components/subcomponents/GuestInput";
+import AvailableTime from "@/components/subcomponents/AvailableTime";
+import { toast } from "react-toastify";
+import OrderDetails from "@/components/subcomponents/OrderDetails";
+import Button from "@/components/subcomponents/Button";
+import { useRouter } from "next/router";
 
 export default function Reservation(props: {
   disabledDays: IDisabledDay[];
 }): JSX.Element {
   const { disabledDays } = props;
-
-  const [translate, setTranslate] = useState(
-    `translate-x-96 invisible w-[100%] text-transparent`
-  );
-
+  const router = useRouter();
   const [date, setDate] = useState<IDate>(today);
   const [tablesData, setTablesData] = useState<ITable[]>([]);
-  const [newReservation, setNewReservation] = useState({
+
+  const [tableNumber, setTableNumber] = useState<number>(0);
+  const [newReservation, setNewReservation] = useState<IReservation>({
     time: "",
     date: "",
     persons: 0,
@@ -27,17 +28,18 @@ export default function Reservation(props: {
     table: "",
   });
 
+  // console.log(tableNumber);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleClickDay = (date: any) => {
     setTablesData([]);
     setDate(date);
-    console.log("ClickDay: ", date);
-    setTranslate(`z-30 w-[100%]`);
+
+    // console.log("ClickDay: ", date);
+    console.log("reservation", newReservation);
     setNewReservation((prev) => ({
       ...prev,
-      date: `${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${
-        date.day < 10 ? "0" : ""
-      }${date.day}`,
+      date: `${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${date.day < 10 ? "0" : ""
+        }${date.day}`,
     }));
 
     // branchId/tables
@@ -47,57 +49,55 @@ export default function Reservation(props: {
       .catch((err) => toast.error(err));
   };
 
-  const handleBack = () => {
-    setTranslate(`w-1 opacity-0 text-transparent`);
-  };
-
   return (
-    <Layout>
-      <div className="lg:grid lg:grid-cols-3 h-[1700px] lg:h-[1200px] border mx-auto bg-slate-50 p-3 pt-28 justify-center">
-        <div className="mx-auto">
-          <div className="m-8 font-bold text-center">Select a date</div>
-          <div className="flex justify-center">
-            <Calendar
-              value={date}
-              onChange={handleClickDay}
-              minimumDate={today}
-              disabledDays={disabledDays}
-              shouldHighlightWeekends
-            />
-          </div>
+    <div className="flex gap-[16px] m-[40px]">
+      <div className="">
+        <Calendar
+          value={date}
+          onChange={handleClickDay}
+          minimumDate={today}
+          disabledDays={disabledDays}
+          shouldHighlightWeekends
+        />
+        <GuestInput setNewReservation={setNewReservation} />
+        <AvailableTime setNewReservation={setNewReservation} />
+      </div>
+      <div className="w-full flex flex-col gap-4">
+        <div className="border">
+          <RoomArea
+            setTableNumber={setTableNumber}
+            tablesData={tablesData}
+            setNewReservation={setNewReservation}
+            newReservation={newReservation}
+          />
         </div>
-        <div className="relative flex lg:col-span-2">
-          <div className="bg-slate-100 p-2 w-[100%] h-[100%] text-center">
-            Please choose a date from the calendar
-          </div>
-          {translate == "z-30 w-[100%]" && (
-            <div
-              className={`absolute top-0 left-0 duration-500 bg-slate-100 p-2 h-[100%] text-center transition-all ${translate}`}
-            >
-              <div className="mb-2 font-bold">Select a table</div>
-              <div className="text-gray-300 font-bold p-3 bg-slate-500 rounded-xl">
-                Date selected:{" "}
-                {`${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${
-                  date.day < 10 ? "0" : ""
-                }${date.day}`}
-              </div>
-
-              <RoomArea
-                tablesData={tablesData}
-                setNewReservation={setNewReservation}
-                newReservation={newReservation}
-              />
-
-              <div className="my-6">
-                <Button variant="ghost" size="sm" onClick={handleBack}>
-                  {"< Back"}
-                </Button>
-              </div>
-            </div>
-          )}
+        <OrderDetails
+          newReservation={newReservation}
+          tableNumber={tableNumber}
+        />
+        <div>
+          <Button size={"lg"} variant={"ghost"}>
+            Cancel
+          </Button>
+          <Button
+            className={`${newReservation._id !== "" &&
+              newReservation.date !== "" &&
+              newReservation.persons !== 0 &&
+              newReservation.table !== "" &&
+              newReservation.time !== "--:--"
+              ? "bg-[#0D5C63]"
+              : "bg-slate-400"
+              }`}
+            size={"lg"}
+            variant={"brand"}
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            onClick={() => router.push("/loginPage")}
+          >
+            Continue
+          </Button>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 }
 
