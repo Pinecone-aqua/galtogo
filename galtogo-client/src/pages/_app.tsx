@@ -5,6 +5,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import Loader from "@/components/Loader";
 import UserProvider from "@/context/UserContext";
+import ReservationProvider from "@/context/ReservationContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,7 +14,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Loader>
         <UserProvider>
-          <Component {...pageProps} className={inter.className} />
+          <ReservationProvider>
+            <Component {...pageProps} className={inter.className} />
+          </ReservationProvider>
         </UserProvider>
       </Loader>
     </>

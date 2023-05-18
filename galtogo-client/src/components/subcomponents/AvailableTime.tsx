@@ -45,7 +45,7 @@ export default function AvailableTime({
   }, [selectedTime, setNewReservation]);
 
   return (
-    <div className="grid grid-cols-3 gap-2 w-full mt-[8px]">
+    <div className="grid grid-cols-3 gap-2 w-full mt-[8px] p-3 rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
       {tableTimes.map((cell: any, index: number) => (
         <button
           className={

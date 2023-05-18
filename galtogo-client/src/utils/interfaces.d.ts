@@ -3,8 +3,8 @@ interface IReservation {
   time: string;
   date: string;
   persons: number;
-  user?: IUser;
-  table?: ITable;
+  user?: mongoose.Schema.Types.ObjectId;
+  table?: mongoose.Schema.Types.ObjectId;
 }
 
 interface ICategory {
