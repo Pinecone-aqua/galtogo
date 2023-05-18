@@ -22,11 +22,12 @@ const RoomArea = ({
       ...prev,
       table: e.target.id,
     }));
+    console.log(e.target.id);
   };
 
   return (
-    <div className="fit-content rounded-lg">
-      <div className="relative room-area bg-white max-w-[800px] h-[600px] mx-auto overflow-x-auto overflow-hidden">
+    <div className="fit-content rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+      <div className="relative room-area rounded-lg bg-white max-w-[800px] h-[600px] mx-auto overflow-x-auto overflow-hidden">
         {tablesData.length === 0 ? (
           <div className="loader-container w-full h-full flex justify-center items-center">
             <ReactLoading color="blue" height={50} width={50} type="spin" />
@@ -34,22 +35,20 @@ const RoomArea = ({
         ) : (
           tablesData.map((table, index) => (
             <div
-              id={table._id}
               key={index}
-              onClick={(e) => handleClickTable({ e, name: table.name })}
               style={{
                 top: table.coords.posY,
                 left: table.coords.posX,
               }}
-              className={`${
-                current === table._id ? "bg-green-500" : ""
-              } room-table absolute p-3 m-3 active:scale-95 rounded-md w-fit cursor-pointer`}
+              className="absolute"
             >
               <Table
                 variant="default"
                 size={table.size}
                 shape={table.shape}
-                className="table-button text-center"
+                id={table._id}
+                className={`${current === table._id ? " bg-green-400" : ""}`}
+                onClick={(e) => handleClickTable({ e, name: table.name })}
               >
                 #{table.name}
               </Table>

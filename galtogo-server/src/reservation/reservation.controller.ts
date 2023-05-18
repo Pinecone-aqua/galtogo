@@ -33,6 +33,7 @@ export class ReservationController {
   addReservation(
     @Body() reservation: CreateReservationDto,
   ): Promise<IReservation> {
+    console.log('Reservation: ', reservation);
     return this.reservationService.addReservation(reservation);
   }
 

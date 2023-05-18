@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-// import { useRouter } from "next/router";
-import { auth } from "../config/firebase-config";
+import { useRouter } from "next/router";
+import { auth } from "../../config/firebase-config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import Button from "@/components/subcomponents/Button";
 import axios from "axios";
 import { useReservation } from "@/context/ReservationContext";
+import OrderDetails from "./OrderDetails";
 declare global {
   interface Window {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -17,8 +18,8 @@ declare global {
     confirmationResult: any;
   }
 }
-const LoginPage: React.FC = () => {
-  // const router = useRouter();
+const PhoneInput = ({ tableNumber }: { tableNumber: number }): JSX.Element => {
+  const router = useRouter();
   const { newReservation, setNewReservation } = useReservation();
   const [otp, setOtp] = useState<string>();
   const [timer, setTimer] = useState(false);
@@ -90,48 +91,54 @@ const LoginPage: React.FC = () => {
     if (otp) {
       window.confirmationResult
         .confirm(otp)
-        .then((res: { user: { phoneNumber: string } }) => {
+        .then(async (res: { user: { phoneNumber: string } }) => {
           console.log("Verified: ", res.user.phoneNumber);
 
-          axios
+          const resData: IUser = await axios
             .get(
-              // `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user/${phoneNumber}`
-              `${process.env.NEXT_PUBLIC_PORT}/user/${phoneNumber}`
+              `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user/${phoneNumber}`
+              // `${process.env.NEXT_PUBLIC_PORT}/user/${phoneNumber}`
             )
-            .then((res) =>
-              setNewReservation((prev: IReservation) => ({
-                ...prev,
-                user: res.data._id,
-              }))
-            )
+            .then((res) => res.data)
             .catch((error) => console.log("Axios error!", error));
-          localStorage.removeItem("newRes");
 
-          // router.push("/account");
+          resData._id &&
+            setNewReservation((prev: IReservation) => ({
+              ...prev,
+              user: resData._id,
+            }));
         })
-        .then(
-          axios
-            .post(
-              // `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation/add`,
-              `${process.env.NEXT_PUBLIC_PORT}/reservation/add`,
-              newReservation
-            )
-            .then((res) => {
-              console.log(res.data);
-              toast.success("Reservation successfully added!");
-            })
-            .catch((err) => console.log("newError: ", err))
-        )
         .catch(() => toast.error("Invalid Verification Code!"));
     } else {
       console.log(`No Verification Code!`);
     }
   };
+
+  const addReservation = () => {
+    newReservation.user &&
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation/add`,
+          // `${process.env.NEXT_PUBLIC_PORT}/reservation/add`,
+          newReservation
+        )
+        .then((res) => {
+          console.log(res.data);
+          setNewReservation(res.data);
+          toast.success("Reservation successfully added!");
+        })
+        .catch((err) => console.log("newError: ", err));
+
+    router.push("/account");
+  };
   return (
-    <div className="w-screen h-screen flex justify-center">
+    <div className="w-screen h-screen flex flex-col md:pt-40 pt-10">
       <div id="recaptcha-container" />
+      <section className="flex justify-center mx-auto">
+        <OrderDetails tableNumber={tableNumber} />
+      </section>
       {success ? (
-        <section className="max-w-lg flex flex-col justify-center items-center">
+        <section className="max-w-lg flex flex-col justify-center items-center mx-auto">
           <div className="text-center p-3 m-10 mx-auto text-lg font-bold">
             {`Please input 6-digit code sent to your ******${phoneNumber.slice(
               6,
@@ -165,10 +172,17 @@ const LoginPage: React.FC = () => {
             >
               Verify
             </Button>
+            <Button
+              type="button"
+              onClick={addReservation}
+              disabled={newReservation.user ? false : true}
+            >
+              Make Reservation
+            </Button>
           </div>
         </section>
       ) : (
-        <section className="phone-input max-w-lg flex flex-col justify-center items-center">
+        <section className="phone-input max-w-lg flex flex-col justify-center items-center mx-auto">
           <div className="text-center p-3 m-10 mx-auto text-lg font-bold">
             Please confirm your phone number to create the Reservation.
           </div>
@@ -219,4 +233,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage;
+export default PhoneInput;
