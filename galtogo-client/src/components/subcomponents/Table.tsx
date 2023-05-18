@@ -44,10 +44,12 @@ const Button: FC<ButtonProps> = ({
   shape,
   isLoading,
   size,
+  style,
   ...props
 }) => (
   <button
     className={twMerge(buttonVariants({ variant, size, shape, className }))}
+    style={style}
     disabled={isLoading}
     {...props}
   >
