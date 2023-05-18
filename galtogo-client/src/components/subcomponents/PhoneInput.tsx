@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { auth } from "../../config/firebase-config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,7 +19,7 @@ declare global {
   }
 }
 const PhoneInput = ({ tableNumber }: { tableNumber: number }): JSX.Element => {
-  // const router = useRouter();
+  const router = useRouter();
   const { newReservation, setNewReservation } = useReservation();
   const [otp, setOtp] = useState<string>();
   const [timer, setTimer] = useState(false);
@@ -96,8 +96,8 @@ const PhoneInput = ({ tableNumber }: { tableNumber: number }): JSX.Element => {
 
           const resData: IUser = await axios
             .get(
-              // `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user/${phoneNumber}`
-              `${process.env.NEXT_PUBLIC_PORT}/user/${phoneNumber}`
+              `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user/${phoneNumber}`
+              // `${process.env.NEXT_PUBLIC_PORT}/user/${phoneNumber}`
             )
             .then((res) => res.data)
             .catch((error) => console.log("Axios error!", error));
@@ -107,8 +107,6 @@ const PhoneInput = ({ tableNumber }: { tableNumber: number }): JSX.Element => {
               ...prev,
               user: resData._id,
             }));
-
-          addReservation();
         })
         .catch(() => toast.error("Invalid Verification Code!"));
     } else {
@@ -120,17 +118,18 @@ const PhoneInput = ({ tableNumber }: { tableNumber: number }): JSX.Element => {
     newReservation.user &&
       axios
         .post(
-          // `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation/add`,
-          `${process.env.NEXT_PUBLIC_PORT}/reservation/add`,
+          `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation/add`,
+          // `${process.env.NEXT_PUBLIC_PORT}/reservation/add`,
           newReservation
         )
         .then((res) => {
           console.log(res.data);
+          setNewReservation(res.data);
           toast.success("Reservation successfully added!");
         })
         .catch((err) => console.log("newError: ", err));
 
-    // router.push("/account");
+    router.push("/account");
   };
   return (
     <div className="w-screen h-screen flex flex-col md:pt-40 pt-10">

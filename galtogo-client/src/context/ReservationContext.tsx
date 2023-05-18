@@ -26,10 +26,12 @@ interface UserProviderType {
 }
 
 export default function ReservationProvider({ children }: UserProviderType) {
-  const [newReservation, setNewReservation] = useState({
+  const [newReservation, setNewReservation] = useState<IReservation>({
     time: "",
     date: moment().format("YYYY-MM-DD"),
     persons: 0,
+    table: "",
+    user: "",
   });
 
   return (
