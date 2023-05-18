@@ -94,8 +94,8 @@ const LoginPage: React.FC = () => {
           console.log("localData: ", localData);
           axios
             .get(
-              // `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/login`,
-              `${process.env.NEXT_PUBLIC_PORT}/user/${phoneNumber}`
+              `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user/${phoneNumber}`
+              // `${process.env.NEXT_PUBLIC_PORT}/user/${phoneNumber}`
             )
             .then((res) =>
               setNewReservation({
@@ -112,8 +112,8 @@ const LoginPage: React.FC = () => {
         .then(
           axios
             .post(
-              // `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation/add`,
-              `${process.env.NEXT_PUBLIC_PORT}/reservation/add`,
+              `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation/add`,
+              // `${process.env.NEXT_PUBLIC_PORT}/reservation/add`,
               newReservation
             )
             .then((res) => {
