@@ -15,7 +15,7 @@ export class User {
   lastName: string;
 
   @Prop({ required: false, default: '' })
-  userEmail: string;
+  email: string;
 
   @Prop({ required: true, unique: true, max: 99999999 })
   phone: number;
@@ -29,7 +29,7 @@ export const UserSchema = SchemaFactory.createForClass(User);
 export interface IUser {
   lastName: string;
   firstName: string;
-  userEmail: string;
+  email: string;
   phone: number;
   role: string;
 }

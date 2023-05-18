@@ -43,7 +43,7 @@ const RoomArea = ({
               }}
               className={`${
                 current === table._id ? "bg-green-500" : ""
-              } room-table absolute p-3 m-3 active:bg-blue-400 active:scale-95 rounded-md w-fit cursor-pointer`}
+              } room-table absolute p-3 m-3 active:scale-95 rounded-md w-fit cursor-pointer`}
             >
               <Table
                 variant="default"
