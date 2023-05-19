@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import Layout from "@/components/Layout";
 import Button from "@/components/subComponents/Button";
 import TableBar from "@/components/subComponents/TableBar";
@@ -62,6 +61,7 @@ export default function Tables(props: {
               className="rounded-lg p-3 mb-4 focus:outline-none border"
               type="date"
               value={date}
+              // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onChange={handleChange}
             />
           </div>
@@ -95,8 +95,8 @@ export default function Tables(props: {
 
 export const getStaticProps: () => Promise<{
   props: {
-    reservationData: IReservation[] | null;
-    tablesData: ITable[] | null;
+    reservationData: IReservation[];
+    tablesData: ITable[];
   };
 }> = async () => {
   const date = moment(new Date()).format("YYYY-MM-DD");

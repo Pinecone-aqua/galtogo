@@ -1,31 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { auth } from "../config/firebase-config";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { MuiOtpInput } from "mui-one-time-password-input";
-import { toast } from "react-toastify";
 import Button from "@/components/subcomponents/Button";
+import axios from "axios";
+import { useReservation } from "@/context/ReservationContext";
 declare global {
   interface Window {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     recaptchaVerifier: any;
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     confirmationResult: any;
   }
 }
 const LoginPage: React.FC = () => {
-  const router = useRouter();
-  const [otp, setOtp] = React.useState<string>();
-  const [timer, setTimer] = React.useState(false);
-  const [seconds, setSeconds] = React.useState(59);
-  const [success, setSuccess] = React.useState(false);
-  const [phoneNumber, setPhoneNumber] = React.useState("");
-  const [translate, setTranslate] = React.useState<string>(
+  // const router = useRouter();
+  const { newReservation, setNewReservation } = useReservation();
+  const [otp, setOtp] = useState<string>();
+  const [timer, setTimer] = useState(false);
+  const [seconds, setSeconds] = useState(59);
+  const [success, setSuccess] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  const [translate, setTranslate] = useState<string>(
     "text-base text-slate-300 top-5 left-20 -z-20"
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       if (seconds !== 0 && timer) {
         setSeconds(seconds - 1);
@@ -37,21 +42,12 @@ const LoginPage: React.FC = () => {
     return () => clearInterval(interval);
   }, [seconds, timer]);
 
-  React.useEffect(() => {
-    if (phoneNumber) {
-      console.log("LoginPage: ", phoneNumber);
-    }
-  }, [phoneNumber]);
-
   const onCaptcha = () => {
     if (!window.recaptchaVerifier) {
       window.recaptchaVerifier = new RecaptchaVerifier(
         "recaptcha-container",
         {
           size: "invisible",
-          // callback: (response: string) => {
-          //   console.log("Recaptcha response:", response);
-          // },
         },
         auth
       );
@@ -65,9 +61,10 @@ const LoginPage: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSend: (e: any) => void = (e) => {
     e.preventDefault();
-    console.log("(+976)", phoneNumber);
+    console.log("send: (+976)", phoneNumber);
 
     setTimer(true);
+
     if (phoneNumber.length === 8) {
       setSuccess(true);
       onCaptcha();
@@ -78,7 +75,7 @@ const LoginPage: React.FC = () => {
       )
         .then((confirmationResult) => {
           window.confirmationResult = confirmationResult;
-          toast.success("Sent!");
+          toast.success("Phone number sent!");
         })
         .catch((error) => toast.error("Error! SMS not sent", error));
     }
@@ -93,20 +90,41 @@ const LoginPage: React.FC = () => {
     if (otp) {
       window.confirmationResult
         .confirm(otp)
-        .then(
-          (res: {
-            user: { phoneNumber: string };
-            _tokenResponse: { idToken: string };
-          }) => {
-            console.log("Verify: ", res.user.phoneNumber);
-            console.log("Verified user token: ", res._tokenResponse.idToken);
+        .then((res: { user: { phoneNumber: string } }) => {
+          console.log("Verified: ", res.user.phoneNumber);
 
-            router.push("/account");
-          }
+          axios
+            .get(
+              // `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user/${phoneNumber}`
+              `${process.env.NEXT_PUBLIC_PORT}/user/${phoneNumber}`
+            )
+            .then((res) =>
+              setNewReservation((prev: IReservation) => ({
+                ...prev,
+                user: res.data._id,
+              }))
+            )
+            .catch((error) => console.log("Axios error!", error));
+          localStorage.removeItem("newRes");
+
+          // router.push("/account");
+        })
+        .then(
+          axios
+            .post(
+              // `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation/add`,
+              `${process.env.NEXT_PUBLIC_PORT}/reservation/add`,
+              newReservation
+            )
+            .then((res) => {
+              console.log(res.data);
+              toast.success("Reservation successfully added!");
+            })
+            .catch((err) => console.log("newError: ", err))
         )
-        .catch((err: object) => {
-          console.log(err);
-        });
+        .catch(() => toast.error("Invalid Verification Code!"));
+    } else {
+      console.log(`No Verification Code!`);
     }
   };
   return (
@@ -190,6 +208,13 @@ const LoginPage: React.FC = () => {
           </form>
         </section>
       )}
+      <ToastContainer
+        autoClose={3000}
+        position="top-right"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+      />
     </div>
   );
 };

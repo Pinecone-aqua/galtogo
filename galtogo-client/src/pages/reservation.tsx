@@ -1,6 +1,6 @@
 import RoomArea from "@/components/subcomponents/RoomArea";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { today } from "@/utils/constants";
 import { Calendar } from "@amir04lm26/react-modern-calendar-date-picker";
 import "@amir04lm26/react-modern-calendar-date-picker/lib/DatePicker.css";
@@ -10,95 +10,125 @@ import { toast } from "react-toastify";
 import OrderDetails from "@/components/subcomponents/OrderDetails";
 import Button from "@/components/subcomponents/Button";
 import { useRouter } from "next/router";
+import { useReservation } from "@/context/ReservationContext";
+import PhoneInput from "@/components/subcomponents/PhoneInput";
 
 export default function Reservation(props: {
   disabledDays: IDisabledDay[];
 }): JSX.Element {
   const { disabledDays } = props;
+
+  const { newReservation, setNewReservation } = useReservation();
   const router = useRouter();
   const [date, setDate] = useState<IDate>(today);
   const [tablesData, setTablesData] = useState<ITable[]>([]);
-
+  const [view, setView] = useState<string>("");
   const [tableNumber, setTableNumber] = useState<number>(0);
-  const [newReservation, setNewReservation] = useState<IReservation>({
-    time: "",
-    date: "",
-    persons: 0,
-    user: "",
-    table: "",
-  });
 
-  // console.log(tableNumber);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleClickDay = (date: any) => {
-    setTablesData([]);
-    setDate(date);
+  useEffect(() => {
+    getTables();
+  }, []);
 
-    // console.log("ClickDay: ", date);
-    console.log("reservation", newReservation);
-    setNewReservation((prev) => ({
-      ...prev,
-      date: `${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${date.day < 10 ? "0" : ""
-        }${date.day}`,
-    }));
-
-    // branchId/tables
+  const getTables = () => {
     axios
       .get(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/table`)
       .then((res) => setTablesData(res.data))
       .catch((err) => toast.error(err));
   };
 
-  return (
-    <div className="flex gap-[16px] m-[40px]">
-      <div className="">
-        <Calendar
-          value={date}
-          onChange={handleClickDay}
-          minimumDate={today}
-          disabledDays={disabledDays}
-          shouldHighlightWeekends
-        />
-        <GuestInput setNewReservation={setNewReservation} />
-        <AvailableTime setNewReservation={setNewReservation} />
-      </div>
-      <div className="w-full flex flex-col gap-4">
-        <div className="border">
-          <RoomArea
-            setTableNumber={setTableNumber}
-            tablesData={tablesData}
-            setNewReservation={setNewReservation}
-            newReservation={newReservation}
-          />
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleClickDay = (date: any) => {
+    setTablesData([]);
+    setDate(date);
+
+    setNewReservation((prev) => ({
+      ...prev,
+      date: `${date.year}-${date.month < 10 ? "0" : ""}${date.month}-${
+        date.day < 10 ? "0" : ""
+      }${date.day}`,
+    }));
+    getTables();
+  };
+
+  const handleContinue = () => {
+    setView("phoneInput");
+  };
+  const handleCancel = () => {
+    router.push("/reservation");
+  };
+
+  switch (view) {
+    case "phoneInput":
+      return <PhoneInput tableNumber={tableNumber} />;
+    // return <div>input</div>;
+    case "OtpInput":
+      return <div>OtpVerify</div>;
+    default:
+      return (
+        <div className="flex md:flex-nowrap flex-wrap gap-[16px] m-[40px]">
+          <div className="mx-auto">
+            <Calendar
+              value={date}
+              onChange={handleClickDay}
+              minimumDate={today}
+              disabledDays={disabledDays}
+              shouldHighlightWeekends
+            />
+            <GuestInput setNewReservation={setNewReservation} />
+            <AvailableTime
+              newReservation={newReservation}
+              setNewReservation={setNewReservation}
+            />
+          </div>
+          <div className="w-full flex flex-col gap-4">
+            <div className="">
+              <RoomArea
+                setTableNumber={setTableNumber}
+                tablesData={tablesData}
+                setNewReservation={setNewReservation}
+                newReservation={newReservation}
+              />
+            </div>
+            <div className="">
+              <OrderDetails tableNumber={tableNumber} />
+
+              <div className="flex justify-center">
+                <Button
+                  size={"lg"}
+                  variant={"ghost"}
+                  onClick={handleCancel}
+                  className="m-4"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  className={`${
+                    newReservation._id !== "" &&
+                    newReservation.date !== "" &&
+                    newReservation.persons !== 0 &&
+                    newReservation.time !== "--:--"
+                      ? "bg-[#0D5C63]"
+                      : "bg-slate-400"
+                  } m-4`}
+                  size={"lg"}
+                  disabled={
+                    newReservation._id == "" ||
+                    newReservation.date == "" ||
+                    newReservation.persons == 0 ||
+                    newReservation.table == undefined ||
+                    newReservation.time == "--:--"
+                  }
+                  variant={"brand"}
+                  onClick={handleContinue}
+                >
+                  Continue
+                </Button>
+              </div>
+            </div>
+          </div>
         </div>
-        <OrderDetails
-          newReservation={newReservation}
-          tableNumber={tableNumber}
-        />
-        <div>
-          <Button size={"lg"} variant={"ghost"}>
-            Cancel
-          </Button>
-          <Button
-            className={`${newReservation._id !== "" &&
-              newReservation.date !== "" &&
-              newReservation.persons !== 0 &&
-              newReservation.table !== "" &&
-              newReservation.time !== "--:--"
-              ? "bg-[#0D5C63]"
-              : "bg-slate-400"
-              }`}
-            size={"lg"}
-            variant={"brand"}
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
-            onClick={() => router.push("/loginPage")}
-          >
-            Continue
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
+      );
+  }
 }
 
 export const getStaticProps: () => Promise<{

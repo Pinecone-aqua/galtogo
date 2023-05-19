@@ -27,7 +27,7 @@ const RoomTable: FC<RoomTableProps> = ({ table }: RoomTableProps) => {
         variant="default"
         shape={shape}
         size={size}
-        className="table-button"
+        className="table-button text-center"
       >
         # {table.name}
       </Table>

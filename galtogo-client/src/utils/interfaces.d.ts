@@ -3,8 +3,8 @@ interface IReservation {
   time: string;
   date: string;
   persons: number;
-  user: IUser | string;
-  table: ITable | string;
+  user?: mongoose.Schema.Types.ObjectId;
+  table?: mongoose.Schema.Types.ObjectId;
 }
 
 interface ICategory {
@@ -34,6 +34,8 @@ interface ITable {
   name: number;
   capacity: number;
   isActive: boolean;
+  shape: enum;
+  size: enum;
   coords: {
     posX: number;
     posY: number;

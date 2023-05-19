@@ -18,7 +18,7 @@ export class UserService {
     let currentUser = {
       lastName: '',
       firstName: '',
-      userEmail: '',
+      email: '',
       phone: phone,
       role: 'GUEST',
     };
@@ -34,12 +34,6 @@ export class UserService {
   async addUser(user: CreateUserDto): Promise<User> {
     const result = await this.userModel.create(user);
     return result;
-  }
-
-  async loginUser(phoneNumber: string) {
-    console.log('login user phone: ', phoneNumber);
-    // const result = await this.userModel.create(user);
-    // return result;
   }
 
   async updateUser(id: string, user: UpdateUserDto) {
