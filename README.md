@@ -75,4 +75,4 @@ GALTOGO WebApp is a system for online booking reservations in a restaurant. GALT
 
 ---
 
-=========== All rights reserved :) ============
++=========== All rights reserved :) ============+
