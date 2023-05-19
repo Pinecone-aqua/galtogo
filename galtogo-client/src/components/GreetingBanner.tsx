@@ -33,7 +33,7 @@ export default function GreetingBanner(): JSX.Element {
             <picture>
               <img
                 className="h-[542px] w-full object-cover shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
-                src="http://res.heraldm.com/content/image/2018/02/09/20180209000936_0.jpg"
+                src="https://res.cloudinary.com/dr3rpqkpb/image/upload/v1684472473/images_k3l9jm.jpg"
                 alt="chef-img"
               />
             </picture>
