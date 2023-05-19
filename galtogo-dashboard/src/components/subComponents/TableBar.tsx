@@ -3,11 +3,14 @@ import { tableTimes } from "@/utils/constants";
 import Button from "./Button";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import EditTable from "./EditTable";
 
 interface TableBarProps {
   reservations: IReservation[];
   table: ITable;
   tablesData: ITable[];
+  setTablesDatas: React.Dispatch<React.SetStateAction<ITable[]>>;
   onDeleteTable: (tableId: string) => void;
 }
 
@@ -15,10 +18,12 @@ export default function TableBar({
   reservations,
   table: initialTable,
   onDeleteTable,
+  setTablesDatas,
 }: TableBarProps) {
   const [table] = useState(initialTable);
   const [loading, setLoading] = useState(false);
   const [deleted, setDeleted] = useState(false);
+  const [showTableEdit, setShowTableEdit] = useState(false);
   const tableCells = [...tableTimes];
 
   tableTimes.forEach((el, i) => {
@@ -53,28 +58,45 @@ export default function TableBar({
       });
     }
   }
-
   if (deleted) {
     return null;
   }
 
   return (
     <div className="bg-gray-50 hover:bg-gray-100 p-2 rounded-lg m-3">
-      <div className="flex items-center ">
-        <div className="bg-purple-200 rounded-lg p-3">
-          <MdTableRestaurant className="text-purple-800" />
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-5">
+          <div className="bg-purple-200 rounded-lg p-3">
+            <MdTableRestaurant className="text-purple-800" />
+          </div>
+          <div className="">Table {table.name}</div>
         </div>
-        <p className="pl-4">Table {table.name}</p>
-        <Button
-          type="button"
-          variant="red"
-          size="sm"
-          className="sm:mx-6 m-3"
-          onClick={() => deleteHandler(table._id)}
-          disabled={loading}
-        >
-          {loading ? "Deleting..." : "Delete Table"}
-        </Button>
+
+        <div>
+          <button
+            onClick={() => setShowTableEdit(true)}
+            className="bg-green-200 p-2 rounded-lg text-black hover:bg-green-400"
+          >
+            <AiOutlineEdit />
+          </button>
+          {showTableEdit && (
+            <EditTable
+              setShowTableEdit={setShowTableEdit}
+              table={table}
+              setTablesDatas={setTablesDatas}
+            />
+          )}
+          <Button
+            type="button"
+            variant="red"
+            size="sm"
+            className=""
+            onClick={() => deleteHandler(table._id)}
+            disabled={loading}
+          >
+            {loading ? "Deleting..." : <AiOutlineDelete />}
+          </Button>
+        </div>
       </div>
       <div className="bg-gray-50 hover:bg-gray-100 rounded-lg my-3 p-2 grid  sm:grid-cols-6 grid-cols-3 gap-1 items-center justify-between cursor-pointer">
         {tableCells.map((tableCell, index: number) => (

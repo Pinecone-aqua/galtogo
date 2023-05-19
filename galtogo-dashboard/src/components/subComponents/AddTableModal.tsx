@@ -63,6 +63,7 @@ export default function AddTable({
   return (
     <form className="grid grid-cols-2 w-4/6 gap-4" onSubmit={handleSubmit}>
       <div className="input-type">
+        <p> Table Name:</p>
         <input
           type="number"
           name="name"
@@ -73,6 +74,7 @@ export default function AddTable({
         />
       </div>
       <div className="input-type">
+        <p> Table Capacity:</p>
         <input
           type="number"
           name="capacity"
@@ -83,10 +85,11 @@ export default function AddTable({
         />
       </div>
       <div className="input-type">
+        <p className="">Table Size:</p>
         <select
           name="size"
           value={newTable.size}
-          className="border w-full px-5 py-3 focus:outline-none rounded-md"
+          className="border w-full px-5 py-3 focus:outline-none rounded-md mt-2"
           onChange={handleSelectChange}
         >
           {tableSizes.map((size) => (
@@ -97,10 +100,11 @@ export default function AddTable({
         </select>
       </div>
       <div className="input-type">
+        Table Shape:
         <select
           name="shape"
           value={newTable.shape}
-          className={`border w-full px-5 py-3 focus:outline-none rounded-md`}
+          className={`border w-full px-5 py-3 focus:outline-none rounded-md mt-2`}
           onChange={handleSelectChange}
         >
           {tableShapes.map((shape) => (

@@ -79,6 +79,7 @@ export default function Tables(props: {
                   table={table}
                   onDeleteTable={handleDeleteTable}
                   tablesData={[]}
+                  setTablesDatas={setTablesDatas}
                 />
               </div>
             ))}
