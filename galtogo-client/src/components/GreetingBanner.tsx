@@ -1,5 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 
+import Image from "next/image";
+
 export default function GreetingBanner(): JSX.Element {
   return (
     <div className="relative ">
@@ -20,35 +22,36 @@ export default function GreetingBanner(): JSX.Element {
               <p className="font-medium text-white md:text-start">
                 Yuna restaurant-ын ахлах тогооч
               </p>
-              <picture>
-                <img
-                  className="max-h-[42px] min-h-[16px]"
-                  src="./Signature.svg"
-                  alt="signature"
-                />
-              </picture>
+              <Image
+                className="max-h-[42px] min-h-[16px]"
+                src="./Signature.svg"
+                alt="signature"
+                width={144}
+                height={144}
+              />
             </div>
           </div>
           <div className="min-w-[324px] lg:w-[524px] hidden md:block">
-            <picture>
-              <img
-                className="h-[542px] w-full object-cover shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
-                src="https://res.cloudinary.com/dr3rpqkpb/image/upload/v1684472473/images_k3l9jm.jpg"
-                alt="chef-img"
-              />
-            </picture>
+            <Image
+              className="h-[542px] w-full object-cover shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
+              src="https://res.cloudinary.com/dr3rpqkpb/image/upload/v1684474602/chef_s_image_gmsvqk.png"
+              alt="chef-img"
+              width={1000}
+              height={1000}
+              quality={100}
+            />
           </div>
         </div>
       </div>
       <div className="absolute w-full h-[620px] md:h-[520px] bg-gradient-to-r from-[#0D5C63] to-[#0D5C63B2]" />
       <div className="h-[620px] md:h-[520px] w-full">
-        <picture>
-          <img
-            className="w-full h-full object-cover"
-            src="https://res.cloudinary.com/dr3rpqkpb/image/upload/v1683639802/Rectangle_71_z58pbx.png"
-            alt="bannerPhoto"
-          />
-        </picture>
+        <Image
+          className="w-full h-full object-cover"
+          src="https://res.cloudinary.com/dr3rpqkpb/image/upload/v1683639802/Rectangle_71_z58pbx.png"
+          alt="bannerPhoto"
+          width={1000}
+          height={1000}
+        />
       </div>
       <div className="bg-[#FFDC83] h-[8px] w-full" />
     </div>
