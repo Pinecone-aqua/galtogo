@@ -1,0 +1,93 @@
+@import "../mixins.scss";
+
+.container {
+  display: flex;
+
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 64px;
+}
+
+.header {
+  color: #0d5c63;
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0 auto;
+  width: fit-content;
+  margin-bottom: 48px;
+}
+
+.logo {
+  object-fit: contain;
+  height: 144px;
+  width: 186px;
+}
+
+.section {
+  padding: 156px 0;
+}
+
+@include respond-to("tablet") {
+  .container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 64px;
+    margin: 0 24px;
+  }
+
+  .logo {
+    object-fit: contain;
+    height: 144px;
+    width: 218px;
+  }
+
+  .header {
+    color: #0d5c63;
+    font-size: 40px;
+    font-weight: 700;
+    margin: 0 auto;
+    width: fit-content;
+  }
+}
+
+@include respond-to("mobile") {
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+  .logo {
+    object-fit: contain;
+    height: 72px;
+    width: 186px;
+  }
+
+  .header {
+    color: #0d5c63;
+    font-size: 32px;
+    padding-bottom: 32px;
+    font-weight: 700;
+    margin: 0 auto;
+    width: fit-content;
+  }
+}
+
+@include respond-to("desktop") {
+  .container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    align-items: center;
+    gap: 150px;
+    margin: 0 72px;
+  }
+
+  .logo {
+    object-fit: contain;
+    height: 144px;
+    width: 250px;
+  }
+}

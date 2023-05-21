@@ -1,53 +1,101 @@
 import Image from "next/image";
-
-const contributors = [
-  {
-    imageUrl:
-      "https://res.cloudinary.com/dfwhxsxqb/image/upload/v1684383224/Ramada-Logo_j9tpke.jpg",
-    altText: "Ramada",
-  },
-  {
-    imageUrl:
-      "https://res.cloudinary.com/dfwhxsxqb/image/upload/v1684383942/SHANGRI_LA_HOTEL_zpowjc.webp",
-    altText: "Shangri-La Hotel",
-  },
-  {
-    imageUrl:
-      "https://res.cloudinary.com/dfwhxsxqb/image/upload/v1684384126/Novotel_Logo_r2qs1l.png",
-    altText: "Novotel",
-  },
-  {
-    imageUrl:
-      "https://res.cloudinary.com/dfwhxsxqb/image/upload/v1684383920/download_mgfzi8.png",
-    altText: "BlueSky",
-  },
-  {
-    imageUrl:
-      "https://res.cloudinary.com/dfwhxsxqb/image/upload/v1684419400/naadam-club_gmmkg7.png",
-    altText: "Naadam",
-  },
-  {
-    imageUrl:
-      "https://res.cloudinary.com/dfwhxsxqb/image/upload/v1684419523/central-tower-logo-kopyas%C4%B1_C%CC%A7al%C4%B1s%CC%A7ma-Yu%CC%88zeyi-1-kopya-300x212_auq3o8.png",
-    altText: "Central",
-  },
-];
+import contributors from "../../styles/special/contributors.module.scss";
 
 export default function Contributors(): JSX.Element {
   return (
-    <div className="flex justify-around flex-wrap ml-20 mr-20 mb-10 mt-10">
-      {contributors.map((contributor, index) => (
-        <div key={index} className="flex justify-center items-center m-2">
-          <Image
-            src={contributor.imageUrl}
-            width={200}
-            height={100}
-            quality={100}
-            alt={contributor.altText}
-            className="contributor-image"
-          />
-        </div>
-      ))}
-    </div>
+    <section className={contributors.section}>
+      <h1 className={contributors.header}>Our contributors</h1>
+      <div className={contributors.container}>
+        <Image
+          className={contributors.logo}
+          src={
+            "https://res.cloudinary.com/dr3rpqkpb/image/upload/v1684594109/Contributers/download_1_kywayi.png"
+          }
+          height={72}
+          width={300}
+          alt="Ramada"
+        />
+
+        <Image
+          className={contributors.logo}
+          src={
+            "https://res.cloudinary.com/dr3rpqkpb/image/upload/v1684594109/Contributers/eaf6c-59339796_2268193230110242_1704844065071169536_o_1_a9pnky.png"
+          }
+          height={72}
+          width={300}
+          alt="Novotel"
+        />
+
+        <Image
+          className={contributors.logo}
+          src={
+            "https://res.cloudinary.com/dr3rpqkpb/image/upload/v1684594109/Contributers/MCS_Group_Logo_1_jlhzqt.png"
+          }
+          height={72}
+          width={300}
+          alt="MCS"
+        />
+
+        <Image
+          className={contributors.logo}
+          src={
+            "https://res.cloudinary.com/dr3rpqkpb/image/upload/v1684594109/Contributers/the-logo-originated-from_1_k3pfwz.png"
+          }
+          height={72}
+          width={300}
+          alt="FiveRivers"
+        />
+
+        <Image
+          className={contributors.logo}
+          src={
+            "https://res.cloudinary.com/dr3rpqkpb/image/upload/v1684594109/Contributers/6e069b81-8586-4403-a7eb-a39cadad75d0_1_qteujk.png"
+          }
+          height={72}
+          width={300}
+          alt="SoyolWellness"
+        />
+
+        <Image
+          className={contributors.logo}
+          src={
+            "https://res.cloudinary.com/dr3rpqkpb/image/upload/v1684594109/Contributers/589a48165aa6293a4aac48b8_1_djl1tq.png"
+          }
+          height={72}
+          width={300}
+          alt="Shangri-la"
+        />
+
+        <Image
+          className={contributors.logo}
+          src={
+            "https://res.cloudinary.com/dr3rpqkpb/image/upload/v1684594109/Contributers/14715425_1522875987726210_6757629794993177966_o_1_lmu6cm.png"
+          }
+          height={72}
+          width={300}
+          alt="ChoijinTemple"
+        />
+
+        <Image
+          className={contributors.logo}
+          src={
+            "https://res.cloudinary.com/dr3rpqkpb/image/upload/v1684594109/Contributers/327190706_905875477115373_2584596075861962674_n_1_jsjihx.png"
+          }
+          height={72}
+          width={300}
+          alt="BlueSky"
+        />
+
+        <Image
+          className={contributors.logo}
+          src={
+            "https://res.cloudinary.com/dr3rpqkpb/image/upload/v1684594109/Contributers/46117_a80fe8c64317779503905b762951fef2965cb3ec_1_vnoeqh.png"
+          }
+          height={72}
+          width={300}
+          alt="KhujirtWellness"
+        />
+      </div>
+    </section>
   );
 }
