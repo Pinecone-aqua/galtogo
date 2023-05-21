@@ -5,6 +5,7 @@ import React, { useState } from "react";
 interface EditTableProps {
   table: ITable;
   setShowTableEdit: React.Dispatch<React.SetStateAction<boolean>>;
+  setEditedTable: React.Dispatch<React.SetStateAction<ITable | null>>;
   setTablesDatas: React.Dispatch<React.SetStateAction<ITable[]>>;
 }
 
@@ -12,6 +13,7 @@ const EditTable: React.FC<EditTableProps> = ({
   table,
   setShowTableEdit,
   setTablesDatas,
+  setEditedTable,
 }) => {
   const [name, setName] = useState(table.name);
   const [capacity, setCapacity] = useState(table.capacity);
@@ -21,7 +23,11 @@ const EditTable: React.FC<EditTableProps> = ({
   const tableShapes = Object.values(TableShape);
   const tableSizes = Object.values(TableSize);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const submitHandlerTable = async (e: any): Promise<void> => {
+  // const submitHandlerTable = async (e: any): Promise<void> => {
+
+  const submitHandlerTable = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/table/${table._id}`,
@@ -36,29 +42,45 @@ const EditTable: React.FC<EditTableProps> = ({
         }),
       }
     );
+    // if (response.ok) {
+    //   setTablesDatas((prevTables) =>
+    //     prevTables.map((prevTable) =>
+    //       prevTable._id === table._id
+    //         ? {
+    //             ...prevTable,
+    //             name,
+    //             capacity,
+    //             shape,
+    //             size,
+    //             coord: { posX: 0, posY: 0 },
+    //           }
+    //         : prevTable
+    //     )
+    //   );
     if (response.ok) {
+      const editedTable = {
+        ...table,
+        name,
+        capacity,
+        shape,
+        size,
+        coord: { posX: 0, posY: 0 },
+      };
       setTablesDatas((prevTables) =>
         prevTables.map((prevTable) =>
-          prevTable._id === table._id
-            ? {
-                ...prevTable,
-                name,
-                capacity,
-                shape,
-                size,
-                coord: { posX: 0, posY: 0 },
-              }
-            : prevTable
+          prevTable._id === table._id ? editedTable : prevTable
         )
       );
+      setEditedTable(editedTable);
       setShowTableEdit(false);
     }
   };
+
   console.log("table", table);
   // console.log("settable", setTable);
 
   return (
-    <div className="fixed z-10 inset-0 overflow-y-auto">
+    <div className="fixed z-50 inset-0 overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen">
         <div className="fixed inset-0 transition-opacity" aria-hidden="true">
           <div className="absolute inset-0 bg-gray-500 opacity-75" />

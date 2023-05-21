@@ -5,8 +5,10 @@ import { toast } from "react-toastify";
 
 export default function AddTable({
   setTablesDatas,
+  onAddTableSuccess,
 }: {
   setTablesDatas: Dispatch<SetStateAction<ITable[]>>;
+  onAddTableSuccess: (newTable: ITable) => void;
 }): JSX.Element {
   const [newTable, setNewTable] = useState<ITable>({
     name: 0,
@@ -18,6 +20,32 @@ export default function AddTable({
   const tableShapes = Object.values(TableShape);
   const tableSizes = Object.values(TableSize);
 
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   console.log("newTable", newTable);
+  //   fetch(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/table/add`, {
+  //     headers: { "Content-Type": "application/json" },
+  //     method: "POST",
+  //     body: JSON.stringify(newTable),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setTablesDatas((prevTablesData) => [...prevTablesData, data]);
+  //       setNewTable({
+  //         name: 0,
+  //         capacity: 0,
+  //         size: TableSize.MEDIUM,
+  //         shape: TableShape.ROUND,
+  //         coords: { posX: 0, posY: 0 },
+  //       });
+  //       toast.success("Table added successfully");
+  //       onAddTableSuccess(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       toast.error("Error adding table");
+  //     });
+  // };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("newTable", newTable);
@@ -28,7 +56,6 @@ export default function AddTable({
     })
       .then((response) => response.json())
       .then((data) => {
-        setTablesDatas((prevTablesData) => [...prevTablesData, data]);
         setNewTable({
           name: 0,
           capacity: 0,
@@ -37,6 +64,7 @@ export default function AddTable({
           coords: { posX: 0, posY: 0 },
         });
         toast.success("Table added successfully");
+        onAddTableSuccess(data);
       })
       .catch((error) => {
         console.log(error);
@@ -44,11 +72,24 @@ export default function AddTable({
       });
   };
 
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   setNewTable((prevTable) => ({
+  //     ...prevTable,
+  //     [name]: value,
+  //   }));
+  // };
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    let parsedValue = parseInt(value);
+
+    if (name === "name" || name === "capacity") {
+      parsedValue = Math.max(parsedValue, 0); // Ensure the value is not negative
+    }
+
     setNewTable((prevTable) => ({
       ...prevTable,
-      [name]: value,
+      [name]: parsedValue,
     }));
   };
 
@@ -61,20 +102,23 @@ export default function AddTable({
   };
 
   return (
-    <form className="grid grid-cols-2 w-4/6 gap-4" onSubmit={handleSubmit}>
+    <form
+      className="grid grid-cols-2 w-4/6 gap-4 border border-gray-200 rounded p-10"
+      onSubmit={handleSubmit}
+    >
       <div className="input-type">
-        <p> Table Name:</p>
+        <p className="mb-5"> Table Name:</p>
         <input
           type="number"
           name="name"
           className="border w-full px-5 py-3 focus:outline-none rounded-md"
-          placeholder="Ширээний нэр"
+          placeholder="Enter table name"
           value={newTable.name}
           onChange={handleInputChange}
         />
       </div>
       <div className="input-type">
-        <p> Table Capacity:</p>
+        <p className="mb-5"> Table Capacity:</p>
         <input
           type="number"
           name="capacity"
@@ -99,7 +143,7 @@ export default function AddTable({
           ))}
         </select>
       </div>
-      <div className="input-type">
+      <div className="input-type mb-5">
         Table Shape:
         <select
           name="shape"

@@ -25,6 +25,7 @@ export default function TableBar({
   const [deleted, setDeleted] = useState(false);
   const [showTableEdit, setShowTableEdit] = useState(false);
   const tableCells = [...tableTimes];
+  const [editedTable, setEditedTable] = useState<ITable | null>(null);
 
   tableTimes.forEach((el, i) => {
     reservations.forEach((reservation) => {
@@ -64,15 +65,17 @@ export default function TableBar({
 
   return (
     <div className="bg-gray-50 hover:bg-gray-100 p-2 rounded-lg m-3">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-center justify-between">
         <div className="flex items-center gap-5">
           <div className="bg-purple-200 rounded-lg p-3">
             <MdTableRestaurant className="text-purple-800" />
           </div>
-          <div className="">Table {table.name}</div>
+          <div className="whitespace-nowrap">
+            Table {editedTable ? editedTable.name : table.name}
+          </div>
         </div>
 
-        <div>
+        <div className="flex items-center mt-3 sm:mt-0">
           <button
             onClick={() => setShowTableEdit(true)}
             className="bg-green-200 p-2 rounded-lg text-black hover:bg-green-400"
@@ -84,13 +87,14 @@ export default function TableBar({
               setShowTableEdit={setShowTableEdit}
               table={table}
               setTablesDatas={setTablesDatas}
+              setEditedTable={setEditedTable}
             />
           )}
           <Button
             type="button"
             variant="red"
             size="sm"
-            className=""
+            className="ml-2"
             onClick={() => deleteHandler(table._id)}
             disabled={loading}
           >
@@ -98,7 +102,7 @@ export default function TableBar({
           </Button>
         </div>
       </div>
-      <div className="bg-gray-50 hover:bg-gray-100 rounded-lg my-3 p-2 grid  sm:grid-cols-6 grid-cols-3 gap-1 items-center justify-between cursor-pointer">
+      <div className="bg-gray-50 hover:bg-gray-100 rounded-lg my-3 p-2 grid sm:grid-cols-6 grid-cols-3 gap-1 items-center justify-between cursor-pointer">
         {tableCells.map((tableCell, index: number) => (
           <div
             key={index}
