@@ -3,8 +3,8 @@ interface IReservation {
   time: string;
   date: string;
   persons: number;
-  user: IUser;
-  table: ITable;
+  user: IUser | null;
+  table: ITable | null;
   status: string;
 }
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { useRouter } from "next/router";
+
 import { auth } from "../../config/firebase-config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,7 +19,7 @@ declare global {
   }
 }
 const PhoneInput = ({ tableNumber }: { tableNumber: number }): JSX.Element => {
-  const router = useRouter();
+  // const router = useRouter();
   const { newReservation, setNewReservation } = useReservation();
   const [otp, setOtp] = useState<string>();
   const [timer, setTimer] = useState(false);
@@ -96,8 +96,8 @@ const PhoneInput = ({ tableNumber }: { tableNumber: number }): JSX.Element => {
 
           const resData: IUser = await axios
             .get(
-              `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user/${phoneNumber}`
-              // `${process.env.NEXT_PUBLIC_PORT}/user/${phoneNumber}`
+              `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user/phone/${phoneNumber}`
+              // `${process.env.NEXT_PUBLIC_PORT}/user/phone/${phoneNumber}`
             )
             .then((res) => res.data)
             .catch((error) => console.log("Axios error!", error));
@@ -129,7 +129,11 @@ const PhoneInput = ({ tableNumber }: { tableNumber: number }): JSX.Element => {
         })
         .catch((err) => console.log("newError: ", err));
 
-    router.push("/account");
+    newReservation.user &&
+      axios.get(
+        `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user/auth/user?id=${newReservation.user}`
+        // `${process.env.NEXT_PUBLIC_PORT}/user/auth/user?id=${newReservation.user}`
+      );
   };
   return (
     <div className="w-screen h-screen flex flex-col md:pt-40 pt-10">

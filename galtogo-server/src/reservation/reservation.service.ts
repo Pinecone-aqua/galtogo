@@ -20,7 +20,7 @@ export class ReservationService {
         [query.filter, query.isAsc],
         ['time', 'asc'],
       ]);
-
+    console.log(result);
     return result;
   }
 

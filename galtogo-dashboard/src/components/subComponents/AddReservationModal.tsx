@@ -16,7 +16,7 @@ export default function AddReservationModal({
     e.preventDefault();
     const userId = await axios
       .get(
-        `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user/${e.target.phone.value}`
+        `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user/phone/${e.target.phone.value}`
       )
       .then((res) => res.data)
       .catch((err) => console.log("user: ", err));
