@@ -25,8 +25,8 @@ export default function Reservations(props: {
     axios
       .get(
         `${
-          // process.env.NEXT_PUBLIC_GALTOGO_SERVER_API
-          process.env.NEXT_PUBLIC_GALTOGO_PORT
+          process.env.NEXT_PUBLIC_GALTOGO_SERVER_API
+          // process.env.NEXT_PUBLIC_GALTOGO_PORT
         }/reservation?filter=${filter}&isAsc=${toggleFilter ? "asc" : "desc"}`
       )
       .then((res) => setReservations(res.data))
@@ -118,15 +118,15 @@ export const getServerSideProps: () => Promise<{
 }> = async () => {
   const reservationData = await axios
     .get(
-      // `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation?filter=date&isAsc=desc`
-      `${process.env.NEXT_PUBLIC_PORT}/reservation?filter=date&isAsc=desc`
+      `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation?filter=date&isAsc=desc`
+      // `${process.env.NEXT_PUBLIC_PORT}/reservation?filter=date&isAsc=desc`
     )
     .then((res) => res.data)
     .catch((err) => console.log(err));
 
   const tablesData = await axios
-    // .get(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/table`)
-    .get(`${process.env.NEXT_PUBLIC_PORT}/table`)
+    .get(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/table`)
+    // .get(`${process.env.NEXT_PUBLIC_PORT}/table`)
     .then((res) => res.data);
   return {
     props: {

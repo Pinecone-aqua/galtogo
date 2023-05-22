@@ -24,6 +24,7 @@ export default function TableBar({
   tableTimes.forEach((el, i) => {
     reservations.forEach((reservation) => {
       if (
+        reservation.table &&
         table.name === reservation.table.name &&
         el.time === reservation.time
       ) {

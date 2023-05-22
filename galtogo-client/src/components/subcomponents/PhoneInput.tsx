@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { useRouter } from "next/router";
+
 import { auth } from "../../config/firebase-config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
