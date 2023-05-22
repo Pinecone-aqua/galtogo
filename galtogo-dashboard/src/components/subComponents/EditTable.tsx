@@ -22,9 +22,8 @@ const EditTable: React.FC<EditTableProps> = ({
 
   const tableShapes = Object.values(TableShape);
   const tableSizes = Object.values(TableSize);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // const submitHandlerTable = async (e: any): Promise<void> => {
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const submitHandlerTable = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
@@ -42,21 +41,6 @@ const EditTable: React.FC<EditTableProps> = ({
         }),
       }
     );
-    // if (response.ok) {
-    //   setTablesDatas((prevTables) =>
-    //     prevTables.map((prevTable) =>
-    //       prevTable._id === table._id
-    //         ? {
-    //             ...prevTable,
-    //             name,
-    //             capacity,
-    //             shape,
-    //             size,
-    //             coord: { posX: 0, posY: 0 },
-    //           }
-    //         : prevTable
-    //     )
-    //   );
     if (response.ok) {
       const editedTable = {
         ...table,
@@ -75,9 +59,6 @@ const EditTable: React.FC<EditTableProps> = ({
       setShowTableEdit(false);
     }
   };
-
-  console.log("table", table);
-  // console.log("settable", setTable);
 
   return (
     <div className="fixed z-50 inset-0 overflow-y-auto">
