@@ -20,32 +20,6 @@ export default function AddTable({
   const tableShapes = Object.values(TableShape);
   const tableSizes = Object.values(TableSize);
 
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   console.log("newTable", newTable);
-  //   fetch(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/table/add`, {
-  //     headers: { "Content-Type": "application/json" },
-  //     method: "POST",
-  //     body: JSON.stringify(newTable),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setTablesDatas((prevTablesData) => [...prevTablesData, data]);
-  //       setNewTable({
-  //         name: 0,
-  //         capacity: 0,
-  //         size: TableSize.MEDIUM,
-  //         shape: TableShape.ROUND,
-  //         coords: { posX: 0, posY: 0 },
-  //       });
-  //       toast.success("Table added successfully");
-  //       onAddTableSuccess(data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       toast.error("Error adding table");
-  //     });
-  // };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("newTable", newTable);
@@ -72,13 +46,6 @@ export default function AddTable({
       });
   };
 
-  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target;
-  //   setNewTable((prevTable) => ({
-  //     ...prevTable,
-  //     [name]: value,
-  //   }));
-  // };
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     let parsedValue = parseInt(value);
