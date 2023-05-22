@@ -72,10 +72,7 @@ export default function Tables(props: {
             />
           </div>
           {showAddModal ? (
-            <AddTableModal
-              setTablesDatas={setTablesDatas}
-              onAddTableSuccess={handleAddTableSuccess}
-            />
+            <AddTableModal onAddTableSuccess={handleAddTableSuccess} />
           ) : (
             <></>
           )}

@@ -1,13 +1,11 @@
 import { TableShape, TableSize } from "@/utils/constants";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import { toast } from "react-toastify";
 
 export default function AddTable({
-  setTablesDatas,
   onAddTableSuccess,
 }: {
-  setTablesDatas: Dispatch<SetStateAction<ITable[]>>;
   onAddTableSuccess: (newTable: ITable) => void;
 }): JSX.Element {
   const [newTable, setNewTable] = useState<ITable>({
