@@ -14,12 +14,16 @@ export class UserService {
     return result;
   }
 
-  async getUserByPhone(phone: number): Promise<IUser> {
+  async getUserById(id: string): Promise<IUser> {
+    return await this.userModel.findOne({ _id: id });
+  }
+
+  async getUserByPhone(phone: string): Promise<IUser> {
     let currentUser = {
       lastName: '',
       firstName: '',
       email: '',
-      phone: phone,
+      phone: Number(phone),
       role: 'GUEST',
     };
     const result = await this.userModel.findOne({ phone }).exec();

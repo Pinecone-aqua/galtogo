@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import Button from "@/components/subComponents/Button";
+import { today } from "@/utils/constants";
 import { Calendar } from "@amir04lm26/react-modern-calendar-date-picker";
 import "@amir04lm26/react-modern-calendar-date-picker/lib/DatePicker.css";
 import axios from "axios";
@@ -60,6 +61,7 @@ export default function Settings(props: {
               <div className="bg-white rounded-lg p-1 w-fit  mx-auto">
                 <Calendar
                   value={pickerDate}
+                  minimumDate={today}
                   onChange={handleChange}
                   disabledDays={disabledDays}
                   shouldHighlightWeekends

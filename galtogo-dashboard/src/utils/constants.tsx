@@ -4,6 +4,7 @@ import { FaRegListAlt } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { RxSketchLogo, RxDashboard, RxPerson } from "react-icons/rx";
 import { BiDish } from "react-icons/bi";
+import moment from "moment";
 
 export const menuItems = [
   {
@@ -80,3 +81,9 @@ export const tableTimes = [
   { time: "20:00", isOccupied: false },
   { time: "21:00", isOccupied: false },
 ];
+
+export const today = {
+  year: Number(moment().format("YYYY")),
+  month: Number(moment().format("MM")),
+  day: Number(moment().format("DD")),
+};
