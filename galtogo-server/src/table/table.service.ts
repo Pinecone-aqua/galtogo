@@ -4,10 +4,14 @@ import { ITable, Table } from './table.schema';
 import { Model } from 'mongoose';
 import { CreateTableDto } from './dto/create-table.dto';
 import { UpdateTableDto } from './dto/update-table.dto';
+import { Reservation } from 'src/reservation/reservation.schema';
 
 @Injectable()
 export class TableService {
-  constructor(@InjectModel(Table.name) private tableModel: Model<Table>) {}
+  constructor(
+    @InjectModel(Table.name) private tableModel: Model<Table>,
+    @InjectModel(Reservation.name) private reservationModel: Model<Reservation>,
+  ) {}
 
   async getTables(): Promise<ITable[]> {
     const result = await this.tableModel.find().exec();
@@ -31,6 +35,7 @@ export class TableService {
   }
 
   async deleteTable(id: string) {
+    await this.reservationModel.findOneAndDelete({ 'table._id': id }).exec();
     await this.tableModel.findByIdAndDelete(id).exec();
     return { message: `Table deleted with id: ${id}` };
   }
