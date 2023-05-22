@@ -1,14 +1,14 @@
 import ChefTeam from "@/components/ChefTeam";
 import Layout from "@/components/Layout";
 import Contributors from "@/components/subcomponents/Contributors";
-// import MasterClassCarousel from "@/components/MasterClassCarousel";
-// import CountdownBanner from "@/components/subcomponents/CountdownBanner";
-// import Timer from "@/components/subcomponents/Timer";
+import MasterClassCarousel from "@/components/MasterClassCarousel";
+import CountdownBanner from "@/components/subcomponents/CountdownBanner";
+import Timer from "@/components/subcomponents/Timer";
 
 export default function Special() {
   return (
     <Layout>
-      {/* <div className="relative overflow-hidden w-full">
+      <div className="relative overflow-hidden w-full">
         <CountdownBanner />
         <div className="absolute text-white text-[56px] font-bold top-[38%] mx-[20%] left-0 right-0">
           <div className="flex items-center justify-between flex-wrap">
@@ -19,7 +19,7 @@ export default function Special() {
       </div>
       <div className="my-[56px]">
         <MasterClassCarousel />
-      </div> */}
+      </div>
       <ChefTeam />
       <Contributors />
     </Layout>
