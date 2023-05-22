@@ -86,15 +86,7 @@ export default function Contributors(): JSX.Element {
           alt="BlueSky"
         />
 
-        <Image
-          className={contributors.logo}
-          src={
-            "https://res.cloudinary.com/dr3rpqkpb/image/upload/v1684594109/Contributers/46117_a80fe8c64317779503905b762951fef2965cb3ec_1_vnoeqh.png"
-          }
-          height={72}
-          width={300}
-          alt="KhujirtWellness"
-        />
+
       </div>
     </section>
   );
