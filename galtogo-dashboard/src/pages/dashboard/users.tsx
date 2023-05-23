@@ -52,8 +52,8 @@ const Customers: React.FC = () => {
           </div>
 
           {showAddButton ? <AddUserButton setUsers={setUsers} /> : <></>}
-          <table className="justify-around w-full">
-            <thead>
+          <table className="justify-between w-full">
+            <thead className="text-left">
               <tr>
                 <th>First Name</th>
                 <th>Last Name</th>

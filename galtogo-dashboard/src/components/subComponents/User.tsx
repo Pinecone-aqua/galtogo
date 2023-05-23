@@ -32,15 +32,19 @@ const User: React.FC<UserProps> = ({ user, setUsers }) => {
       .then((data) => {
         const userReservations = data.filter(
           (reservation: { user: { _id: string } }) =>
-            reservation.user._id === id
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+            reservation.user && reservation.user._id === id
         );
         setReservations(userReservations);
-        setShowReservation(!showReservation); // toggle showReservation
+        setShowReservation(!showReservation);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
 
   return (
-    <tr className="textleft my-3 p-2 items-center cursor-pointer hover:bg-gray-200">
+    <tr className="my-3 p-2 cursor-pointer hover:bg-gray-200 justify-between">
       <td>{user.firstName}</td>
       <td>{user.lastName}</td>
       <td>{user.phone}</td>
@@ -56,14 +60,16 @@ const User: React.FC<UserProps> = ({ user, setUsers }) => {
           {showReservation && (
             <div className="absolute z-10 top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
               <div className="bg-white p-4 rounded-lg">
-                <p className="font-bold text-lg mb-2">Reservation dates:</p>
+                <p className="font-bold text-lg mb-2">Reservation history:</p>
                 {reservations
                   .sort(
                     (a, b) =>
                       new Date(a.date).getTime() - new Date(b.date).getTime()
                   )
                   .map((reservation) => (
-                    <p key={reservation._id}>{reservation.date}</p>
+                    <p key={reservation._id}>
+                      {reservation.date} {reservation.status}
+                    </p>
                   ))}
                 <button
                   onClick={() => setShowReservation(false)}
