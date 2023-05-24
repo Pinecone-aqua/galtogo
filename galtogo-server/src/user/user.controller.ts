@@ -51,33 +51,34 @@ export class UsersController {
     return this.userService.deleteUser(id);
   }
 
-  // @Get('auth/user')
-  // async verifyUser(
-  //   @Query() query: { id: string },
-  //   @Res() res: Response,
-  //   // @Req() req: Request,
-  // ) {
-  //   console.log('auth request revieved');
-  //   console.log('auth:', query.id);
-  //   const id = query.id;
-  //   if (!id) throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
+  @Get('auth/user')
+  async verifyUser(
+    @Query() query: { id: string },
+    @Res() res: Response,
+    // @Req() req: Request,
+  ) {
+    console.log('auth:', query.id);
+    const id = query.id;
+    if (!id) throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
 
-  //   const user = await this.userService.getUserById(query.id);
-  //   console.log('user: ', user);
+    const user = await this.userService.getUserById(query.id);
+    console.log('user: ', user);
 
-  //   const payload = {
-  //     firstName: user.firstName,
-  //     email: user.email,
-  //     role: user.role,
-  //     phone: user.phone,
-  //   };
-  //   console.log('payload: ', payload);
+    const payload = {
+      firstName: user.firstName,
+      role: user.role,
+      phone: user.phone,
+    };
+    console.log('payload: ', payload);
 
-  //   const token = this.jwtService.sign(payload);
-  //   console.log('token: ', token);
-  //   res
-  //     .status(200)
-  //     .cookie('token', token)
-  //     .redirect(`https://galtogo.vercel.app/account`);
-  // }
+    try {
+      const token = this.jwtService.sign(payload);
+      console.log('token: ', token);
+      res.status(200).send({ path: 'http://localhost:3001/', token });
+
+      // .redirect(`https://galtogo.vercel.app/account`);
+    } catch (error) {
+      console.log('token: ', error);
+    }
+  }
 }

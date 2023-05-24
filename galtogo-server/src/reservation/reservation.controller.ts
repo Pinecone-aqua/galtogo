@@ -30,9 +30,7 @@ export class ReservationController {
   }
 
   @Post('add')
-  addReservation(
-    @Body() reservation: CreateReservationDto,
-  ): Promise<IReservation> {
+  addReservation(@Body() reservation: CreateReservationDto) {
     console.log('Reservation: ', reservation);
     return this.reservationService.addReservation(reservation);
   }
