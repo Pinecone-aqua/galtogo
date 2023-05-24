@@ -73,7 +73,10 @@ export default function Navigation(): JSX.Element {
             <div className="px-3">
               Logged in as:
               <span className="font-bold px-1">
-                {JSON.parse(jwtDecode<string>(currentUser)).phone}
+                {
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  jwtDecode<any>(currentUser).phone
+                }
               </span>
             </div>
             <Button variant={"ghost"} onClick={handleLogout}>
