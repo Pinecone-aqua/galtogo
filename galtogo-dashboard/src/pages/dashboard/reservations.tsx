@@ -16,7 +16,7 @@ export default function Reservations(props: {
   const [toggleFilter, setToggleFilter] = useState<boolean>(true);
   const [showAddModal, setShowAddModal] = useState<boolean>(false);
   const [searchReservation, setSearchReservation] = useState("");
-  console.log;
+
   const handleAdd = () => {
     setShowAddModal((prev) => !prev);
   };
@@ -63,6 +63,7 @@ export default function Reservations(props: {
               <AddReservationModal
                 setShowAddModal={setShowAddModal}
                 tablesData={tablesData}
+                reservation={reservationData}
               />
             )}
             <div>

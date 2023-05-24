@@ -68,7 +68,7 @@ const User: React.FC<UserProps> = ({ user, setUsers }) => {
                   )
                   .map((reservation) => (
                     <p key={reservation._id}>
-                      {reservation.date} {reservation.status}
+                      {reservation.date} {reservation.time} {reservation.status}
                     </p>
                   ))}
                 <button

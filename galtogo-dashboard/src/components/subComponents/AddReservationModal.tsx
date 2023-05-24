@@ -6,10 +6,12 @@ import { toast } from "react-toastify";
 export default function AddReservationModal({
   setShowAddModal,
   tablesData,
+  reservation,
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setShowAddModal: any;
   tablesData: ITable[];
+  reservation: IReservation[];
 }): JSX.Element {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async function handleSubmit(e: any) {
@@ -49,6 +51,7 @@ export default function AddReservationModal({
       console.log(error);
     }
   }
+  console.log("reservation in add", reservation);
   return (
     <form
       className="absolute top-20 left-0 bg-slate-200 p-3 flex flex-col z-10 rounded-xl"
