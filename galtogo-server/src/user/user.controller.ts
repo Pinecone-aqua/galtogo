@@ -74,9 +74,7 @@ export class UsersController {
     try {
       const token = this.jwtService.sign(payload);
       console.log('token: ', token);
-      res.status(200).send({ path: 'http://localhost:3001/', token });
-
-      // .redirect(`https://galtogo.vercel.app/account`);
+      res.status(200).send({ path: 'https://galtogo.vercel.app/', token });
     } catch (error) {
       console.log('token: ', error);
     }
