@@ -14,9 +14,11 @@ export class CheckRoleGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
+    // console.log('context: ', context);
     const request = context.switchToHttp().getRequest();
+    console.log('req: ', request);
     const token = this.extractTokenFromHeader(request);
-
+    console.log('guard token: ', token);
     if (!token) {
       return false;
     }
@@ -45,6 +47,7 @@ export class CheckRoleGuard implements CanActivate {
 
   private extractTokenFromHeader(request: Request): string | undefined {
     const [type, token] = request.headers.authorization?.split(' ') ?? [];
+    console.log('extracted token: ', token);
     return type === 'Bearer' ? token : undefined;
   }
 }

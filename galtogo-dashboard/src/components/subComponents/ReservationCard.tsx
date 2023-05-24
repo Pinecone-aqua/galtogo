@@ -31,11 +31,15 @@ const ReservationCard: FC<CardProps> = ({ reservation, setReservations }) => {
     <div className="bg-gray-50 hover:bg-gray-100 rounded-lg sm:mx-3 my-3 p-2">
       <div className="p-4 flex items-center justify-between border-b-4">
         <p className="bg-sky-600 p-3 rounded-lg text-center text-white font-bold">
+<<<<<<< HEAD
           {reservation.table !== null ? (
             reservation.table.name
           ) : (
             <>Deleted table</>
           )}
+=======
+          {reservation.table !== null ? reservation.table.name : "D"}
+>>>>>>> de5530e61faf866e39e79c79e82b6e09e8136ad8
         </p>
         <div className="">
           <p className="text-gray-800 font-bold">{reservation.date}</p>
