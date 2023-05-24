@@ -17,7 +17,7 @@ export default function Layout({ children }: PropType) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleClick = (e: any) => {
     e.preventDefault(); // ?
-    router.push("Reservation");
+    router.push("reservation");
   };
 
   // challange title n product iin name baih

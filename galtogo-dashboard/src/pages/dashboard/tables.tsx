@@ -18,8 +18,14 @@ export default function Tables(props: {
   const [tablesDatas, setTablesDatas] = useState<ITable[]>(tablesData);
 
   const handleAdd = () => {
-    setShowAddModal(true);
+    setShowAddModal((prevShowAddModal) => !prevShowAddModal);
   };
+
+  const handleAddTableSuccess = (newTable: ITable) => {
+    setTablesDatas((prevTablesData) => [...prevTablesData, newTable]);
+    setShowAddModal(false);
+  };
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange: (e: any) => Promise<void> = async (e) => {
     try {
@@ -66,7 +72,7 @@ export default function Tables(props: {
             />
           </div>
           {showAddModal ? (
-            <AddTableModal setTablesDatas={setTablesDatas} />
+            <AddTableModal onAddTableSuccess={handleAddTableSuccess} />
           ) : (
             <></>
           )}
@@ -79,6 +85,7 @@ export default function Tables(props: {
                   table={table}
                   onDeleteTable={handleDeleteTable}
                   tablesData={[]}
+                  setTablesDatas={setTablesDatas}
                 />
               </div>
             ))}

@@ -16,7 +16,7 @@ export default function Reservations(props: {
   const [toggleFilter, setToggleFilter] = useState<boolean>(true);
   const [showAddModal, setShowAddModal] = useState<boolean>(false);
   const [searchReservation, setSearchReservation] = useState("");
-
+  console.log;
   const handleAdd = () => {
     setShowAddModal((prev) => !prev);
   };
@@ -26,6 +26,7 @@ export default function Reservations(props: {
       .get(
         `${
           process.env.NEXT_PUBLIC_GALTOGO_SERVER_API
+          // process.env.NEXT_PUBLIC_GALTOGO_PORT
         }/reservation?filter=${filter}&isAsc=${toggleFilter ? "asc" : "desc"}`
       )
       .then((res) => setReservations(res.data))
@@ -83,7 +84,15 @@ export default function Reservations(props: {
           <div className="m-3 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 items-center justify-between">
             {reservations
               .filter((reservation) =>
-                `${reservation.time} ${reservation.date} ${reservation.user.firstName} ${reservation.user.lastName} ${reservation.user.email} ${reservation.user.phone} ${reservation.table} ${reservation.status} ${reservation.table}`
+                `${reservation.time} 
+                ${reservation.date} 
+                ${reservation.user && reservation.user.firstName} 
+                ${reservation.user && reservation.user.lastName} 
+                ${reservation.user && reservation.user.email} 
+                ${reservation.user && reservation.user.phone} 
+                ${reservation.table} 
+                ${reservation.status} 
+                `
                   .toLocaleLowerCase()
                   .includes(searchReservation.toLocaleLowerCase())
               )
@@ -110,10 +119,14 @@ export const getServerSideProps: () => Promise<{
   const reservationData = await axios
     .get(
       `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation?filter=date&isAsc=desc`
+      // `${process.env.NEXT_PUBLIC_PORT}/reservation?filter=date&isAsc=desc`
     )
-    .then((res) => res.data);
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
+
   const tablesData = await axios
     .get(`${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/table`)
+    // .get(`${process.env.NEXT_PUBLIC_PORT}/table`)
     .then((res) => res.data);
   return {
     props: {

@@ -31,14 +31,14 @@ const ReservationCard: FC<CardProps> = ({ reservation, setReservations }) => {
     <div className="bg-gray-50 hover:bg-gray-100 rounded-lg sm:mx-3 my-3 p-2">
       <div className="p-4 flex items-center justify-between border-b-4">
         <p className="bg-sky-600 p-3 rounded-lg text-center text-white font-bold">
-          {"# " + reservation.table.name}
+          {reservation.table !== null ? reservation.table.name : "D"}
         </p>
         <div className="">
           <p className="text-gray-800 font-bold">{reservation.date}</p>
           <p className="text-gray-400">{reservation.time}</p>
         </div>
       </div>
-      {reservation.user.firstName ? (
+      {reservation.user ? (
         <div className="cardBody p-4 text-gray-400 text-md">
           <p className="text-gray-800">
             {`${reservation.user.firstName} ${reservation.user.lastName}`}

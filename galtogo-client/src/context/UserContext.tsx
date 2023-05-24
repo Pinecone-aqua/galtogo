@@ -26,6 +26,7 @@ export default function UserProvider({ children }: UserProviderType) {
 
   useEffect(() => {
     const token = Cookies.get("token");
+
     if (token) {
       setCurrentUser(token);
     }
