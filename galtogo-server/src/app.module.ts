@@ -10,6 +10,7 @@ import { CategoryModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
 import { BannerModule } from './banner/banner.module';
 import { DisabledDayModule } from './days/days.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { DisabledDayModule } from './days/days.module';
     ProductModule,
     BannerModule,
     DisabledDayModule,
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -9,6 +9,9 @@ import Button from "@/components/subcomponents/Button";
 import axios from "axios";
 import { useReservation } from "@/context/ReservationContext";
 import OrderDetails from "./OrderDetails";
+import { useRouter } from "next/router";
+import Cookies from "js-cookie";
+
 declare global {
   interface Window {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -26,7 +29,7 @@ const PhoneInput = ({ tableNumber }: { tableNumber: number }): JSX.Element => {
   const [seconds, setSeconds] = useState(59);
   const [success, setSuccess] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
-
+  const router = useRouter();
   const [translate, setTranslate] = useState<string>(
     "text-base text-slate-300 top-5 left-20 -z-20"
   );
@@ -114,27 +117,35 @@ const PhoneInput = ({ tableNumber }: { tableNumber: number }): JSX.Element => {
     }
   };
 
-  const addReservation = () => {
+  const addReservation = async (): Promise<void> => {
     newReservation.user &&
-      axios
+      (await axios
         .post(
           `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/reservation/add`,
           // `${process.env.NEXT_PUBLIC_PORT}/reservation/add`,
           newReservation
         )
         .then((res) => {
-          console.log(res.data);
-          setNewReservation(res.data);
+          console.log("response: ", res.data);
+
           toast.success("Reservation successfully added!");
         })
-        .catch((err) => console.log("newError: ", err));
+        .then(() => authRedirect())
+        .catch((err) => console.log("newError: ", err)));
+  };
 
-    newReservation.user &&
-      axios.get(
+  const authRedirect = () => {
+    axios
+      .get(
         `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/user/auth/user?id=${newReservation.user}`
         // `${process.env.NEXT_PUBLIC_PORT}/user/auth/user?id=${newReservation.user}`
-      );
+      )
+      .then((res) => {
+        Cookies.set("token", res.data.token);
+        router.push(res.data.path);
+      });
   };
+
   return (
     <div className="w-screen h-screen flex flex-col md:pt-40 pt-10">
       <div id="recaptcha-container" />
@@ -178,6 +189,7 @@ const PhoneInput = ({ tableNumber }: { tableNumber: number }): JSX.Element => {
             </Button>
             <Button
               type="button"
+              // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onClick={addReservation}
               disabled={newReservation.user ? false : true}
             >

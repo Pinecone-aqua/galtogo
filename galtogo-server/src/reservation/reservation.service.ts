@@ -31,11 +31,9 @@ export class ReservationService {
     return result;
   }
 
-  async addReservation(
-    reservation: CreateReservationDto,
-  ): Promise<IReservation> {
-    const result = await this.reservationModel.create(reservation);
-    return result;
+  async addReservation(reservation: CreateReservationDto) {
+    await this.reservationModel.create(reservation);
+    console.log('Reservation added');
   }
 
   async updateReservation(id: string, table: UpdateReservationDto) {

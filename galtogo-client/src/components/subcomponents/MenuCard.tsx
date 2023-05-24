@@ -2,13 +2,34 @@ import React from "react";
 import { Rating } from "primereact/rating";
 import Button from "./Button";
 import Image from "next/image";
-
+import { useUser } from "@/context/UserContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function MenuCard({
   product,
 }: {
   product: IProduct;
 }): JSX.Element {
+  const { currentUser } = useUser();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleClick = (e: any) => {
+    e.preventDefault();
+    if (currentUser) {
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_GALTOGO_SERVER_API}/order/add`,
+          product,
+          {
+            headers: { authorization: `Bearer ${currentUser}` },
+          }
+        )
+        .then((res) => toast(res.data))
+        .catch((err) => toast(err.response.statusText));
+    } else {
+      toast("Not authorized user!");
+    }
+  };
   return (
     <div className="md:w-full">
       <Image
@@ -28,8 +49,9 @@ export default function MenuCard({
         </div>
 
         <Button
-          className="w-full mt-4 hidden lg:block border border-slate-100 bg-white text-black"
+          className="w-full mt-4 border-slate-100 bg-white text-black"
           size={"lg"}
+          onClick={handleClick}
         >
           {product.price}₮
         </Button>
