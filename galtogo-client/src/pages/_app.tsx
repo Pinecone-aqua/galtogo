@@ -15,7 +15,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <Loader>
         <UserProvider>
           <ReservationProvider>
-            <Component {...pageProps} className={inter.className} />
+            <main className={inter.className}>
+              <Component {...pageProps} />
+            </main>
           </ReservationProvider>
         </UserProvider>
       </Loader>
