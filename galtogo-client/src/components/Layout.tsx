@@ -6,7 +6,7 @@ import { NextRouter, useRouter } from "next/router";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./Footer";
-import Navigation from "./Navigation";
+// import Navigation from "./Navigation";
 
 type PropType = {
   children: ReactNode;
@@ -49,7 +49,7 @@ export default function Layout({ children }: PropType) {
             </div>
           </div>
         </div>
-        <Navigation />
+        {/* <Navigation /> */}
 
         <ToastContainer
           autoClose={3000}
