@@ -181,3 +181,21 @@ export const TestimonialItems = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam vel quo nobis at non repellat illum repellendus dignissimos incidunt architecto.",
   },
 ];
+
+export const features = [
+  {
+    header: "We made order easy and faster",
+    image: "./Fast.svg",
+    text: "You can make reservation on every branches on Yuna restaurants from anywhere & anytime.",
+  },
+  {
+    header: "You can also order your dishes on reservation",
+    image: "./Dish.svg",
+    text: "You can make reservation on every branches on Yuna restaurants from anywhere & anytime.",
+  },
+  {
+    header: "We also offer u a faster delivery service",
+    image: "./Delivery.svg",
+    text: "You can make reservation on every branches on Yuna restaurants from anywhere & anytime.",
+  },
+];
