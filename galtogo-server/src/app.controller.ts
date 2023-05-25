@@ -14,15 +14,7 @@ export class AppController {
   }
 
   @Get('.well-known/pki-validation/999550D5A343324934EF6361B33DDB04.txt')
-  getFile(@Res({ passthrough: true }) res: Response): StreamableFile {
-    const file = createReadStream(
-      join(process.cwd(), '999550D5A343324934EF6361B33DDB04.txt'),
-    );
-    res.set({
-      'Content-Type': 'application/json',
-      'Content-Disposition':
-        'attachment; filename="999550D5A343324934EF6361B33DDB04.txt"',
-    });
-    return new StreamableFile(file);
+  getFile(@Res() res: Response) {
+    res.sendFile(join(process.cwd(), '999550D5A343324934EF6361B33DDB04.txt'));
   }
 }
