@@ -1,4 +1,3 @@
-import Carousel from "@/components/Carousel";
 import Layout from "@/components/Layout";
 import MenuField from "@/components/MenuField";
 import SpecialOffer from "@/components/SpecialOffer";
