@@ -46,9 +46,10 @@ export default function Home(props: {
           categories={categories}
         />
       </div>
-      <div className="hidden sm:block md:block w-full overflow-x-auto no-scrollbar sm:overflow-x-auto sm:no-scrollbar sm:snap-x snap-mandatory rounded-lg md:overflow-hidden">
+      <div className="">
         <MenuField selectedCategory={selectedCategory} products={products} />
       </div>
+
       <div className="block md:hidden">
         <MobileMenuField products={products} deviceType={undefined} />
       </div>

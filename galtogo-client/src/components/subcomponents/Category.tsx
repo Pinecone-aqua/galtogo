@@ -8,14 +8,15 @@ export default function Carousel({
   categories: ICategory[];
   selectedCategory: string | null;
 }): JSX.Element {
-  const selected = "px-[32px] py-[12px] text-base font-medium rounded-full";
+  const selected =
+    "px-[32px] py-[12px] text-base font-medium rounded-full w-max";
 
   return (
-    <div className="flex justify-between">
+    <div className="flex">
       <h1 className="text-[32px] font-semibold text-[#0D5C63]">
         Our categories
       </h1>
-      <div className="flex justify-between gap-2">
+      <div className="flex justify-between gap-2 overflow-x-auto">
         {categories.map((category: ICategory, index: number) => (
           <div
             key={index}
