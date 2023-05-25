@@ -226,3 +226,47 @@ export const eventList = [
     price: "25.000₮",
   },
 ];
+
+export const blogList = [
+  {
+    image: "/blogImage.png",
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.",
+    readTime: "3min read",
+  },
+
+  {
+    image: "/blogImage1.png",
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.",
+    readTime: "3min read",
+  },
+
+  {
+    image: "/blogImage2.png",
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.",
+    readTime: "3min read",
+  },
+
+  {
+    image: "/blogImage3.png",
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.",
+    readTime: "1min read",
+  },
+
+  {
+    image: "/blogImage4.png",
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.",
+    readTime: "2min read",
+  },
+
+  {
+    image: "/blogImage3.png",
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.",
+    readTime: "3min read",
+  },
+];

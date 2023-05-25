@@ -12,6 +12,7 @@ import MobileMenuField from "@/components/MobileMenuField";
 import Features from "@/components/subcomponents/Features";
 import Category from "@/components/subcomponents/Category";
 import EventSection from "@/components/EventSection";
+import BlogSection from "@/components/BlogSection";
 
 export default function Home(props: {
   products: IProduct[];
@@ -52,6 +53,7 @@ export default function Home(props: {
       </div>
 
       <EventSection />
+      <BlogSection />
 
       <div className="block md:hidden">
         <MobileMenuField products={products} deviceType={undefined} />
