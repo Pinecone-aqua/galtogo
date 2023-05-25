@@ -199,3 +199,30 @@ export const features = [
     text: "You can make reservation on every branches on Yuna restaurants from anywhere & anytime.",
   },
 ];
+
+export const eventList = [
+  {
+    image: "/eventImage1.webp",
+    title: "Celine Dessberg",
+    date: "May 23th - May 27th",
+    price: "25.000₮",
+  },
+  {
+    image: "/eventImage2.webp",
+    title: "June Line ups",
+    date: "June 1st - 25th",
+    price: "25.000₮",
+  },
+  {
+    image: "/eventImage3.webp",
+    title: "The noon",
+    date: "July 1st - July 16th",
+    price: "25.000₮",
+  },
+  {
+    image: "/eventImage4.webp",
+    title: "October Line up",
+    date: "October 1st - 30th",
+    price: "25.000₮",
+  },
+];
