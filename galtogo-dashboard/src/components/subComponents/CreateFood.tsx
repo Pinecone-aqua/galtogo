@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import "primeicons/primeicons.css";
 
 import { Button } from "primereact/button";
+import { MultipleCheckbox } from "./MultipleCheckbox";
 
 export default function CreateFood() {
   const [categories, setCategories] = useState<ICategory[]>([]);
@@ -67,6 +68,8 @@ export default function CreateFood() {
             ))}
           </select>
         </div>
+
+        <MultipleCheckbox categories={categories} />
 
         <input
           className="w-full mt-2 p-4 rounded-lg bg-slate-50"
