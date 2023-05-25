@@ -65,3 +65,10 @@ interface ILocation {
   lat: number;
   lng: number;
 }
+
+interface IEventList {
+  image: string;
+  title: string;
+  date: string;
+  price: string;
+}
