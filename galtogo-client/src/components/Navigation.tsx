@@ -42,7 +42,7 @@ export default function Navigation(): JSX.Element {
   };
   return (
     <div
-      className={`fixed z-50 w-[100%] bg-white px-[16px] md:px-[40px] shadow-[0_8px_30px_rgb(0,0,0,0.12)]`}
+      className={`flex fixed z-50 w-[100%] bg-white px-[16px] md:px-[40px] shadow-[0_8px_30px_rgb(0,0,0,0.12)]`}
     >
       <div className="flex justify-between items-center">
         <Image
@@ -86,7 +86,7 @@ export default function Navigation(): JSX.Element {
         )}
 
         <div
-          className="block md:hidden lg:hidden"
+          className="block md:hidden"
           onClick={() => setToggleMenu((prev) => !prev)}
         >
           <Hamburger size={24} />
