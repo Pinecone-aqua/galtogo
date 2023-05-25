@@ -182,7 +182,7 @@ export const TestimonialItems = [
   },
 ];
 
-export const featureSection = [
+export const features = [
   {
     header: "We made order easy and faster",
     image: "./Fast.svg",

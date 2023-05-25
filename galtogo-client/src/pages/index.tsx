@@ -10,7 +10,7 @@ import GreetingBanner from "@/components/GreetingBanner";
 import MemberShip from "@/components/Membership";
 import TestimonialSection from "@/components/TestimonialSection";
 import MobileMenuField from "@/components/MobileMenuField";
-import FeatureSection from "@/components/subcomponents/FeatureSection";
+import Features from "@/components/subcomponents/Features";
 
 export default function Home(props: {
   products: IProduct[];
@@ -39,7 +39,7 @@ export default function Home(props: {
             categories={categories}
           />
         </div>
-        <FeatureSection />
+        <Features />
       </div>
       <div className="w-full overflow-x-auto no-scrollbar snap-x snap-mandatory sm:visible md:hidden lg:hidden">
         <CategoryMobile
