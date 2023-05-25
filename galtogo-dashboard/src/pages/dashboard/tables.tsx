@@ -100,7 +100,7 @@ export default function Tables(props: {
   );
 }
 
-export const getStaticProps: () => Promise<{
+export const getServerSideProps: () => Promise<{
   props: {
     reservationData: IReservation[];
     tablesData: ITable[];
