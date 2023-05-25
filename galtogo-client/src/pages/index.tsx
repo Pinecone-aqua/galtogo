@@ -11,6 +11,7 @@ import MemberShip from "@/components/Membership";
 import TestimonialSection from "@/components/TestimonialSection";
 import MobileMenuField from "@/components/MobileMenuField";
 import Features from "@/components/subcomponents/Features";
+import Category from "@/components/subcomponents/Category";
 
 export default function Home(props: {
   products: IProduct[];
@@ -32,14 +33,12 @@ export default function Home(props: {
       <div className="hidden md:block p-3">
         <SpecialOffer />
 
-        <div className="hidden md:block w-[90%] mx-auto bottom-[24px] -translate-y-8">
-          <Carousel
-            setSelectedCategory={setSelectedCategory}
-            selectedCategory={selectedCategory}
-            categories={categories}
-          />
-        </div>
         <Features />
+        <Category
+          setSelectedCategory={setSelectedCategory}
+          selectedCategory={selectedCategory}
+          categories={categories}
+        />
       </div>
       <div className="w-full overflow-x-auto no-scrollbar snap-x snap-mandatory sm:visible md:hidden lg:hidden">
         <CategoryMobile
