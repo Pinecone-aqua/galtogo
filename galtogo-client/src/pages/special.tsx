@@ -1,6 +1,6 @@
 // import ChefTeam from "@/components/ChefTeam";
 import Layout from "@/components/Layout";
-import FoodCard from "@/components/subcomponents/FoodCard";
+
 // import Contributors from "@/components/subcomponents/Contributors";
 // import MasterClassCarousel from "@/components/MasterClassCarousel";
 // import CountdownBanner from "@/components/subcomponents/CountdownBanner";
@@ -23,7 +23,6 @@ export default function Special() {
       </div>
       <ChefTeam />
       <Contributors /> */}
-      <FoodCard />
     </Layout>
   );
 }

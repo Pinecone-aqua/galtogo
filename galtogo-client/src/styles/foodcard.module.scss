@@ -12,6 +12,8 @@
 .image {
   width: 100%;
   min-height: 152px;
+  max-height: 152px;
+  object-fit: cover;
 }
 
 .details {
