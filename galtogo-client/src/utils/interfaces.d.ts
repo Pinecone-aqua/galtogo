@@ -72,3 +72,10 @@ interface IEventList {
   date: string;
   price: string;
 }
+
+interface IBlog {
+  image: string;
+  title: string;
+  readTime: string;
+  desc: string;
+}

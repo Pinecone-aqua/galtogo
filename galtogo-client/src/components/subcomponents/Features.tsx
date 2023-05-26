@@ -2,10 +2,10 @@ import { features } from "@/utils/constants";
 import Image from "next/image";
 export default function Features() {
   return (
-    <div className="flex justify-center gap-5">
+    <div className="flex flex-col sm:flex-col gap-4 md:flex-row md:justify-center mt-[72px] mb-[32px] w-full px-[16px] sm:px-[72px] md:px-[144px] mx-auto">
       {features.map((item, index) => (
         <div
-          className="max-w-[371px] min-w-[371px] p-[24px] border border-[#0D5C631A] rounded-[8px]"
+          className="min-w-[250px]  p-[24px] border border-[#0D5C631A] rounded-[8px]"
           key={index}
         >
           <div className="flex items-center gap-4">
