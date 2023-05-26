@@ -3,7 +3,6 @@ import ReactLoading from "react-loading";
 import Table from "./Table";
 import Image from "next/image";
 
-
 const RoomArea = ({
   tablesData,
   setNewReservation,
@@ -35,10 +34,8 @@ const RoomArea = ({
             <ReactLoading color="blue" height={50} width={50} type="spin" />
           </div>
         ) : (
-
           <div className="relative h-[100%] w-max">
             {tablesData.map((table, index) => (
-
               <div
                 className="absolute z-10 "
                 key={index}
@@ -57,19 +54,19 @@ const RoomArea = ({
                 >
                   #{table.name}
                 </Table>
-
               </div>
-
-
             ))}
-            <Image className="w-full h-full overflow-auto border z-0" src="/Plan.png" width={1000} height={1000} alt="zurag" />
+            <Image
+              className="overflow-auto border z-0"
+              src="/Plan.png"
+              width={800}
+              height={600}
+              alt="zurag"
+            />
           </div>
-
-
         )}
-
       </div>
-    </div >
+    </div>
   );
 };
 export default RoomArea;
