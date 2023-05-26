@@ -5,7 +5,6 @@ export default function EventCard({
 }: {
   event: IEventList;
 }): JSX.Element {
-  console.log(event);
   return (
     <div className="w-[100%] md:min-w-[290px] md:max-w-[566px]">
       <Image

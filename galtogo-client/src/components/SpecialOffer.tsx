@@ -13,12 +13,12 @@ export default function SpecialOffer() {
       .then((res) => setImages(res.data));
   }, []);
   return (
-    <div className="hidden sm:block sm:rounded-lg md:block relative overflow-hidden rounded-[32px] mt-[120px]">
+    <div className="hidden sm:block  md:block relative overflow-hidden pt-[64px]">
       {images && (
         <Image
-          className="h-[520px] sm:h-[280px] md:h-[720px] w-full object-cover"
+          className="h-[520px]  sm:h-[280px] md:h-[720px] w-full object-cover"
           src={images[0].imageURL}
-          alt={"sda1"}
+          alt={"cover"}
           width={1000}
           height={1000}
           priority={true}
