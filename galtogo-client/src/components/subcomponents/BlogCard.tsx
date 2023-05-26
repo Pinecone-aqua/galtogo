@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function BlogCard({ item }: { item: IBlog }) {
   return (
-    <div className="min-w-[359px] max-w-[370px] rounded-lg overflow-hidden">
+    <div className="min-w-[250px] max-w-[370px] rounded-lg overflow-hidden">
       <Image
         className="min-h-[156px] max-h-[250px]"
         src={item.image}

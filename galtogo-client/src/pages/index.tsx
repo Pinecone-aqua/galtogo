@@ -3,12 +3,10 @@ import MenuField from "@/components/MenuField";
 import SpecialOffer from "@/components/SpecialOffer";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import BranchSection from "@/components/BranchSection";
-import CategoryMobile from "@/components/subcomponents/CategoryMobile";
-import GreetingBanner from "@/components/GreetingBanner";
-import MemberShip from "@/components/Membership";
+// import BranchSection from "@/components/BranchSection";
+// import GreetingBanner from "@/components/GreetingBanner";
+// import MemberShip from "@/components/Membership";
 import TestimonialSection from "@/components/TestimonialSection";
-import MobileMenuField from "@/components/MobileMenuField";
 import Features from "@/components/subcomponents/Features";
 import Category from "@/components/subcomponents/Category";
 import EventSection from "@/components/EventSection";
@@ -31,42 +29,29 @@ export default function Home(props: {
 
   return (
     <Layout>
-      <div className="hidden md:block p-3">
-        <SpecialOffer />
+      <SpecialOffer />
 
-        <Features />
+
+
+      <Features />
+      <div className="">
         <Category
           setSelectedCategory={setSelectedCategory}
           selectedCategory={selectedCategory}
           categories={categories}
         />
       </div>
-      <div className="w-full overflow-x-auto no-scrollbar snap-x snap-mandatory sm:visible md:hidden lg:hidden">
-        <CategoryMobile
-          setSelectedCategory={setSelectedCategory}
-          selectedCategory={selectedCategory}
-          categories={categories}
-        />
-      </div>
-      <div className="">
+
+      <div className="mx-auto max-w-[80%]">
         <MenuField selectedCategory={selectedCategory} products={products} />
       </div>
 
       <EventSection />
       <BlogSection />
 
-      <div className="block md:hidden">
-        <MobileMenuField products={products} deviceType={undefined} />
-      </div>
-      <div className="my-[24px] lg:my-[96px]">
-        <GreetingBanner />
-      </div>
-      <div className="mx-[40px] my-[72px] hidden md:block">
-        <MemberShip />
-      </div>
-      <div className="md:mx-[40px] my-[72px]">
+      {/* <div className="md:mx-[40px] my-[72px]">
         <BranchSection />
-      </div>
+      </div> */}
       <div className=" my-[72px]">
         <TestimonialSection />
       </div>
