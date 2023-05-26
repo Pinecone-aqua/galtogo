@@ -1,6 +1,8 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import ReactLoading from "react-loading";
 import Table from "./Table";
+import Image from "next/image";
+
 
 const RoomArea = ({
   tablesData,
@@ -26,37 +28,48 @@ const RoomArea = ({
   };
 
   return (
-    <div className="fit-content rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
-      <div className="relative room-area rounded-lg bg-white max-w-[800px] h-[600px] mx-auto overflow-x-auto overflow-hidden">
+    <div className="w-[100%] rounded-lg shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+      <div className="relative room-area rounded-lg bg-white w-[100%] md:w-max border mx-auto overflow-auto">
         {tablesData.length === 0 ? (
           <div className="loader-container w-full h-full flex justify-center items-center">
             <ReactLoading color="blue" height={50} width={50} type="spin" />
           </div>
         ) : (
-          tablesData.map((table, index) => (
-            <div
-              key={index}
-              style={{
-                top: table.coords.posY,
-                left: table.coords.posX,
-              }}
-              className="absolute"
-            >
-              <Table
-                variant="default"
-                size={table.size}
-                shape={table.shape}
-                id={table._id}
-                className={`${current === table._id ? " bg-green-400" : ""}`}
-                onClick={(e) => handleClickTable({ e, name: table.name })}
+
+          <div className="relative h-[100%] w-max">
+            {tablesData.map((table, index) => (
+
+              <div
+                className="absolute z-10 "
+                key={index}
+                style={{
+                  top: table.coords.posY,
+                  left: table.coords.posX,
+                }}
               >
-                #{table.name}
-              </Table>
-            </div>
-          ))
+                <Table
+                  variant="default"
+                  size={table.size}
+                  shape={table.shape}
+                  id={table._id}
+                  className={`${current === table._id ? " bg-green-400" : ""}`}
+                  onClick={(e) => handleClickTable({ e, name: table.name })}
+                >
+                  #{table.name}
+                </Table>
+
+              </div>
+
+
+            ))}
+            <Image className="w-full h-full overflow-auto border z-0" src="/Plan.png" width={1000} height={1000} alt="zurag" />
+          </div>
+
+
         )}
+
       </div>
-    </div>
+    </div >
   );
 };
 export default RoomArea;
